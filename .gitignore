@@ -9,3 +9,5 @@ relation-algebra
 \.coqdeps\.d
 
 \.lia\.cache
+
+README\.html
