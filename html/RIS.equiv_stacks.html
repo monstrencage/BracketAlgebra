@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="coqdoc.css" rel="stylesheet" type="text/css" />
+<title>RIS.equiv_stacks</title>
+</head>
+
+<body>
+
+<div id="page">
+
+<div id="header">
+</div>
+
+<div id="main">
+
+<h1 class="libtitle">Library RIS.equiv_stacks</h1>
+
+<div class="code">
+</div>
+
+<div class="doc">
+<a name="lab77"></a><h1 class="section">RIS.equiv_stacks : dynamic properties of the binding transducer.</h1>
+
+</div>
+<div class="code">
+<span class="id" title="keyword">Set Implicit Arguments</span>.<br/>
+
+<br/>
+<span class="id" title="keyword">Require</span> <span class="id" title="keyword">Export</span> <a class="idref" href="RIS.transducer.html#"><span class="id" title="library">transducer</span></a>.<br/>
+
+<br/>
+<span class="id" title="keyword">Section</span> <a name="s"><span class="id" title="section">s</span></a>.<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<span class="id" title="var">atom</span> <span class="id" title="var">X</span>: <span class="id" title="keyword">Set</span>}{𝐀 : <a class="idref" href="RIS.atoms.html#Atom"><span class="id" title="class">Atom</span></a> <a class="idref" href="RIS.equiv_stacks.html#atom"><span class="id" title="variable">atom</span></a>} {𝐗 : <a class="idref" href="RIS.words.html#Alphabet"><span class="id" title="class">Alphabet</span></a> <a class="idref" href="RIS.equiv_stacks.html#8641701fafbb6d109185a381b5830e92"><span class="id" title="variable">𝐀</span></a> <a class="idref" href="RIS.equiv_stacks.html#X"><span class="id" title="variable">X</span></a>}.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab78"></a><h1 class="section">Static equivalence</h1>
+ We may define the following relation on stacks. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Fixpoint</span> <a name="equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#145bedf8a5d4a541831f3f70db03085c"><span class="id" title="notation">[]</span></a> ⇒ <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.stacks.html#4da3e8d43c55435cce4c43e233197ef6"><span class="id" title="notation">✓</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">(</span></a><span class="id" title="var">a</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">,</span></a><span class="id" title="var">b</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">)</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed5"><span class="id" title="notation">::</span></a><span class="id" title="var">s1</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.stacks.html#6d5a9f1640b18a6568ba41cafb4718b3"><span class="id" title="notation">⊨</span></a> <span class="id" title="var">a</span> <a class="idref" href="RIS.stacks.html#6d5a9f1640b18a6568ba41cafb4718b3"><span class="id" title="notation">↦</span></a> <span class="id" title="var">b</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> (<a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.tools.html#297954bc5d5aaeca45305fc0bd94f1fe"><span class="id" title="notation">⊖</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">(</span></a><span class="id" title="var">a</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">,</span></a><span class="id" title="var">b</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">)</span></a>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+<span class="id" title="keyword">Infix</span> <a name="84d05f4722e5e802494866820c218a04"><span class="id" title="notation">&quot;</span></a> == " := <a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a> (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 80).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+This relation may easily be translated as a boolean relation. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Fixpoint</span> <a name="equiv_stacksb"><span class="id" title="definition">equiv_stacksb</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> :=<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">match</span> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <span class="id" title="keyword">with</span><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#145bedf8a5d4a541831f3f70db03085c"><span class="id" title="notation">[]</span></a> ⇒ <a class="idref" href="RIS.tools.html#prj1"><span class="id" title="abbreviation">prj1</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.tools.html#f62e571aaf06e485801e62a5c9bd7232"><span class="id" title="notation">=?=</span></a> <a class="idref" href="RIS.tools.html#prj2"><span class="id" title="abbreviation">prj2</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a><br/>
+&nbsp;&nbsp;| <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">(</span></a><span class="id" title="var">a</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">,</span></a><span class="id" title="var">b</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">)</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#0a8150c3c4df34d205c5ed9a427e2ed5"><span class="id" title="notation">::</span></a><span class="id" title="var">s1</span> ⇒ <a class="idref" href="RIS.stacks.html#pairedb"><span class="id" title="definition">pairedb</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#49ac24efa716d8b0ee8943bc1d1769a9"><span class="id" title="notation">&amp;&amp;</span></a> <a class="idref" href="RIS.equiv_stacks.html#equiv_stacksb"><span class="id" title="definition">equiv_stacksb</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> (<a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.tools.html#297954bc5d5aaeca45305fc0bd94f1fe"><span class="id" title="notation">⊖</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">(</span></a><span class="id" title="var">a</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">,</span></a><span class="id" title="var">b</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">)</span></a>)<br/>
+&nbsp;&nbsp;<span class="id" title="keyword">end</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#equiv_stacksb"><span class="id" title="definition">equiv_stacksb</span></a></span> reflects <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="equiv_stacksb_spec"><span class="id" title="lemma">equiv_stacksb_spec</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>: <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#84d05f4722e5e802494866820c218a04"><span class="id" title="notation">==</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="RIS.equiv_stacks.html#equiv_stacksb"><span class="id" title="definition">equiv_stacksb</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#true"><span class="id" title="constructor">true</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We will now show that <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a></span> is an equivalence relation. Reflexivity is straightforward. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="equiv_stacks_Reflexive"><span class="id" title="lemma">equiv_stacks_Reflexive</span></a> <span class="id" title="var">s</span> : <a class="idref" href="RIS.equiv_stacks.html#s"><span class="id" title="variable">s</span></a> <a class="idref" href="RIS.equiv_stacks.html#84d05f4722e5e802494866820c218a04"><span class="id" title="notation">==</span></a> <a class="idref" href="RIS.equiv_stacks.html#s"><span class="id" title="variable">s</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Two equivalent stacks validate the same pairs. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="equiv_stacks_paired"><span class="id" title="lemma">equiv_stacks_paired</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> <span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#84d05f4722e5e802494866820c218a04"><span class="id" title="notation">==</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.stacks.html#6d5a9f1640b18a6568ba41cafb4718b3"><span class="id" title="notation">⊨</span></a> <a class="idref" href="RIS.equiv_stacks.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="RIS.stacks.html#6d5a9f1640b18a6568ba41cafb4718b3"><span class="id" title="notation">↦</span></a> <a class="idref" href="RIS.equiv_stacks.html#b"><span class="id" title="variable">b</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.stacks.html#6d5a9f1640b18a6568ba41cafb4718b3"><span class="id" title="notation">⊨</span></a> <a class="idref" href="RIS.equiv_stacks.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="RIS.stacks.html#6d5a9f1640b18a6568ba41cafb4718b3"><span class="id" title="notation">↦</span></a> <a class="idref" href="RIS.equiv_stacks.html#b"><span class="id" title="variable">b</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">)</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+If two stacks are equivalent, then either both are accepting or none of them are. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="equiv_stacks_Accepting"><span class="id" title="lemma">equiv_stacks_Accepting</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#84d05f4722e5e802494866820c218a04"><span class="id" title="notation">==</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.stacks.html#4da3e8d43c55435cce4c43e233197ef6"><span class="id" title="notation">✓</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.stacks.html#4da3e8d43c55435cce4c43e233197ef6"><span class="id" title="notation">✓</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Two accepting stacks are always equivalent. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="Accepting_equiv_stacks"><span class="id" title="lemma">Accepting_equiv_stacks</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.stacks.html#4da3e8d43c55435cce4c43e233197ef6"><span class="id" title="notation">✓</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.stacks.html#4da3e8d43c55435cce4c43e233197ef6"><span class="id" title="notation">✓</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#84d05f4722e5e802494866820c218a04"><span class="id" title="notation">==</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We may therefore show that <span class="inlinecode">==</span> is a symmetric relation. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="equiv_stacks_Symmetric"><span class="id" title="lemma">equiv_stacks_Symmetric</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#84d05f4722e5e802494866820c218a04"><span class="id" title="notation">==</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.equiv_stacks.html#84d05f4722e5e802494866820c218a04"><span class="id" title="notation">==</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The operation <span class="inlinecode"><a class="idref" href="RIS.tools.html#rmfst"><span class="id" title="definition">rmfst</span></a></span> is monotonic with respect to <span class="inlinecode">==</span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Global Instance</span> <a name="equiv_stacks_rmfst"><span class="id" title="instance">equiv_stacks_rmfst</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#Proper"><span class="id" title="class">Proper</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a>) <a class="idref" href="RIS.tools.html#rmfst"><span class="id" title="definition">rmfst</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We these facts established we can prove that <span class="inlinecode">==</span> is transitive. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="equiv_stacks_Transitive"><span class="id" title="lemma">equiv_stacks_Transitive</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> <span class="id" title="var">s3</span> : <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#84d05f4722e5e802494866820c218a04"><span class="id" title="notation">==</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.equiv_stacks.html#84d05f4722e5e802494866820c218a04"><span class="id" title="notation">==</span></a> <a class="idref" href="RIS.equiv_stacks.html#s3"><span class="id" title="variable">s3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#84d05f4722e5e802494866820c218a04"><span class="id" title="notation">==</span></a> <a class="idref" href="RIS.equiv_stacks.html#s3"><span class="id" title="variable">s3</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Having proved reflexivity, symmetricity and transitivity, we now know that <span class="inlinecode">==</span> is indeed an equivalence relation. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Global Instance</span> <a name="equiv_stacks_equivalence"><span class="id" title="instance">equiv_stacks_equivalence</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.RelationClasses.html#Equivalence"><span class="id" title="class">Equivalence</span></a> <a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#cons"><span class="id" title="constructor">cons</span></a></span> is monotonic with respect to <span class="inlinecode">==</span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Global Instance</span> <a name="equiv_stacks_cons"><span class="id" title="instance">equiv_stacks_cons</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#Proper"><span class="id" title="class">Proper</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#cons"><span class="id" title="constructor">cons</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+If two stacks are equivalent, then their associated <span class="inlinecode"><a class="idref" href="RIS.stacks.html#image"><span class="id" title="definition">image</span></a></span> functions are extensionally equivalent.  
+</div>
+<div class="code">
+<span class="id" title="keyword">Global Instance</span> <a name="equiv_stacks_image"><span class="id" title="instance">equiv_stacks_image</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#Proper"><span class="id" title="class">Proper</span></a> (<a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a>) <a class="idref" href="RIS.stacks.html#image"><span class="id" title="definition">image</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+It follows that two equivalent stacks yield equivalent permutations for any list. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Global Instance</span> <a name="equiv_stacks_var_perm"><span class="id" title="instance">equiv_stacks_var_perm</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#Proper"><span class="id" title="class">Proper</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="RIS.tools.html#sequiv"><span class="id" title="definition">sequiv</span></a>) <a class="idref" href="RIS.stacks.html#var_perm"><span class="id" title="definition">var_perm</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab79"></a><h1 class="section">Definitions</h1>
+
+</div>
+<div class="code">
+
+<br/>
+<span class="id" title="keyword">Notation</span> <a name="61929393f05edcf639732ca5c584d061"><span class="id" title="notation">&quot;</span></a> s1 -- α --&gt;&gt; s2 " := (<a class="idref" href="RIS.transducer.html#path"><span class="id" title="inductive">path</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#fst"><span class="id" title="definition">fst</span></a> <span class="id" title="var">α</span>) (<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#snd"><span class="id" title="definition">snd</span></a> <span class="id" title="var">α</span>) <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 80).<br/>
+<span class="id" title="keyword">Notation</span> <a name="16d7ab12bd6c8ac3af7968062a0bcad9"><span class="id" title="notation">&quot;</span></a> s1 -- α ---&gt; s2 " := (<a class="idref" href="RIS.transducer.html#step"><span class="id" title="definition">step</span></a> <span class="id" title="var">s1</span> (<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#fst"><span class="id" title="definition">fst</span></a> <span class="id" title="var">α</span>) (<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#snd"><span class="id" title="definition">snd</span></a> <span class="id" title="var">α</span>) <span class="id" title="var">s2</span>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 80).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+As will be shown later on, the pair of words <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#w1"><span class="id" title="definition">w1</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.closed_automaton.html#s"><span class="id" title="section">s</span></a>,<a class="idref" href="RIS.equiv_stacks.html#w2"><span class="id" title="definition">w2</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.closed_automaton.html#s"><span class="id" title="section">s</span></a></span> characterises the stack <span class="inlinecode"><a class="idref" href="RIS.closed_automaton.html#s"><span class="id" title="section">s</span></a></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="w1"><span class="id" title="definition">w1</span></a> (<span class="id" title="var">s</span> : <a class="idref" href="RIS.stacks.html#stack"><span class="id" title="definition">stack</span></a>) : <a class="idref" href="RIS.words.html#word"><span class="id" title="definition">word</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> <a class="idref" href="RIS.words.html#close"><span class="id" title="constructor">close</span></a> (<a class="idref" href="RIS.tools.html#prj1"><span class="id" title="abbreviation">prj1</span></a> <a class="idref" href="RIS.equiv_stacks.html#s"><span class="id" title="variable">s</span></a>).<br/>
+<span class="id" title="keyword">Definition</span> <a name="w2"><span class="id" title="definition">w2</span></a> (<span class="id" title="var">s</span> : <a class="idref" href="RIS.stacks.html#stack"><span class="id" title="definition">stack</span></a>) : <a class="idref" href="RIS.words.html#word"><span class="id" title="definition">word</span></a> := <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#map"><span class="id" title="definition">map</span></a> <a class="idref" href="RIS.words.html#close"><span class="id" title="constructor">close</span></a> (<a class="idref" href="RIS.tools.html#prj2"><span class="id" title="abbreviation">prj2</span></a> <a class="idref" href="RIS.equiv_stacks.html#s"><span class="id" title="variable">s</span></a>).<br/>
+<span class="id" title="keyword">Definition</span> <a name="3f3b3714f30e67327a57be78c00c9d23"><span class="id" title="definition">𝐰</span></a> (<span class="id" title="var">s</span> : <a class="idref" href="RIS.stacks.html#stack"><span class="id" title="definition">stack</span></a>) := <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.equiv_stacks.html#w1"><span class="id" title="definition">w1</span></a> <a class="idref" href="RIS.equiv_stacks.html#s"><span class="id" title="variable">s</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">,</span></a><a class="idref" href="RIS.equiv_stacks.html#w2"><span class="id" title="definition">w2</span></a> <a class="idref" href="RIS.equiv_stacks.html#s"><span class="id" title="variable">s</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">)</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We define bissimilarity of stacks by coinduction, saying that <span class="inlinecode"><a class="idref" href="RIS.tools.html#s1"><span class="id" title="variable">s1</span></a>∼<a class="idref" href="RIS.tools.html#s2"><span class="id" title="variable">s2</span></a></span> holds if for every pair of letters <span class="inlinecode"><a class="idref" href="RIS.tools.html#l1"><span class="id" title="variable">l1</span></a>,<a class="idref" href="RIS.tools.html#l2"><span class="id" title="variable">l2</span></a></span>, if <span class="inlinecode"><a class="idref" href="RIS.tools.html#s1"><span class="id" title="variable">s1</span></a></span> can perform one transition labelled with <span class="inlinecode"><a class="idref" href="RIS.tools.html#l1"><span class="id" title="variable">l1</span></a>|<a class="idref" href="RIS.tools.html#l2"><span class="id" title="variable">l2</span></a></span> to <span class="inlinecode"><a class="idref" href="RIS.transducer.html#s3"><span class="id" title="variable">s3</span></a></span> then <span class="inlinecode"><a class="idref" href="RIS.tools.html#s2"><span class="id" title="variable">s2</span></a></span> can can follow a transition with the same label to reach <span class="inlinecode"><a class="idref" href="RIS.transducer.html#s4"><span class="id" title="variable">s4</span></a></span> with <span class="inlinecode"><a class="idref" href="RIS.transducer.html#s3"><span class="id" title="variable">s3</span></a>∼<a class="idref" href="RIS.transducer.html#s4"><span class="id" title="variable">s4</span></a></span>, and conversely. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Reserved Notation</span> &quot; s1 ∼ s2 " (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 80).<br/>
+<span class="id" title="keyword">CoInductive</span> <a name="bissimilar"><span class="id" title="inductive">bissimilar</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Relations.Relation_Definitions.html#relation"><span class="id" title="definition">relation</span></a> <a class="idref" href="RIS.stacks.html#stack"><span class="id" title="definition">stack</span></a> :=<br/>
+| <a name="prog"><span class="id" title="constructor">prog</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <span class="id" title="var">α</span>, <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <span class="id" title="var">s3</span>, <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#16d7ab12bd6c8ac3af7968062a0bcad9"><span class="id" title="notation">--</span></a> <a class="idref" href="RIS.equiv_stacks.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a> <a class="idref" href="RIS.equiv_stacks.html#16d7ab12bd6c8ac3af7968062a0bcad9"><span class="id" title="notation">---&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#s3"><span class="id" title="variable">s3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">∃</span></a> <span class="id" title="var">s4</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.equiv_stacks.html#16d7ab12bd6c8ac3af7968062a0bcad9"><span class="id" title="notation">--</span></a><a class="idref" href="RIS.equiv_stacks.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a><a class="idref" href="RIS.equiv_stacks.html#16d7ab12bd6c8ac3af7968062a0bcad9"><span class="id" title="notation">---&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#s4"><span class="id" title="variable">s4</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="RIS.equiv_stacks.html#s3"><span class="id" title="variable">s3</span></a> <a class="idref" href="RIS.equiv_stacks.html#f46b09742795e9ffc656d3dc00451cd5"><span class="id" title="notation">∼</span></a> <a class="idref" href="RIS.equiv_stacks.html#s4"><span class="id" title="variable">s4</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">)</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <span class="id" title="var">s4</span>, <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.equiv_stacks.html#16d7ab12bd6c8ac3af7968062a0bcad9"><span class="id" title="notation">--</span></a><a class="idref" href="RIS.equiv_stacks.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a><a class="idref" href="RIS.equiv_stacks.html#16d7ab12bd6c8ac3af7968062a0bcad9"><span class="id" title="notation">---&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#s4"><span class="id" title="variable">s4</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">∃</span></a> <span class="id" title="var">s3</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#16d7ab12bd6c8ac3af7968062a0bcad9"><span class="id" title="notation">--</span></a><a class="idref" href="RIS.equiv_stacks.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a><a class="idref" href="RIS.equiv_stacks.html#16d7ab12bd6c8ac3af7968062a0bcad9"><span class="id" title="notation">---&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#s3"><span class="id" title="variable">s3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="RIS.equiv_stacks.html#s3"><span class="id" title="variable">s3</span></a> <a class="idref" href="RIS.equiv_stacks.html#f46b09742795e9ffc656d3dc00451cd5"><span class="id" title="notation">∼</span></a> <a class="idref" href="RIS.equiv_stacks.html#s4"><span class="id" title="variable">s4</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">)</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#f46b09742795e9ffc656d3dc00451cd5"><span class="id" title="notation">∼</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a><br/>
+<span class="id" title="keyword">where</span> <a name="f46b09742795e9ffc656d3dc00451cd5"><span class="id" title="notation">&quot;</span></a> s1 ∼ s2 " := (<a class="idref" href="RIS.equiv_stacks.html#bissimilar"><span class="id" title="inductive">bissimilar</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Similarity is defined analogously. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Reserved Notation</span> &quot; s1 ≺ s2 " (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 80).<br/>
+<span class="id" title="keyword">CoInductive</span> <a name="similar"><span class="id" title="inductive">similar</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Relations.Relation_Definitions.html#relation"><span class="id" title="definition">relation</span></a> <a class="idref" href="RIS.stacks.html#stack"><span class="id" title="definition">stack</span></a> :=<br/>
+| <a name="prog2"><span class="id" title="constructor">prog2</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> :<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a><span class="id" title="keyword">∀</span> <span class="id" title="var">α</span>, (<span class="id" title="keyword">∀</span> <span class="id" title="var">s3</span>, <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#16d7ab12bd6c8ac3af7968062a0bcad9"><span class="id" title="notation">--</span></a><a class="idref" href="RIS.equiv_stacks.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a><a class="idref" href="RIS.equiv_stacks.html#16d7ab12bd6c8ac3af7968062a0bcad9"><span class="id" title="notation">---&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#s3"><span class="id" title="variable">s3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">∃</span></a> <span class="id" title="var">s4</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.equiv_stacks.html#16d7ab12bd6c8ac3af7968062a0bcad9"><span class="id" title="notation">--</span></a><a class="idref" href="RIS.equiv_stacks.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a><a class="idref" href="RIS.equiv_stacks.html#16d7ab12bd6c8ac3af7968062a0bcad9"><span class="id" title="notation">---&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#s4"><span class="id" title="variable">s4</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="RIS.equiv_stacks.html#s3"><span class="id" title="variable">s3</span></a> <a class="idref" href="RIS.equiv_stacks.html#b9408cf88abb81b3e61ee010575b7536"><span class="id" title="notation">≺</span></a> <a class="idref" href="RIS.equiv_stacks.html#s4"><span class="id" title="variable">s4</span></a>)<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#b9408cf88abb81b3e61ee010575b7536"><span class="id" title="notation">≺</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a><br/>
+<span class="id" title="keyword">where</span> <a name="b9408cf88abb81b3e61ee010575b7536"><span class="id" title="notation">&quot;</span></a> s1 ≺ s2 " := (<a class="idref" href="RIS.equiv_stacks.html#similar"><span class="id" title="inductive">similar</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+We consider here languages to be sets of pairs of words, i.e. predicates over <span class="inlinecode"><span class="id" title="library">words</span>×<span class="id" title="library">words</span></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="lang"><span class="id" title="definition">lang</span></a> := (<a class="idref" href="RIS.words.html#word"><span class="id" title="definition">word</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#d19c7eafd0e2d195d10df94b392087b5"><span class="id" title="notation">×</span></a> <a class="idref" href="RIS.words.html#word"><span class="id" title="definition">word</span></a>)%<span class="id" title="keyword">type</span> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Two languages are equivalent if they contain the same words. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Global Instance</span> <a name="eq_sem"><span class="id" title="instance">eq_sem</span></a> : <a class="idref" href="RIS.tools.html#SemEquiv"><span class="id" title="class">SemEquiv</span></a> <a class="idref" href="RIS.equiv_stacks.html#lang"><span class="id" title="definition">lang</span></a> := <span class="id" title="keyword">fun</span> <span class="id" title="var">L</span> <span class="id" title="var">M</span> ⇒ <span class="id" title="keyword">∀</span> σ, <a class="idref" href="RIS.equiv_stacks.html#L"><span class="id" title="variable">L</span></a> <a class="idref" href="RIS.equiv_stacks.html#3122c41ebe889f745cb9bbe1c92165c3"><span class="id" title="variable">σ</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="RIS.equiv_stacks.html#M"><span class="id" title="variable">M</span></a> <a class="idref" href="RIS.equiv_stacks.html#3122c41ebe889f745cb9bbe1c92165c3"><span class="id" title="variable">σ</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The language <span class="inlinecode"><a class="idref" href="RIS.tools.html#L"><span class="id" title="variable">L</span></a></span> is smaller that the language <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#M"><span class="id" title="variable">M</span></a></span> if every word in <span class="inlinecode"><a class="idref" href="RIS.tools.html#L"><span class="id" title="variable">L</span></a></span> belongs to <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#M"><span class="id" title="variable">M</span></a></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Global Instance</span> <a name="inf_sem"><span class="id" title="instance">inf_sem</span></a> : <a class="idref" href="RIS.tools.html#SemSmaller"><span class="id" title="class">SemSmaller</span></a> <a class="idref" href="RIS.equiv_stacks.html#lang"><span class="id" title="definition">lang</span></a> := <span class="id" title="keyword">fun</span> <span class="id" title="var">L</span> <span class="id" title="var">M</span> ⇒ <span class="id" title="keyword">∀</span> σ, <a class="idref" href="RIS.equiv_stacks.html#L"><span class="id" title="variable">L</span></a> <a class="idref" href="RIS.equiv_stacks.html#3122c41ebe889f745cb9bbe1c92165c3"><span class="id" title="variable">σ</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#M"><span class="id" title="variable">M</span></a> <a class="idref" href="RIS.equiv_stacks.html#3122c41ebe889f745cb9bbe1c92165c3"><span class="id" title="variable">σ</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+The semantics of a stack <span class="inlinecode"><a class="idref" href="RIS.closed_automaton.html#s"><span class="id" title="section">s</span></a></span> is the set of pairs <span class="inlinecode"><a class="idref" href="RIS.tools.html#u"><span class="id" title="variable">u</span></a>,<a class="idref" href="RIS.tools.html#v"><span class="id" title="variable">v</span></a></span> such that there is a path from <span class="inlinecode"><a class="idref" href="RIS.closed_automaton.html#s"><span class="id" title="section">s</span></a></span> to some accepting stack labelled with <span class="inlinecode"><a class="idref" href="RIS.tools.html#u"><span class="id" title="variable">u</span></a>,<a class="idref" href="RIS.tools.html#v"><span class="id" title="variable">v</span></a></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Definition</span> <a name="semantics"><span class="id" title="definition">semantics</span></a> <span class="id" title="var">s</span> : <a class="idref" href="RIS.equiv_stacks.html#lang"><span class="id" title="definition">lang</span></a> := <span class="id" title="keyword">fun</span> σ ⇒ (<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">∃</span></a> <span class="id" title="var">s'</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="RIS.equiv_stacks.html#s'"><span class="id" title="variable">s'</span></a> <a class="idref" href="RIS.stacks.html#4da3e8d43c55435cce4c43e233197ef6"><span class="id" title="notation">✓</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="RIS.equiv_stacks.html#s"><span class="id" title="variable">s</span></a> <a class="idref" href="RIS.equiv_stacks.html#61929393f05edcf639732ca5c584d061"><span class="id" title="notation">--</span></a><a class="idref" href="RIS.equiv_stacks.html#3122c41ebe889f745cb9bbe1c92165c3"><span class="id" title="variable">σ</span></a><a class="idref" href="RIS.equiv_stacks.html#61929393f05edcf639732ca5c584d061"><span class="id" title="notation">--&gt;&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#s'"><span class="id" title="variable">s'</span></a>).<br/>
+<span class="id" title="keyword">Notation</span> <a name="dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">&quot;</span></a> ⟦ s ⟧ " := (<a class="idref" href="RIS.equiv_stacks.html#semantics"><span class="id" title="definition">semantics</span></a> <span class="id" title="var">s</span>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab80"></a><h1 class="section">Lemmas</h1>
+<a name="lab81"></a><h2 class="section">equiv_stacks</h2>
+ <span class="inlinecode"><span class="id" title="keyword">fun</span></span> <span class="inlinecode"><a class="idref" href="RIS.closed_automaton.html#s"><span class="id" title="section">s</span></a></span> <span class="inlinecode">⇒</span> <span class="inlinecode"><a class="idref" href="RIS.transducer.html#ec080ca89c3c6f45180317e3db5f4e7d"><span class="id" title="definition">δt</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.closed_automaton.html#s"><span class="id" title="section">s</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#u"><span class="id" title="variable">u</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#v"><span class="id" title="variable">v</span></a></span> preserves the relation <span class="inlinecode">==</span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Global Instance</span> <a name="adf242729421984c3e980caa05b06c00"><span class="id" title="instance">equiv_stacks_δt</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#Proper"><span class="id" title="class">Proper</span></a> (<a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a>) <a class="idref" href="RIS.transducer.html#ec080ca89c3c6f45180317e3db5f4e7d"><span class="id" title="definition">δt</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+If <span class="inlinecode"><a class="idref" href="RIS.closed_automaton.html#s"><span class="id" title="section">s</span></a>==<a class="idref" href="RIS.stacks.html#s'"><span class="id" title="variable">s'</span></a></span>, then <span class="inlinecode"><a class="idref" href="RIS.tools.html#u"><span class="id" title="variable">u</span></a>,<a class="idref" href="RIS.tools.html#v"><span class="id" title="variable">v</span></a></span> is compatible with <span class="inlinecode"><a class="idref" href="RIS.closed_automaton.html#s"><span class="id" title="section">s</span></a></span> if and only if <span class="inlinecode"><a class="idref" href="RIS.stacks.html#s'"><span class="id" title="variable">s'</span></a></span> is. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Global Instance</span> <a name="equiv_stacks_compatible"><span class="id" title="instance">equiv_stacks_compatible</span></a> :<br/>
+&nbsp;&nbsp;<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#Proper"><span class="id" title="class">Proper</span></a> (<a class="idref" href="RIS.equiv_stacks.html#equiv_stacks"><span class="id" title="definition">equiv_stacks</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#eq"><span class="id" title="inductive">Logic.eq</span></a>) <a class="idref" href="RIS.transducer.html#compatible"><span class="id" title="definition">compatible</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab82"></a><h2 class="section">Characteristic words</h2>
+ The pair <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#w1"><span class="id" title="definition">w1</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.closed_automaton.html#s"><span class="id" title="section">s</span></a>,<a class="idref" href="RIS.equiv_stacks.html#w2"><span class="id" title="definition">w2</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.closed_automaton.html#s"><span class="id" title="section">s</span></a></span> belongs to the semantics of <span class="inlinecode"><a class="idref" href="RIS.closed_automaton.html#s"><span class="id" title="section">s</span></a></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="w_path"><span class="id" title="lemma">w_path</span></a> <span class="id" title="var">s</span> : <a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟦</span></a><a class="idref" href="RIS.equiv_stacks.html#s"><span class="id" title="variable">s</span></a><a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟧</span></a> (<a class="idref" href="RIS.equiv_stacks.html#3f3b3714f30e67327a57be78c00c9d23"><span class="id" title="definition">𝐰</span></a> <a class="idref" href="RIS.equiv_stacks.html#s"><span class="id" title="variable">s</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+If <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#w1"><span class="id" title="definition">w1</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#s1"><span class="id" title="variable">s1</span></a>,<a class="idref" href="RIS.equiv_stacks.html#w2"><span class="id" title="definition">w2</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#s1"><span class="id" title="variable">s1</span></a></span> is in the semantics of <span class="inlinecode"><a class="idref" href="RIS.tools.html#s2"><span class="id" title="variable">s2</span></a></span>, then <span class="inlinecode"><a class="idref" href="RIS.tools.html#s1"><span class="id" title="variable">s1</span></a>==<a class="idref" href="RIS.tools.html#s2"><span class="id" title="variable">s2</span></a></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="w_equiv_stacks"><span class="id" title="lemma">w_equiv_stacks</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> :<br/>
+&nbsp;&nbsp;<a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟦</span></a><a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a><a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟧</span></a> (<a class="idref" href="RIS.equiv_stacks.html#3f3b3714f30e67327a57be78c00c9d23"><span class="id" title="definition">𝐰</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#84d05f4722e5e802494866820c218a04"><span class="id" title="notation">==</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab83"></a><h2 class="section">Bissimilarity</h2>
+ Bissimilarity is an equivalence relation. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Global Instance</span> <a name="bissimilar_equivalence"><span class="id" title="instance">bissimilar_equivalence</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.RelationClasses.html#Equivalence"><span class="id" title="class">Equivalence</span></a> <a class="idref" href="RIS.equiv_stacks.html#bissimilar"><span class="id" title="inductive">bissimilar</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Although we have defined bissimilarity in terms of transitions, it may be naturally extended to paths. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="bissimilar_path"><span class="id" title="lemma">bissimilar_path</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> σ <span class="id" title="var">s3</span> :<br/>
+&nbsp;&nbsp;<a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#f46b09742795e9ffc656d3dc00451cd5"><span class="id" title="notation">∼</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#61929393f05edcf639732ca5c584d061"><span class="id" title="notation">--</span></a><a class="idref" href="RIS.equiv_stacks.html#3122c41ebe889f745cb9bbe1c92165c3"><span class="id" title="variable">σ</span></a><a class="idref" href="RIS.equiv_stacks.html#61929393f05edcf639732ca5c584d061"><span class="id" title="notation">--&gt;&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#s3"><span class="id" title="variable">s3</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">∃</span></a> <span class="id" title="var">s4</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.equiv_stacks.html#61929393f05edcf639732ca5c584d061"><span class="id" title="notation">--</span></a><a class="idref" href="RIS.equiv_stacks.html#3122c41ebe889f745cb9bbe1c92165c3"><span class="id" title="variable">σ</span></a><a class="idref" href="RIS.equiv_stacks.html#61929393f05edcf639732ca5c584d061"><span class="id" title="notation">--&gt;&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#s4"><span class="id" title="variable">s4</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="RIS.equiv_stacks.html#s3"><span class="id" title="variable">s3</span></a> <a class="idref" href="RIS.equiv_stacks.html#f46b09742795e9ffc656d3dc00451cd5"><span class="id" title="notation">∼</span></a> <a class="idref" href="RIS.equiv_stacks.html#s4"><span class="id" title="variable">s4</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+In fact <span class="inlinecode"><a class="idref" href="RIS.tools.html#s1"><span class="id" title="variable">s1</span></a></span> is bissimilar to <span class="inlinecode"><a class="idref" href="RIS.tools.html#s2"><span class="id" title="variable">s2</span></a></span> exactly when for every pair of words <span class="inlinecode"><a class="idref" href="RIS.tools.html#u"><span class="id" title="variable">u</span></a>,<a class="idref" href="RIS.tools.html#v"><span class="id" title="variable">v</span></a></span>, there is a path labelled with <span class="inlinecode"><a class="idref" href="RIS.tools.html#u"><span class="id" title="variable">u</span></a>|<a class="idref" href="RIS.tools.html#v"><span class="id" title="variable">v</span></a></span> from <span class="inlinecode"><a class="idref" href="RIS.tools.html#s1"><span class="id" title="variable">s1</span></a></span> if and only if there is one from <span class="inlinecode"><a class="idref" href="RIS.tools.html#s2"><span class="id" title="variable">s2</span></a></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="bissimilar_alt"><span class="id" title="lemma">bissimilar_alt</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> :<br/>
+&nbsp;&nbsp;<a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#f46b09742795e9ffc656d3dc00451cd5"><span class="id" title="notation">∼</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <span class="id" title="keyword">∀</span> σ, <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">∃</span></a> <span class="id" title="var">s</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#61929393f05edcf639732ca5c584d061"><span class="id" title="notation">--</span></a><a class="idref" href="RIS.equiv_stacks.html#3122c41ebe889f745cb9bbe1c92165c3"><span class="id" title="variable">σ</span></a><a class="idref" href="RIS.equiv_stacks.html#61929393f05edcf639732ca5c584d061"><span class="id" title="notation">--&gt;&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#s"><span class="id" title="variable">s</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">(</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">∃</span></a> <span class="id" title="var">s</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.equiv_stacks.html#61929393f05edcf639732ca5c584d061"><span class="id" title="notation">--</span></a><a class="idref" href="RIS.equiv_stacks.html#3122c41ebe889f745cb9bbe1c92165c3"><span class="id" title="variable">σ</span></a><a class="idref" href="RIS.equiv_stacks.html#61929393f05edcf639732ca5c584d061"><span class="id" title="notation">--&gt;&gt;</span></a> <a class="idref" href="RIS.equiv_stacks.html#s"><span class="id" title="variable">s</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">)</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Bissimilar stacks are equivalent with respect to acceptance. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="bissimilar_accepting"><span class="id" title="lemma">bissimilar_accepting</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#f46b09742795e9ffc656d3dc00451cd5"><span class="id" title="notation">∼</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.stacks.html#4da3e8d43c55435cce4c43e233197ef6"><span class="id" title="notation">✓</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="RIS.stacks.html#4da3e8d43c55435cce4c43e233197ef6"><span class="id" title="notation">✓</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Static equivalence implies bissimilarity. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="equiv_stacks_bissimilar"><span class="id" title="lemma">equiv_stacks_bissimilar</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#84d05f4722e5e802494866820c218a04"><span class="id" title="notation">==</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#f46b09742795e9ffc656d3dc00451cd5"><span class="id" title="notation">∼</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+If <span class="inlinecode"><a class="idref" href="RIS.tools.html#s1"><span class="id" title="variable">s1</span></a></span> and <span class="inlinecode"><a class="idref" href="RIS.tools.html#s2"><span class="id" title="variable">s2</span></a></span> are bissimilar, then the semantics of <span class="inlinecode"><a class="idref" href="RIS.tools.html#s2"><span class="id" title="variable">s2</span></a></span> contains <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#w1"><span class="id" title="definition">w1</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#s1"><span class="id" title="variable">s1</span></a>,<a class="idref" href="RIS.equiv_stacks.html#w2"><span class="id" title="definition">w2</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#s2"><span class="id" title="variable">s2</span></a></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="bissimilar_w"><span class="id" title="lemma">bissimilar_w</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> :<br/>
+&nbsp;&nbsp;<a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#f46b09742795e9ffc656d3dc00451cd5"><span class="id" title="notation">∼</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟦</span></a><a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a><a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟧</span></a> (<a class="idref" href="RIS.equiv_stacks.html#3f3b3714f30e67327a57be78c00c9d23"><span class="id" title="definition">𝐰</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a>).<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab84"></a><h2 class="section">Similarity</h2>
+ Bissimilarity implies similarity. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="bissimilar_similar"><span class="id" title="lemma">bissimilar_similar</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#f46b09742795e9ffc656d3dc00451cd5"><span class="id" title="notation">∼</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#b9408cf88abb81b3e61ee010575b7536"><span class="id" title="notation">≺</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Similarity implies static equivalence. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="similar_equiv_stacks"><span class="id" title="lemma">similar_equiv_stacks</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#b9408cf88abb81b3e61ee010575b7536"><span class="id" title="notation">≺</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#84d05f4722e5e802494866820c218a04"><span class="id" title="notation">==</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+<a name="lab85"></a><h2 class="section">Semantics</h2>
+ Bissimilarity implies semantic equivalence. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="bissimilar_eq_sem"><span class="id" title="lemma">bissimilar_eq_sem</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a> <a class="idref" href="RIS.equiv_stacks.html#f46b09742795e9ffc656d3dc00451cd5"><span class="id" title="notation">∼</span></a> <a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟦</span></a><a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a><a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟧</span></a> <a class="idref" href="RIS.tools.html#63510515077225ba3be50ed1e1ec3cec"><span class="id" title="notation">≃</span></a> <a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟦</span></a><a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a><a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟧</span></a>.<br/>
+
+<br/>
+</div>
+
+<div class="doc">
+Semantic equivalence implies semantic inclusion. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="eq_lang_incl_sem"><span class="id" title="lemma">eq_lang_incl_sem</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟦</span></a><a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a><a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟧</span></a> <a class="idref" href="RIS.tools.html#63510515077225ba3be50ed1e1ec3cec"><span class="id" title="notation">≃</span></a> <a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟦</span></a><a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a><a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟧</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟦</span></a><a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a><a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟧</span></a> <a class="idref" href="RIS.tools.html#2f613003cab010170c28ba1e92d0ce28"><span class="id" title="notation">≲</span></a> <a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟦</span></a><a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a><a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟧</span></a>.<br/>
+ 
+<br/>
+</div>
+
+<div class="doc">
+Semantic inclusion of <span class="inlinecode"><a class="idref" href="RIS.tools.html#s1"><span class="id" title="variable">s1</span></a></span> in <span class="inlinecode"><a class="idref" href="RIS.tools.html#s2"><span class="id" title="variable">s2</span></a></span> implies that <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#w1"><span class="id" title="definition">w1</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#s1"><span class="id" title="variable">s1</span></a>,<a class="idref" href="RIS.equiv_stacks.html#w2"><span class="id" title="definition">w2</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#s1"><span class="id" title="variable">s1</span></a></span> is in the semantics of <span class="inlinecode"><a class="idref" href="RIS.tools.html#s2"><span class="id" title="variable">s2</span></a></span>. 
+</div>
+<div class="code">
+<span class="id" title="keyword">Lemma</span> <a name="incl_sem_w"><span class="id" title="lemma">incl_sem_w</span></a> <span class="id" title="var">s1</span> <span class="id" title="var">s2</span> : <a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟦</span></a><a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a><a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟧</span></a> <a class="idref" href="RIS.tools.html#2f613003cab010170c28ba1e92d0ce28"><span class="id" title="notation">≲</span></a> <a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟦</span></a><a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a><a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟧</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟦</span></a><a class="idref" href="RIS.equiv_stacks.html#s2"><span class="id" title="variable">s2</span></a><a class="idref" href="RIS.equiv_stacks.html#dbd54d46d0331fa2ab804128cfe91f74"><span class="id" title="notation">⟧</span></a> (<a class="idref" href="RIS.equiv_stacks.html#3f3b3714f30e67327a57be78c00c9d23"><span class="id" title="definition">𝐰</span></a> <a class="idref" href="RIS.equiv_stacks.html#s1"><span class="id" title="variable">s1</span></a>).<br/>
+ 
+<br/>
+<span class="id" title="keyword">End</span> <a class="idref" href="RIS.equiv_stacks.html#s"><span class="id" title="section">s</span></a>.<br/>
+</div>
+</div>
+
+<div id="footer">
+<hr/><a href="index.html">Index</a><hr/>This page has been generated by <a href="http://coq.inria.fr/">coqdoc</a>
+</div>
+
+</div>
+
+</body>
+</html>
