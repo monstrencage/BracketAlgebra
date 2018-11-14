@@ -1,0 +1,46 @@
+-R . RIS
+-I relation-algebra
+-Q relation-algebra RelationAlgebra
+tools.v
+atoms.v
+bijection.v
+nominalsetoid.v
+words.v
+stacks.v
+transducer.v
+equiv_stacks.v
+alternate_eq.v
+traces.v
+representative.v
+normalise.v
+
+factors.v
+
+algebra.v
+language.v
+regexp.v
+completenessKA.v
+automata.v
+
+systems.v
+
+positive_regexp.v
+
+subword.v
+
+aeq_facts.v
+alpha_regexp.v
+
+alphaKA.v
+closed_languages.v
+binding_finite.v
+
+filters.v
+splits.v
+strict_split.v
+tri_split.v
+
+alpha_derivatives.v
+alpha_delta.v
+
+closed_automaton.v
