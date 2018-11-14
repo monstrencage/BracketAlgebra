@@ -1,10 +1,9 @@
 *.vo
 *.glob
 *.v.d
-
+*~
+*.conf
 *.aux
-
-relation-algebra
 
 \.coqdeps\.d
 
