@@ -1,3 +1,4 @@
+(** * RIS.subword : the subword ordering on words. *)
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.

@@ -35,12 +35,12 @@ alphaKA.v
 closed_languages.v
 binding_finite.v
 
-filters.v
-splits.v
-strict_split.v
-tri_split.v
+# filters.v
+# splits.v
+# strict_split.v
+# tri_split.v
 
-alpha_derivatives.v
-alpha_delta.v
+# alpha_derivatives.v
+# alpha_delta.v
 
 closed_automaton.v

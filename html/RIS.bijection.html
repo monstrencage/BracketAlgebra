@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>RIS.bijection</title>
+<title>RIS.bijection: generate permutations.</title>
 </head>
 
 <body>
@@ -16,13 +16,12 @@
 
 <div id="main">
 
-<h1 class="libtitle">Library RIS.bijection</h1>
+<h1 class="libtitle">RIS.bijection: generate permutations.</h1>
 
 <div class="code">
 </div>
 
 <div class="doc">
-<a name="lab44"></a><h1 class="section">RIS.bijection : generate permutations.</h1>
 
 </div>
 <div class="code">
@@ -46,8 +45,8 @@ Applying a permutation commutes with computing the shuffles.
 </div>
 
 <div class="doc">
-<a name="lab45"></a><h1 class="section">Permutation out of two lists</h1>
- If <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span> and <span class="inlinecode"><a class="idref" href="RIS.tools.html#m"><span class="id" title="variable">m</span></a></span> are duplication-free and have the same length, then there is a permutation (computed by <span class="inlinecode"><a class="idref" href="RIS.bijection.html#make_perm"><span class="id" title="definition">make_perm</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#m"><span class="id" title="variable">m</span></a></span>) that send <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span> to <span class="inlinecode"><a class="idref" href="RIS.tools.html#m"><span class="id" title="variable">m</span></a></span>. Furthermore, every atom mentioned by this permutation comes from either <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span> or <span class="inlinecode"><a class="idref" href="RIS.tools.html#m"><span class="id" title="variable">m</span></a></span>. 
+<a name="lab42"></a><h1 class="section">Permutation out of two lists</h1>
+ If <span class="inlinecode"><span class="id" title="var">l</span></span> and <span class="inlinecode"><span class="id" title="var">m</span></span> are duplication-free and have the same length, then there is a permutation (computed by <span class="inlinecode"><span class="id" title="var">make_perm</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span> <span class="inlinecode"><span class="id" title="var">m</span></span>) that send <span class="inlinecode"><span class="id" title="var">l</span></span> to <span class="inlinecode"><span class="id" title="var">m</span></span>. Furthermore, every atom mentioned by this permutation comes from either <span class="inlinecode"><span class="id" title="var">l</span></span> or <span class="inlinecode"><span class="id" title="var">m</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Fixpoint</span> <a name="make_perm"><span class="id" title="definition">make_perm</span></a> (<span class="id" title="var">l</span> <span class="id" title="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="RIS.bijection.html#bijection.atom"><span class="id" title="variable">atom</span></a>) : <a class="idref" href="RIS.atoms.html#perm"><span class="id" title="definition">perm</span></a> :=<br/>
@@ -73,7 +72,7 @@ Applying a permutation commutes with computing the shuffles.
 </div>
 
 <div class="doc">
-Applying <span class="inlinecode"><a class="idref" href="RIS.bijection.html#make_perm"><span class="id" title="definition">make_perm</span></a></span> to two copies of the same lists yields a permutation equivalent to the identity. 
+Applying <span class="inlinecode"><span class="id" title="var">make_perm</span></span> to two copies of the same lists yields a permutation equivalent to the identity. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="make_perm_id"><span class="id" title="lemma">make_perm_id</span></a> <span class="id" title="var">l</span> : <a class="idref" href="RIS.tools.html#63510515077225ba3be50ed1e1ec3cec"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.bijection.html#l"><span class="id" title="variable">l</span></a> <a class="idref" href="RIS.bijection.html#1711e6cc0cd214bab0dac7f5f74feeec"><span class="id" title="notation">&gt;&gt;</span></a> <a class="idref" href="RIS.bijection.html#l"><span class="id" title="variable">l</span></a><a class="idref" href="RIS.tools.html#63510515077225ba3be50ed1e1ec3cec"><span class="id" title="notation">)</span></a> <a class="idref" href="RIS.tools.html#63510515077225ba3be50ed1e1ec3cec"><span class="id" title="notation">≃</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#145bedf8a5d4a541831f3f70db03085c"><span class="id" title="notation">[]</span></a>.<br/>
@@ -82,7 +81,7 @@ Applying <span class="inlinecode"><a class="idref" href="RIS.bijection.html#make
 </div>
 
 <div class="doc">
-<a name="lab46"></a><h1 class="section">Permutation out of a bijection</h1>
+<a name="lab43"></a><h1 class="section">Permutation out of a bijection</h1>
 
 <div class="paragraph"> </div>
 
@@ -106,11 +105,11 @@ Functions that are injective and finitely supported may be represented as permut
 </div>
 
 <div class="doc">
-<a name="lab47"></a><h1 class="section">Enumerate permutations</h1>
+<a name="lab44"></a><h1 class="section">Enumerate permutations</h1>
 
 <div class="paragraph"> </div>
 
- <span class="inlinecode"><a class="idref" href="RIS.bijection.html#permutations"><span class="id" title="definition">permutations</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span> lists every permutation supported by <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span>. 
+ <span class="inlinecode"><span class="id" title="var">permutations</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span> lists every permutation supported by <span class="inlinecode"><span class="id" title="var">l</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="permutations"><span class="id" title="definition">permutations</span></a> <span class="id" title="var">l</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="RIS.atoms.html#perm"><span class="id" title="definition">perm</span></a> :=<br/>
@@ -120,7 +119,7 @@ Functions that are injective and finitely supported may be represented as permut
 </div>
 
 <div class="doc">
-Indeed, if every atom <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span> such that <span class="inlinecode"><a class="idref" href="RIS.atoms.html#q"><span class="id" title="variable">q</span></a>∙<a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a>≠<a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span> belongs to the list <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span>, then there is a permutation <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a></span> that is equivalent to <span class="inlinecode"><a class="idref" href="RIS.atoms.html#q"><span class="id" title="variable">q</span></a></span> and belongs to the list <span class="inlinecode"><a class="idref" href="RIS.bijection.html#permutations"><span class="id" title="definition">permutations</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span>. 
+Indeed, if every atom <span class="inlinecode"><span class="id" title="var">a</span></span> such that <span class="inlinecode"><span class="id" title="var">q</span>∙<span class="id" title="var">a</span>≠<span class="id" title="var">a</span></span> belongs to the list <span class="inlinecode"><span class="id" title="var">l</span></span>, then there is a permutation <span class="inlinecode"><span class="id" title="var">p</span></span> that is equivalent to <span class="inlinecode"><span class="id" title="var">q</span></span> and belongs to the list <span class="inlinecode"><span class="id" title="var">permutations</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="permutations_spec"><span class="id" title="lemma">permutations_spec</span></a> <span class="id" title="var">q</span> <span class="id" title="var">l</span> :<br/>
@@ -130,7 +129,7 @@ Indeed, if every atom <span class="inlinecode"><a class="idref" href="RIS.tools.
 </div>
 
 <div class="doc">
-This means that if <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a></span> is a permutation supported by <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span>, for every name <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span> we know that <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a>∈<a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span> if and only if <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a>∈<a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>∙<a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span>. 
+This means that if <span class="inlinecode"><span class="id" title="var">p</span></span> is a permutation supported by <span class="inlinecode"><span class="id" title="var">l</span></span>, for every name <span class="inlinecode"><span class="id" title="var">a</span></span> we know that <span class="inlinecode"><span class="id" title="var">a</span>∈<span class="id" title="var">l</span></span> if and only if <span class="inlinecode"><span class="id" title="var">a</span>∈<span class="id" title="var">p</span>∙<span class="id" title="var">l</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="permutations_image"><span class="id" title="lemma">permutations_image</span></a> <span class="id" title="var">p</span> <span class="id" title="var">l</span> :<br/>
@@ -140,7 +139,7 @@ This means that if <span class="inlinecode"><a class="idref" href="RIS.tools.htm
 </div>
 
 <div class="doc">
-The permutations appearing in <span class="inlinecode"><a class="idref" href="RIS.bijection.html#permutations"><span class="id" title="definition">permutations</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span> have the additional property that they only mention names from <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span>. 
+The permutations appearing in <span class="inlinecode"><span class="id" title="var">permutations</span></span> <span class="inlinecode"><span class="id" title="var">l</span></span> have the additional property that they only mention names from <span class="inlinecode"><span class="id" title="var">l</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="permutations_elements"><span class="id" title="lemma">permutations_elements</span></a> <span class="id" title="var">p</span> <span class="id" title="var">l</span> :<br/>

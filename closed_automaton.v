@@ -1,9 +1,10 @@
+(** * RIS.closed_automaton : computing an automaton for the α-closure of an expression. *)
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
 
-Require Import tools algebra language regexp aeq_facts alpha_regexp closed_languages binding_finite alphaKA automata systems.
-Require Import alpha_delta.
+Require Import tools algebra language regexp automata systems.
+Require Import aeq_facts alpha_regexp closed_languages binding_finite.
 
 Section s.
   Context {atom : Set}{𝐀 : Atom atom}.
@@ -146,7 +147,10 @@ Section s.
       apply αfresh_support in I1 as ->.
       simpl;simpl_binding;lia.
   Qed.
-    
+
+  (** We have built an automaton whose language is the set of words
+      [u] such that [⌊u⌋ ⊆ A] and there is a word [v ∈ ⟦e⟧] such that
+      [v≡u]. *)
   Lemma lang_close_automaton e A :
     is_binding_finite e ->
     langNFA (closed_automaton e A) ([],e) ≃ restrict (cl_α ⟦e⟧) A.

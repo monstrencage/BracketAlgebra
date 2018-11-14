@@ -1,3 +1,4 @@
+(** * RIS.binding_finite : binding-finite and memory-finite expressions. *)
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
@@ -1052,10 +1053,7 @@ Section s.
         apply αfresh_support in I as ->;simpl.
         unfold size;simpl;lia.
   Qed.
-        
-  (** ** More facts about binding finite expressions *)
-  
-  
+          
   Lemma bindFinList_incl L M : bindFinList M -> L ⊆ M -> bindFinList L.
   Proof. intro hM;intros I e Ie;apply hM,I,Ie. Qed.
 

@@ -1,3 +1,4 @@
+(** * RIS.aeq_facts : lemmas about α-equivalence and the equivalence transducer. *)
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
@@ -195,7 +196,7 @@ Section s.
                 ** rewrite A2;simpl;intros E' <-;lia.
                 ** lia.
           -- remember (a0::w) as t1;rewrite app_comm_cons,<-Heqt1 in Sb,ha;clear a0 w Heqt1.
-            exists s3,(t1++t2);split;[rewrite app_ass;reflexivity|].
+             exists s3,(t1++t2);split;[rewrite app_ass;reflexivity|].
              split;[rewrite <- Sb;apply subword_app;
                     [reflexivity|apply subword_cons]|].
              intros c;simpl_binding.
@@ -364,8 +365,8 @@ Section s.
              unfold close_balanced;simpl_binding;rewrite I';reflexivity. 
   Qed.
 
-    
-    
+  
+  
   Lemma path_init_pair u v a b s :
     a <> b -> ([(a,b)] ⊣ u | v ⤅ s) ->
     (a ◁ u /\ b ◁ v /\ exists s', s = s'++[(a,b)])
@@ -465,17 +466,17 @@ Section s.
                         *** apply app_inj_tail in E as (_&E);inversion E;subst;apply N;reflexivity.
                         *** rewrite app_comm_cons,<-app_ass in E.
                             apply app_inj_tail in E as (<-&->). 
-                        pose proof (ha b) as (h1&h2&h3&h4&h5).
-                        rewrite F in *;simpl in *;revert h1 h2 h3 h4 h5;simpl_eqX;simpl.
-                        repeat rewrite map_app,filter_app,app_length;simpl;simpl_beq;simpl.
-                        destruct A' as (A'&_);apply nb_not_In in A' as ->;discriminate.
+                            pose proof (ha b) as (h1&h2&h3&h4&h5).
+                            rewrite F in *;simpl in *;revert h1 h2 h3 h4 h5;simpl_eqX;simpl.
+                            repeat rewrite map_app,filter_app,app_length;simpl;simpl_beq;simpl.
+                            destruct A' as (A'&_);apply nb_not_In in A' as ->;discriminate.
                     +++ revert Sb;clear;simpl;tauto.
              ++ destruct A as (_&A);destruct (ha' b) as (_&_&E1&E2).
-                 split.
-                 --- revert A E2;clear.
-                     intro A;apply nb_not_In in A as ->;lia.
-                 --- revert E1;clear;simpl;simpl_eqX;simpl.
-                     destruct (d_binding (𝗙 b v1));lia.
+                split.
+                --- revert A E2;clear.
+                    intro A;apply nb_not_In in A as ->;lia.
+                --- revert E1;clear;simpl;simpl_eqX;simpl.
+                    destruct (d_binding (𝗙 b v1));lia.
           -- exfalso.
              rewrite app_comm_cons,<-app_ass in E.
              apply app_inj_tail in E as (<-&->).
@@ -496,134 +497,6 @@ Section s.
         destruct (d_binding (𝗙 b v));lia.
     - exfalso;simpl in Sb;tauto.
   Qed.
-
-  (* Lemma path_init_pair_bis u v a b s : *)
-  (*   a <> b -> ([(a,b)] ⊣ u | v ⤅ s) -> *)
-  (*   (a ◁ u /\ b ◁ v /\ exists s', s = s'++[(a,b)]) *)
-  (*   \/ (exists u1 u2 v1 v2, *)
-  (*         u = u1++close a::u2 *)
-  (*         /\ v = v1++close b::v2 *)
-  (*         /\ a ⋄ u1 *)
-  (*         /\ b ⋄ v1 *)
-  (*         /\ ⎢u1⎥ = ⎢v1⎥ *)
-  (*         /\ exists n, 𝗙 b u1 = (0,false,n)). *)
-  (* Proof. *)
-  (*   intros N P. *)
-  (*   destruct (path_init_pair P) as [h|h];[tauto|]. *)
-  (*   right. *)
-  (*   destruct h as (u1&u2&v1&v2&->&->&B1&B2&Len). *)
-  (*   exists u1,u2,v1,v2;repeat (split;[reflexivity||assumption|]). *)
-  (*   remember (𝗙 b u1) as β;destruct β as ((m&k)&n). *)
-  (*   destruct m. *)
-  (*   - destruct k;[|exists n;reflexivity]. *)
-  (*     exfalso. *)
-  (*     cut (exists w1 w2 x, u1 = w1++var x::w2 /\ b #α w1 /\ b ∈ ⌊x⌋). *)
-  (*     + intros (w1&w2&x&->&Fb&Ib). *)
-  (*       cut (exists w1' w2' y, v1 = w1'++var y::w2' /\ ⎢w1⎥ = ⎢w1'⎥). *)
-  (*       * intros (w1'&w2'&y&->&Len'). *)
-  (*         repeat rewrite app_ass in P;apply path_decompose_app in P as (s'&P1&P2);[|assumption]. *)
-  (*         simpl in P2;inversion P2 as [|? ? ? ? ? ? ? hs P];subst. *)
-  (*         unfold step in hs;destruct hs as (->&(p&->&hs)). *)
-  (*         pose proof (hs b Ib) as [h|h]. *)
-  (*         -- pose proof (stack_binding_both P1 b) as (_&Eb);revert Eb. *)
-  (*            destruct h as (E&A1&A2). *)
-  (*            apply nb_not_In in A2 as ->. *)
-  (*            simpl;simpl_eqX;simpl. *)
-  (*            revert B2;unfold balanced;simpl_binding. *)
-  (*            case_in b ⌊p∙x⌋. *)
-  (*            ++ simpl. *)
-  (*               destruct (d_binding (𝗙 b w1'));lia. *)
-  (*            ++ rewrite support_action,In_act_lists,<-E,act_pinv_p in I. *)
-  (*               exfalso;apply I,Ib. *)
-  (*         -- pose proof (stack_binding_both P1 b) as (Eb&_). *)
-  (*            revert Eb;rewrite Fb;simpl;simpl_eqX;simpl. *)
-  (*            rewrite <- nb_not_In. *)
-  (*            destruct h as (s1&s2&->&_);rewrite map_app;simpl_In;simpl;tauto. *)
-  (*       * pose proof (firstn_skipn ⎢w1⎥ v1) as Ev. *)
-  (*         remember (firstn ⎢w1⎥ v1) as w1'. *)
-  (*         remember (skipn ⎢w1⎥ v1) as w. *)
-  (*         destruct w as [|y w2']. *)
-  (*         -- exfalso. *)
-  (*            rewrite app_nil_r in Ev;subst. *)
-  (*            cut (length v1 > length w1);[intro L|solve_length]. *)
-  (*            cut (length v1 = length w1);[solve_length|]. *)
-  (*            rewrite <- Ev;apply firstn_length_le. *)
-  (*            lia. *)
-  (*         -- exists w1',w2'. *)
-  (*            assert (L: length w1 = length w1') *)
-  (*              by (rewrite Heqw1';symmetry;apply firstn_length_le;solve_length). *)
-  (*            clear Heqw1' Heqw;subst. *)
-  (*            repeat rewrite app_ass in P;apply path_decompose_app in P as (s'&P1&P2);[|assumption]. *)
-  (*            simpl in P2;inversion P2 as [|? ? ? ? ? ? ? hs P];subst. *)
-  (*            destruct y as [c|c|y];unfold step in hs;try tauto. *)
-  (*            exists y;tauto. *)
-  (*     + clear P v1 v2 B2 Len a N B1. *)
-  (*       assert (hyp : exists n, 𝗙 b u1 = (0, true, n)) by (exists n;rewrite Heqβ;reflexivity). *)
-  (*       clear n Heqβ;revert hyp. *)
-  (*       induction u1 as [|l u1] using rev_induction. *)
-  (*       * intros (n&F);exfalso;discriminate. *)
-  (*       * intros (n&E);revert E;simpl_binding;unfold fresh__α. *)
-  (*         remember (𝗙 b u1) as β;destruct β as ((m&k)&n'). *)
-  (*         destruct m. *)
-  (*         -- destruct k. *)
-  (*            ++ destruct IHu1 as (w1&w2&x&->&B&I). *)
-  (*               ** eauto. *)
-  (*               ** intros _;exists w1,(w2++[l]),x;rewrite app_ass;tauto. *)
-  (*            ++ clear IHu1;destruct l as [a|a|x]. *)
-  (*               ** clear;intro h;exfalso;revert h;clear. *)
-  (*                  simpl;unfold_eqX;unfold prod_binding;simpl;destruct n';simpl;discriminate. *)
-  (*               ** clear;intro h;exfalso;revert h;clear. *)
-  (*                  simpl;unfold_eqX;unfold prod_binding;simpl;destruct n' as [|[]];simpl;discriminate. *)
-  (*               ** intro E;exists u1,[],x;split;[reflexivity|]. *)
-  (*                  revert E;unfold prod_binding;simpl. *)
-  (*                  destruct n';simpl;[|discriminate]. *)
-  (*                  case_in b ⌊x⌋;[|discriminate]. *)
-  (*                  rewrite <- Heqβ;tauto. *)
-  (*         -- clear;intro h;exfalso;revert h. *)
-  (*            destruct l as [a|a|x];simpl;unfold_eqX;unfold prod_binding;simpl. *)
-  (*            ++ destruct n';simpl;discriminate. *)
-  (*            ++ destruct n';simpl;discriminate. *)
-  (*            ++ destruct n' as [|[]];simpl;discriminate. *)
-  (*            ++ destruct n';simpl;discriminate. *)
-  (*            ++ destruct n';simpl;discriminate. *)
-  (*   - exfalso. *)
-  (*     destruct (@αfresh_open_split _ _ _ _ u1 b) as (w1&w2&->&B); *)
-  (*       [unfold close_balanced;rewrite <- Heqβ;simpl_binding;discriminate|]. *)
-  (*     cut (exists w1' w2' c, v1 = w1'++close c::w2' /\ ⎢w1⎥ = ⎢w1'⎥). *)
-  (*     + intros (w1'&w2'&y&->&Len'). *)
-  (*       repeat rewrite app_ass in P;apply path_decompose_app in P as (s'&P1&P2);[|assumption]. *)
-  (*       simpl in P2;inversion P2 as [|? ? ? ? ? ? ? hs P];subst;clear P P2. *)
-  (*       unfold step in hs;destruct hs as ([(->&A)|(t1&t2&->&A)]&->). *)
-  (*       * pose proof (stack_binding_both P1 b) as (_&Eb);revert Eb. *)
-  (*         simpl;simpl_eqX;simpl.   *)
-  (*         destruct A as (_&A). *)
-  (*         apply nb_not_In in A as ->. *)
-  (*         revert B2;unfold balanced;simpl_binding;simpl. *)
-  (*         destruct (d_binding (𝗙 b w1'));lia. *)
-  (*       * pose proof (stack_binding_both P1 b) as (Eb&_). *)
-  (*         revert Eb;simpl;simpl_eqX;simpl. *)
-  (*         rewrite map_app,filter_app,app_length;simpl;simpl_eqX;simpl. *)
-  (*         destruct A as (A&_);apply nb_not_In in A as ->. *)
-  (*         destruct B as (->&_);lia. *)
-  (*     + pose proof (firstn_skipn ⎢w1⎥ v1) as Ev. *)
-  (*       remember (firstn ⎢w1⎥ v1) as w1'. *)
-  (*       remember (skipn ⎢w1⎥ v1) as w. *)
-  (*       destruct w as [|y w2']. *)
-  (*       * exfalso. *)
-  (*         rewrite app_nil_r in Ev;subst. *)
-  (*         cut (length v1 > length w1);[intro L|solve_length]. *)
-  (*         cut (length v1 = length w1);[solve_length|]. *)
-  (*         rewrite <- Ev;apply firstn_length_le. *)
-  (*         lia. *)
-  (*       * exists w1',w2'. *)
-  (*         assert (L: length w1 = length w1') *)
-  (*           by (rewrite Heqw1';symmetry;apply firstn_length_le;solve_length). *)
-  (*         clear Heqw1' Heqw;subst. *)
-  (*         repeat rewrite app_ass in P;apply path_decompose_app in P as (s'&P1&P2);[|assumption]. *)
-  (*         simpl in P2;inversion P2 as [|? ? ? ? ? ? ? hs P];subst. *)
-  (*         destruct y as [c|c|y];unfold step in hs;try tauto. *)
-  (*         exists c;tauto. *)
-  (* Qed. *)
 
   Lemma path_init_refl_pair u v s c :
     ([(c,c)] ⊣ u | v ⤅ s) ->
@@ -765,15 +638,15 @@ Section s.
   Lemma aeq_first_letter_open u v a b :
     a<>b -> open a::u ≡ open b::v ->
     exists u1 u2, u = u1++close a::u2
-                   /\ a ⋄ u1
-                   /\ ((b #α u1 /\ [(a,b)]∙u1++close b::u2 ≡ v)
-                      \/ exists w1 w2 w3 w4, u1 = w1 ++ open b::w2
-                                       /\ u2 = w3 ++ close b::w4
-                                       /\ b #α w1
-                                       /\ b ⋄ (w2++w3)
-                                       /\ forall c, c # u ->
-                                           [(a,b)]∙w1++open c::[(a,b);(b,c)]∙w2
-                                                  ++close b::[(b,c)]∙w3++close c::w4 ≡ v).
+             /\ a ⋄ u1
+             /\ ((b #α u1 /\ [(a,b)]∙u1++close b::u2 ≡ v)
+                \/ exists w1 w2 w3 w4, u1 = w1 ++ open b::w2
+                                 /\ u2 = w3 ++ close b::w4
+                                 /\ b #α w1
+                                 /\ b ⋄ (w2++w3)
+                                 /\ forall c, c # u ->
+                                        [(a,b)]∙w1++open c::[(a,b);(b,c)]∙w2
+                                               ++close b::[(b,c)]∙w3++close c::w4 ≡ v).
   Proof.
     intros N E.
     pose proof E as P;apply completeness in P as (s&P'&Ac).

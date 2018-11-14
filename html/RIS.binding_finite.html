@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>RIS.binding_finite</title>
+<title>RIS.binding_finite: binding-finite and memory-finite expressions.</title>
 </head>
 
 <body>
@@ -16,8 +16,14 @@
 
 <div id="main">
 
-<h1 class="libtitle">Library RIS.binding_finite</h1>
+<h1 class="libtitle">RIS.binding_finite: binding-finite and memory-finite expressions.</h1>
 
+<div class="code">
+</div>
+
+<div class="doc">
+
+</div>
 <div class="code">
 <span class="id" title="keyword">Set Implicit Arguments</span>.<br/>
 
@@ -31,7 +37,7 @@
 </div>
 
 <div class="doc">
-<a name="lab172"></a><h1 class="section">Definitions</h1>
+<a name="lab159"></a><h1 class="section">Definitions</h1>
 
 </div>
 <div class="code">
@@ -98,7 +104,7 @@
 </div>
 
 <div class="doc">
-<a name="lab173"></a><h1 class="section">Elementary facts</h1>
+<a name="lab160"></a><h1 class="section">Elementary facts</h1>
 
 </div>
 <div class="code">
@@ -306,17 +312,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<a class="idref" href="RIS.binding_finite.html#is_binding_finite"><span class="id" title="definition">is_binding_finite</span></a> <a class="idref" href="RIS.binding_finite.html#e"><span class="id" title="variable">e</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <span class="id" title="keyword">∀</span> <span class="id" title="var">u</span> <span class="id" title="var">v</span>, <a class="idref" href="RIS.regexp.html#e30f1fc6aff009f2034a1be3c2c0749d"><span class="id" title="notation">⟦</span></a><a class="idref" href="RIS.binding_finite.html#e"><span class="id" title="variable">e</span></a><a class="idref" href="RIS.regexp.html#e30f1fc6aff009f2034a1be3c2c0749d"><span class="id" title="notation">⟧</span></a> (<a class="idref" href="RIS.binding_finite.html#u"><span class="id" title="variable">u</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a><a class="idref" href="RIS.binding_finite.html#v"><span class="id" title="variable">v</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.binding_finite.html#weight"><span class="id" title="definition">weight</span></a> <a class="idref" href="RIS.binding_finite.html#u"><span class="id" title="variable">u</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Peano.html#9b077c369e19739ef880736ba34623ff"><span class="id" title="notation">≤</span></a> 2<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Peano.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">×</span></a><a class="idref" href="RIS.regexp.html#sizeExpr"><span class="id" title="definition">sizeExpr</span></a> <a class="idref" href="RIS.binding_finite.html#e"><span class="id" title="variable">e</span></a>.<br/>
 
 <br/>
-</div>
-
-<div class="doc">
-<a name="lab174"></a><h2 class="section">More facts about binding finite expressions</h2>
-
-</div>
-<div class="code">
-
-<br/>
-
-<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="bindFinList_incl"><span class="id" title="lemma">bindFinList_incl</span></a> <span class="id" title="var">L</span> <span class="id" title="var">M</span> : <a class="idref" href="RIS.binding_finite.html#bindFinList"><span class="id" title="definition">bindFinList</span></a> <a class="idref" href="RIS.binding_finite.html#M"><span class="id" title="variable">M</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.binding_finite.html#L"><span class="id" title="variable">L</span></a> <a class="idref" href="RIS.tools.html#90d3e561eecd6f722fcd65c2a39b3026"><span class="id" title="notation">⊆</span></a> <a class="idref" href="RIS.binding_finite.html#M"><span class="id" title="variable">M</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.binding_finite.html#bindFinList"><span class="id" title="definition">bindFinList</span></a> <a class="idref" href="RIS.binding_finite.html#L"><span class="id" title="variable">L</span></a>.<br/>
  
 <br/>
@@ -326,7 +321,7 @@
 </div>
 
 <div class="doc">
-<a name="lab175"></a><h1 class="section">Square expressions</h1>
+<a name="lab161"></a><h1 class="section">Square expressions</h1>
 
 </div>
 <div class="code">
@@ -358,7 +353,7 @@
 </div>
 
 <div class="doc">
-<a name="lab176"></a><h1 class="section">Homogeneous expressions</h1>
+<a name="lab162"></a><h1 class="section">Homogeneous expressions</h1>
 
 </div>
 <div class="code">
@@ -403,7 +398,7 @@
 </div>
 
 <div class="doc">
-<a name="lab177"></a><h1 class="section">Spines</h1>
+<a name="lab163"></a><h1 class="section">Spines</h1>
 
 </div>
 <div class="code">

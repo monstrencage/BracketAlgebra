@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>RIS.atoms</title>
+<title>RIS.atoms: Nominal sets.</title>
 </head>
 
 <body>
@@ -16,13 +16,12 @@
 
 <div id="main">
 
-<h1 class="libtitle">Library RIS.atoms</h1>
+<h1 class="libtitle">RIS.atoms: Nominal sets.</h1>
 
 <div class="code">
 </div>
 
 <div class="doc">
-<a name="lab23"></a><h1 class="section">RIS.atoms : Nominal sets.</h1>
 
 </div>
 <div class="code">
@@ -37,7 +36,7 @@
 </div>
 
 <div class="doc">
-<a name="lab24"></a><h1 class="section">Set of atoms</h1>
+<a name="lab22"></a><h1 class="section">Set of atoms</h1>
  Type of atoms 
 </div>
 <div class="code">
@@ -46,7 +45,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
 <div class="doc">
-We require <span class="inlinecode"><a class="idref" href="RIS.atoms.html#Atom"><span class="id" title="record">Atom</span></a></span> to be decidable, by a boolean function. 
+We require <span class="inlinecode"><span class="id" title="var">Atom</span></span> to be decidable, by a boolean function. 
 </div>
 <div class="code">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a name="dec_atom"><span class="id" title="projection">dec_atom</span></a> :&gt; <a class="idref" href="RIS.tools.html#decidable_set"><span class="id" title="class">decidable_set</span></a> <a class="idref" href="RIS.atoms.html#atom"><span class="id" title="variable">atom</span></a>;<br/>
@@ -64,8 +63,8 @@ We also want an infinite number of atoms to be available.
 </div>
 
 <div class="doc">
-<a name="lab25"></a><h1 class="section">Permutations</h1>
-<a name="lab26"></a><h2 class="section">Definitions and elementary properties</h2>
+<a name="lab23"></a><h1 class="section">Permutations</h1>
+<a name="lab24"></a><h2 class="section">Definitions and elementary properties</h2>
 
 <div class="paragraph"> </div>
 
@@ -87,7 +86,7 @@ Boolean equality predicate over permutations.
 </div>
 
 <div class="doc">
-Notation for the action of a permutation on a set <span class="inlinecode"><a class="idref" href="RIS.tools.html#X"><span class="id" title="variable">X</span></a></span>. 
+Notation for the action of a permutation on a set <span class="inlinecode"><span class="id" title="var">X</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Class</span> <a name="Action"><span class="id" title="record">Action</span></a> (<span class="id" title="var">Atoms</span> : <a class="idref" href="RIS.atoms.html#Atom"><span class="id" title="class">Atom</span></a> <a class="idref" href="RIS.atoms.html#perm.atom"><span class="id" title="variable">atom</span></a>) <span class="id" title="var">X</span> := <a name="act"><span class="id" title="projection">act</span></a> : <a class="idref" href="RIS.atoms.html#perm"><span class="id" title="definition">perm</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.atoms.html#X"><span class="id" title="variable">X</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.atoms.html#X"><span class="id" title="variable">X</span></a>.<br/>
@@ -105,7 +104,7 @@ Notation for support functions
 </div>
 
 <div class="doc">
-<span class="inlinecode"><a class="idref" href="RIS.atoms.html#act"><span class="id" title="projection">act</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span> computes the effect of the permutation <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a></span> on the atom <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span>. 
+<span class="inlinecode"><span class="id" title="var">act</span></span> <span class="inlinecode"><span class="id" title="var">p</span></span> <span class="inlinecode"><span class="id" title="var">a</span></span> computes the effect of the permutation <span class="inlinecode"><span class="id" title="var">p</span></span> on the atom <span class="inlinecode"><span class="id" title="var">a</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Global Instance</span> <a name="act_atom"><span class="id" title="instance">act_atom</span></a> : (<a class="idref" href="RIS.atoms.html#Action"><span class="id" title="class">Action</span></a> <a class="idref" href="RIS.atoms.html#perm.Atoms"><span class="id" title="variable">Atoms</span></a> <a class="idref" href="RIS.atoms.html#perm.atom"><span class="id" title="variable">atom</span></a>) :=<br/>
@@ -160,7 +159,7 @@ Permutations are bijective.
 </div>
 
 <div class="doc">
-<a name="lab27"></a><h2 class="section">Inverse of a permutation</h2>
+<a name="lab25"></a><h2 class="section">Inverse of a permutation</h2>
  The inverse of a permutation is computed by reversing the list. 
 </div>
 <div class="code">
@@ -219,8 +218,8 @@ The inverse of a composite permutation is the reverse composition of the inverse
 </div>
 
 <div class="doc">
-<a name="lab28"></a><h2 class="section">Equivalence of permutations</h2>
- Two permutations <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a></span> and <span class="inlinecode"><a class="idref" href="RIS.atoms.html#q"><span class="id" title="variable">q</span></a></span> are considered equivalent when the functions <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>∙<span class="id" title="var">_</span></span> and <span class="inlinecode"><a class="idref" href="RIS.atoms.html#q"><span class="id" title="variable">q</span></a>∙<span class="id" title="var">_</span></span> are extensionally equal. 
+<a name="lab26"></a><h2 class="section">Equivalence of permutations</h2>
+ Two permutations <span class="inlinecode"><span class="id" title="var">p</span></span> and <span class="inlinecode"><span class="id" title="var">q</span></span> are considered equivalent when the functions <span class="inlinecode"><span class="id" title="var">p</span>∙<span class="id" title="var">_</span></span> and <span class="inlinecode"><span class="id" title="var">q</span>∙<span class="id" title="var">_</span></span> are extensionally equal. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Global Instance</span> <a name="equiv_perm"><span class="id" title="instance">equiv_perm</span></a> : <a class="idref" href="RIS.tools.html#SemEquiv"><span class="id" title="class">SemEquiv</span></a> <a class="idref" href="RIS.atoms.html#perm"><span class="id" title="definition">perm</span></a> := <span class="id" title="keyword">fun</span> <span class="id" title="var">p</span> <span class="id" title="var">q</span> ⇒ <span class="id" title="keyword">∀</span> <span class="id" title="var">a</span>, <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a> <a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">∙</span></a> <a class="idref" href="RIS.atoms.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="RIS.atoms.html#q"><span class="id" title="variable">q</span></a> <a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">∙</span></a> <a class="idref" href="RIS.atoms.html#a"><span class="id" title="variable">a</span></a>.<br/>
@@ -246,7 +245,7 @@ The relation <span class="inlinecode">≃</span> is an equivalence relation.
 </div>
 
 <div class="doc">
-If <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>≃<a class="idref" href="RIS.atoms.html#q"><span class="id" title="variable">q</span></a></span> then <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>∗≃<a class="idref" href="RIS.atoms.html#q"><span class="id" title="variable">q</span></a>∗</span>. 
+If <span class="inlinecode"><span class="id" title="var">p</span>≃<span class="id" title="var">q</span></span> then <span class="inlinecode"><span class="id" title="var">p</span>∗≃<span class="id" title="var">q</span>∗</span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Global Instance</span> <a name="equiv_perm_inverse"><span class="id" title="instance">equiv_perm_inverse</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#Proper"><span class="id" title="class">Proper</span></a> (<a class="idref" href="RIS.tools.html#sequiv"><span class="id" title="definition">sequiv</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Classes.Morphisms.html#5bcff5fca4c3a87e683dd8ca07bab63f"><span class="id" title="notation">==&gt;</span></a> <a class="idref" href="RIS.tools.html#sequiv"><span class="id" title="definition">sequiv</span></a>) <a class="idref" href="RIS.atoms.html#inverse"><span class="id" title="definition">inverse</span></a>.<br/>
@@ -255,7 +254,7 @@ If <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class
 </div>
 
 <div class="doc">
-If <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>≃<a class="idref" href="RIS.atoms.html#q"><span class="id" title="variable">q</span></a></span> and <span class="inlinecode"><a class="idref" href="RIS.stacks.html#p'"><span class="id" title="variable">p'</span></a>≃<a class="idref" href="RIS.automata.html#q'"><span class="id" title="variable">q'</span></a></span> then <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>++<a class="idref" href="RIS.stacks.html#p'"><span class="id" title="variable">p'</span></a>≃<a class="idref" href="RIS.atoms.html#q"><span class="id" title="variable">q</span></a>++<a class="idref" href="RIS.automata.html#q'"><span class="id" title="variable">q'</span></a></span>. 
+If <span class="inlinecode"><span class="id" title="var">p</span>≃<span class="id" title="var">q</span></span> and <span class="inlinecode"><span class="id" title="var">p'</span>≃<span class="id" title="var">q'</span></span> then <span class="inlinecode"><span class="id" title="var">p</span>++<span class="id" title="var">p'</span>≃<span class="id" title="var">q</span>++<span class="id" title="var">q'</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Global Instance</span> <a name="equiv_perm_app"><span class="id" title="instance">equiv_perm_app</span></a> :<br/>
@@ -275,7 +274,7 @@ Paraphrasing of the definition of <span class="inlinecode">≃</span>.
 </div>
 
 <div class="doc">
-For every atom <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span>, the permutations <span class="inlinecode">[<a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a>,<a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a>]</span> and <span class="inlinecode">[]</span> are equivalent. 
+For every atom <span class="inlinecode"><span class="id" title="var">a</span></span>, the permutations <span class="inlinecode">[<span class="id" title="var">a</span>,<span class="id" title="var">a</span>]</span> and <span class="inlinecode">[]</span> are equivalent. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="perm_a_a_eq_nil"><span class="id" title="lemma">perm_a_a_eq_nil</span></a> {<span class="id" title="var">a</span>} : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">[</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.atoms.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">,</span></a><a class="idref" href="RIS.atoms.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">)</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">]</span></a> <a class="idref" href="RIS.tools.html#63510515077225ba3be50ed1e1ec3cec"><span class="id" title="notation">≃</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#145bedf8a5d4a541831f3f70db03085c"><span class="id" title="notation">[]</span></a>.<br/>
@@ -284,7 +283,7 @@ For every atom <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"
 </div>
 
 <div class="doc">
-For every permutation <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a></span>, <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>∗++<a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a></span> and <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>++<a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>∗</span> are also equivalent to <span class="inlinecode">[]</span>. 
+For every permutation <span class="inlinecode"><span class="id" title="var">p</span></span>, <span class="inlinecode"><span class="id" title="var">p</span>∗++<span class="id" title="var">p</span></span> and <span class="inlinecode"><span class="id" title="var">p</span>++<span class="id" title="var">p</span>∗</span> are also equivalent to <span class="inlinecode">[]</span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="perm_pinv_p_eq_nil"><span class="id" title="lemma">perm_pinv_p_eq_nil</span></a> {<span class="id" title="var">p</span>} : <a class="idref" href="RIS.tools.html#63510515077225ba3be50ed1e1ec3cec"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="RIS.atoms.html#ebb707f1c77500a56c003a1e53d9c263"><span class="id" title="notation">∗</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a><a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="RIS.tools.html#63510515077225ba3be50ed1e1ec3cec"><span class="id" title="notation">)</span></a> <a class="idref" href="RIS.tools.html#63510515077225ba3be50ed1e1ec3cec"><span class="id" title="notation">≃</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#145bedf8a5d4a541831f3f70db03085c"><span class="id" title="notation">[]</span></a>.<br/>
@@ -294,7 +293,7 @@ For every permutation <span class="inlinecode"><a class="idref" href="RIS.tools.
 </div>
 
 <div class="doc">
-<a name="lab29"></a><h2 class="section">Elements</h2>
+<a name="lab27"></a><h2 class="section">Elements</h2>
  The elements of a permutation are the atoms appearing in it. 
 </div>
 <div class="code">
@@ -305,7 +304,7 @@ For every permutation <span class="inlinecode"><a class="idref" href="RIS.tools.
 </div>
 
 <div class="doc">
-Atoms not appearing in <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a></span> are fixpoints of <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a></span>. 
+Atoms not appearing in <span class="inlinecode"><span class="id" title="var">p</span></span> are fixpoints of <span class="inlinecode"><span class="id" title="var">p</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="elements_inv_act_atom"><span class="id" title="lemma">elements_inv_act_atom</span></a> <span class="id" title="var">x</span> <span class="id" title="var">p</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">¬</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#In"><span class="id" title="definition">In</span></a> <a class="idref" href="RIS.atoms.html#x"><span class="id" title="variable">x</span></a> (<a class="idref" href="RIS.atoms.html#elements"><span class="id" title="definition">elements</span></a> <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">∙</span></a><a class="idref" href="RIS.atoms.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="RIS.atoms.html#x"><span class="id" title="variable">x</span></a>.<br/>
@@ -314,7 +313,7 @@ Atoms not appearing in <span class="inlinecode"><a class="idref" href="RIS.tools
 </div>
 
 <div class="doc">
-The function <span class="inlinecode"><a class="idref" href="RIS.atoms.html#elements"><span class="id" title="definition">elements</span></a></span> distributes over concatenations. 
+The function <span class="inlinecode"><span class="id" title="var">elements</span></span> distributes over concatenations. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="elements_app"><span class="id" title="lemma">elements_app</span></a> <span class="id" title="var">p</span> <span class="id" title="var">q</span> : <a class="idref" href="RIS.atoms.html#elements"><span class="id" title="definition">elements</span></a> (<a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a><a class="idref" href="RIS.atoms.html#q"><span class="id" title="variable">q</span></a>) <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="RIS.atoms.html#elements"><span class="id" title="definition">elements</span></a> <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a><a class="idref" href="RIS.atoms.html#elements"><span class="id" title="definition">elements</span></a> <a class="idref" href="RIS.atoms.html#q"><span class="id" title="variable">q</span></a>.<br/>
@@ -332,7 +331,7 @@ The inverse function preserves elements.
 </div>
 
 <div class="doc">
-For any atom <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span> not mentioned in <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a></span> and any atom <span class="inlinecode"><a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a></span>, <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a></span> is equivalent to the permutation <span class="inlinecode">[(<a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a>,<a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>∙<a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a>)]++<a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>++[(<a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a>,<a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a>)]</span>. 
+For any atom <span class="inlinecode"><span class="id" title="var">a</span></span> not mentioned in <span class="inlinecode"><span class="id" title="var">p</span></span> and any atom <span class="inlinecode"><span class="id" title="var">b</span></span>, <span class="inlinecode"><span class="id" title="var">p</span></span> is equivalent to the permutation <span class="inlinecode">[(<span class="id" title="var">a</span>,<span class="id" title="var">p</span>∙<span class="id" title="var">b</span>)]++<span class="id" title="var">p</span>++[(<span class="id" title="var">a</span>,<span class="id" title="var">b</span>)]</span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="factor_perm"><span class="id" title="lemma">factor_perm</span></a> <span class="id" title="var">a</span> <span class="id" title="var">b</span> <span class="id" title="var">p</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">¬</span></a> <a class="idref" href="RIS.atoms.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="RIS.tools.html#97d4fc09a45292e6e0781158a2094d81"><span class="id" title="notation">∈</span></a> <a class="idref" href="RIS.atoms.html#elements"><span class="id" title="definition">elements</span></a> <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a> <a class="idref" href="RIS.tools.html#63510515077225ba3be50ed1e1ec3cec"><span class="id" title="notation">≃</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">[</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.atoms.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">,</span></a><a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">∙</span></a><a class="idref" href="RIS.atoms.html#b"><span class="id" title="variable">b</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">)</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">]</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a><a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#5d35a99a6abff1d64bf70538feb70e36"><span class="id" title="notation">++</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">[</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.atoms.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">,</span></a><a class="idref" href="RIS.atoms.html#b"><span class="id" title="variable">b</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">)</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">]</span></a>.<br/>
@@ -341,8 +340,8 @@ For any atom <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><
 </div>
 
 <div class="doc">
-<a name="lab30"></a><h2 class="section">Lifting an action on <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a></span> to an action on <span class="inlinecode"><a class="idref" href="RIS.nominalsetoid.html#list"><span class="id" title="section">list</span></a></span> <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a></span></h2>
- We can lift an action over <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class="id" title="variable">A</span></a></span> to an action over <span class="inlinecode"><a class="idref" href="RIS.nominalsetoid.html#list"><span class="id" title="section">list</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class="id" title="variable">A</span></a></span> by applying it pointwise. 
+<a name="lab28"></a><h2 class="section">Lifting an action on <span class="inlinecode"><span class="id" title="var">S</span></span> to an action on <span class="inlinecode"><span class="id" title="var">list</span></span> <span class="inlinecode"><span class="id" title="var">S</span></span></h2>
+ We can lift an action over <span class="inlinecode"><span class="id" title="var">A</span></span> to an action over <span class="inlinecode"><span class="id" title="var">list</span></span> <span class="inlinecode"><span class="id" title="var">A</span></span> by applying it pointwise. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Global Instance</span> <a name="act_lists"><span class="id" title="instance">act_lists</span></a> {<span class="id" title="var">S</span> : <span class="id" title="keyword">Set</span>} `{@<a class="idref" href="RIS.atoms.html#Action"><span class="id" title="class">Action</span></a> <a class="idref" href="RIS.atoms.html#perm.Atoms"><span class="id" title="variable">Atoms</span></a> <a class="idref" href="RIS.atoms.html#S"><span class="id" title="variable">S</span></a>} : <a class="idref" href="RIS.atoms.html#Action"><span class="id" title="class">Action</span></a> <a class="idref" href="RIS.atoms.html#perm.Atoms"><span class="id" title="variable">Atoms</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="RIS.atoms.html#S"><span class="id" title="variable">S</span></a>):=<br/>
@@ -363,9 +362,9 @@ For any atom <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><
 </div>
 
 <div class="doc">
-<a name="lab31"></a><h1 class="section">Nominal sets</h1>
-<a name="lab32"></a><h2 class="section">Definitions</h2>
- For <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#S"><span class="id" title="constructor">S</span></a></span> to be nominal, it needs to be equipped with an action and a support, and they must satisfy these three axioms. 
+<a name="lab29"></a><h1 class="section">Nominal sets</h1>
+<a name="lab30"></a><h2 class="section">Definitions</h2>
+ For <span class="inlinecode"><span class="id" title="var">S</span></span> to be nominal, it needs to be equipped with an action and a support, and they must satisfy these three axioms. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Class</span> <a name="Nominal"><span class="id" title="record">Nominal</span></a> (<span class="id" title="var">S</span> : <span class="id" title="keyword">Set</span>) {<span class="id" title="var">action</span>:<a class="idref" href="RIS.atoms.html#Action"><span class="id" title="class">Action</span></a> <a class="idref" href="RIS.atoms.html#perm.Atoms"><span class="id" title="variable">Atoms</span></a> <a class="idref" href="RIS.atoms.html#S"><span class="id" title="variable">S</span></a>} {<span class="id" title="var">supp</span>:<a class="idref" href="RIS.atoms.html#Support"><span class="id" title="class">Support</span></a> <a class="idref" href="RIS.atoms.html#perm.Atoms"><span class="id" title="variable">Atoms</span></a> <a class="idref" href="RIS.atoms.html#S"><span class="id" title="variable">S</span></a>} :=<br/>
@@ -379,7 +378,7 @@ For any atom <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><
 </div>
 
 <div class="doc">
-If <span class="inlinecode"><a class="idref" href="RIS.tools.html#x"><span class="id" title="variable">x</span></a></span> is an element of a nominal set <span class="inlinecode"><a class="idref" href="RIS.atoms.html#N"><span class="id" title="variable">N</span></a></span>, a name <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span> is <i>fresh</i> for <span class="inlinecode"><a class="idref" href="RIS.tools.html#x"><span class="id" title="variable">x</span></a></span> if it does not appear in the support of <span class="inlinecode"><a class="idref" href="RIS.tools.html#x"><span class="id" title="variable">x</span></a></span>. 
+If <span class="inlinecode"><span class="id" title="var">x</span></span> is an element of a nominal set <span class="inlinecode"><span class="id" title="var">N</span></span>, a name <span class="inlinecode"><span class="id" title="var">a</span></span> is <i>fresh</i> for <span class="inlinecode"><span class="id" title="var">x</span></span> if it does not appear in the support of <span class="inlinecode"><span class="id" title="var">x</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Notation</span> <a name="4b404768fdf4cbe98d4ffadda76097cd"><span class="id" title="notation">&quot;</span></a> a # x " := (<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#611abc97cba304de784fa909dbdea1fa"><span class="id" title="notation">¬</span></a> <span class="id" title="var">a</span> <a class="idref" href="RIS.tools.html#97d4fc09a45292e6e0781158a2094d81"><span class="id" title="notation">∈</span></a> <a class="idref" href="RIS.atoms.html#527ec098b638b7967f86addfb824eb4a"><span class="id" title="notation">⌊</span></a><span class="id" title="var">x</span><a class="idref" href="RIS.atoms.html#527ec098b638b7967f86addfb824eb4a"><span class="id" title="notation">⌋</span></a>) (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 80).<br/>
@@ -388,9 +387,9 @@ If <span class="inlinecode"><a class="idref" href="RIS.tools.html#x"><span class
 </div>
 
 <div class="doc">
-<a name="lab33"></a><h2 class="section">Canonical nominal structures</h2>
-<a name="lab34"></a><h3 class="section">Atoms</h3>
- The support of <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span> is <span class="inlinecode">[<a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a>]</span>. 
+<a name="lab31"></a><h2 class="section">Canonical nominal structures</h2>
+<a name="lab32"></a><h3 class="section">Atoms</h3>
+ The support of <span class="inlinecode"><span class="id" title="var">a</span></span> is <span class="inlinecode">[<span class="id" title="var">a</span>]</span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Global Instance</span> <a name="SupportAtom"><span class="id" title="instance">SupportAtom</span></a> : <a class="idref" href="RIS.atoms.html#Support"><span class="id" title="class">Support</span></a> <a class="idref" href="RIS.atoms.html#perm.Atoms"><span class="id" title="variable">Atoms</span></a> <a class="idref" href="RIS.atoms.html#perm.atom"><span class="id" title="variable">atom</span></a> := <span class="id" title="keyword">fun</span> <span class="id" title="var">a</span> ⇒ <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">[</span></a><a class="idref" href="RIS.atoms.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Lists.List.html#64ee52ab9627fca8d637e2f1207a2990"><span class="id" title="notation">]</span></a>.<br/>
@@ -408,7 +407,7 @@ The set of atoms is nominal.
 </div>
 
 <div class="doc">
-<a name="lab35"></a><h3 class="section">Lists</h3>
+<a name="lab33"></a><h3 class="section">Lists</h3>
  The support of a list is the union of the supports of its elements. Because we encode supports as duplication-free lists, we remove duplicates using the <span class="inlinecode">{{}}</span> function. 
 </div>
 <div class="code">
@@ -419,7 +418,7 @@ The set of atoms is nominal.
 </div>
 
 <div class="doc">
-If <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class="id" title="variable">A</span></a></span> is nominal, so is <span class="inlinecode"><a class="idref" href="RIS.nominalsetoid.html#list"><span class="id" title="section">list</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class="id" title="variable">A</span></a></span>. 
+If <span class="inlinecode"><span class="id" title="var">A</span></span> is nominal, so is <span class="inlinecode"><span class="id" title="var">list</span></span> <span class="inlinecode"><span class="id" title="var">A</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Global Instance</span> <a name="Nominal_list"><span class="id" title="instance">Nominal_list</span></a> (<span class="id" title="var">S</span> : <span class="id" title="keyword">Set</span>)  `{<a class="idref" href="RIS.atoms.html#Nominal"><span class="id" title="class">Nominal</span></a> <a class="idref" href="RIS.atoms.html#S"><span class="id" title="variable">S</span></a>} : <a class="idref" href="RIS.atoms.html#Nominal"><span class="id" title="class">Nominal</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="RIS.atoms.html#S"><span class="id" title="variable">S</span></a>).<br/>
@@ -428,7 +427,7 @@ If <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class
 </div>
 
 <div class="doc">
-<a name="lab36"></a><h3 class="section">Pairs</h3>
+<a name="lab34"></a><h3 class="section">Pairs</h3>
  We extend the action to pairs by applying the permutation to both components. 
 </div>
 <div class="code">
@@ -449,7 +448,7 @@ The support of a pair is the union of the supports of its components.
 </div>
 
 <div class="doc">
-If <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class="id" title="variable">A</span></a></span> and <span class="inlinecode"><a class="idref" href="RIS.tools.html#B"><span class="id" title="variable">B</span></a></span> are nominal, so is <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class="id" title="variable">A</span></a>×<a class="idref" href="RIS.tools.html#B"><span class="id" title="variable">B</span></a></span>. 
+If <span class="inlinecode"><span class="id" title="var">A</span></span> and <span class="inlinecode"><span class="id" title="var">B</span></span> are nominal, so is <span class="inlinecode"><span class="id" title="var">A</span>×<span class="id" title="var">B</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Global Instance</span> <a name="Nominal_Pair"><span class="id" title="instance">Nominal_Pair</span></a> (<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Set</span>) `{<a class="idref" href="RIS.atoms.html#Nominal"><span class="id" title="class">Nominal</span></a> <a class="idref" href="RIS.atoms.html#A"><span class="id" title="variable">A</span></a>,<a class="idref" href="RIS.atoms.html#Nominal"><span class="id" title="class">Nominal</span></a> <a class="idref" href="RIS.atoms.html#B"><span class="id" title="variable">B</span></a>}<br/>
@@ -459,7 +458,7 @@ If <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class
 </div>
 
 <div class="doc">
-<a name="lab37"></a><h3 class="section">Natural numbers</h3>
+<a name="lab35"></a><h3 class="section">Natural numbers</h3>
  We can endow natural numbers with a trivial nominal structure. 
 </div>
 <div class="code">
@@ -471,8 +470,8 @@ If <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class
 </div>
 
 <div class="doc">
-<a name="lab38"></a><h3 class="section">Option types</h3>
- If <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class="id" title="variable">A</span></a></span> is nominal, so is <span class="inlinecode"><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class="id" title="variable">A</span></a></span>. 
+<a name="lab36"></a><h3 class="section">Option types</h3>
+ If <span class="inlinecode"><span class="id" title="var">A</span></span> is nominal, so is <span class="inlinecode"><span class="id" title="var">option</span></span> <span class="inlinecode"><span class="id" title="var">A</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Global Instance</span> <a name="Action_option"><span class="id" title="instance">Action_option</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Set</span>} `{@<a class="idref" href="RIS.atoms.html#Action"><span class="id" title="class">Action</span></a> <a class="idref" href="RIS.atoms.html#perm.Atoms"><span class="id" title="variable">Atoms</span></a> <a class="idref" href="RIS.atoms.html#A"><span class="id" title="variable">A</span></a>} : <a class="idref" href="RIS.atoms.html#Action"><span class="id" title="class">Action</span></a> <a class="idref" href="RIS.atoms.html#perm.Atoms"><span class="id" title="variable">Atoms</span></a> (<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#option"><span class="id" title="inductive">option</span></a> <a class="idref" href="RIS.atoms.html#A"><span class="id" title="variable">A</span></a>):=<br/>
@@ -489,8 +488,8 @@ If <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class
 </div>
 
 <div class="doc">
-<a name="lab39"></a><h3 class="section">Sum types</h3>
- If <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class="id" title="variable">A</span></a></span> and <span class="inlinecode"><a class="idref" href="RIS.tools.html#B"><span class="id" title="variable">B</span></a></span> are nominal, so is <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class="id" title="variable">A</span></a>+<a class="idref" href="RIS.tools.html#B"><span class="id" title="variable">B</span></a></span>. 
+<a name="lab37"></a><h3 class="section">Sum types</h3>
+ If <span class="inlinecode"><span class="id" title="var">A</span></span> and <span class="inlinecode"><span class="id" title="var">B</span></span> are nominal, so is <span class="inlinecode"><span class="id" title="var">A</span>+<span class="id" title="var">B</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Global Instance</span> <a name="Action_sum"><span class="id" title="instance">Action_sum</span></a> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Set</span>} `{@<a class="idref" href="RIS.atoms.html#Action"><span class="id" title="class">Action</span></a> <a class="idref" href="RIS.atoms.html#perm.Atoms"><span class="id" title="variable">Atoms</span></a> <a class="idref" href="RIS.atoms.html#A"><span class="id" title="variable">A</span></a>,@<a class="idref" href="RIS.atoms.html#Action"><span class="id" title="class">Action</span></a> <a class="idref" href="RIS.atoms.html#perm.Atoms"><span class="id" title="variable">Atoms</span></a> <a class="idref" href="RIS.atoms.html#B"><span class="id" title="variable">B</span></a>} : <a class="idref" href="RIS.atoms.html#Action"><span class="id" title="class">Action</span></a> <a class="idref" href="RIS.atoms.html#perm.Atoms"><span class="id" title="variable">Atoms</span></a> (<a class="idref" href="RIS.atoms.html#A"><span class="id" title="variable">A</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#3dcaec3b772747610227247939f96b01"><span class="id" title="notation">+</span></a><a class="idref" href="RIS.atoms.html#B"><span class="id" title="variable">B</span></a>):=<br/>
@@ -507,7 +506,7 @@ If <span class="inlinecode"><a class="idref" href="RIS.tools.html#A"><span class
 </div>
 
 <div class="doc">
-<a name="lab40"></a><h2 class="section">Properties of group actions</h2>
+<a name="lab38"></a><h2 class="section">Properties of group actions</h2>
 
 </div>
 <div class="code">
@@ -539,7 +538,7 @@ Equivalent permutations yield the same action.
 </div>
 
 <div class="doc">
-If the support of <span class="inlinecode"><a class="idref" href="RIS.tools.html#x"><span class="id" title="variable">x</span></a></span> is disjoint from the elements of <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a></span> then <span class="inlinecode"><a class="idref" href="RIS.tools.html#x"><span class="id" title="variable">x</span></a></span> is a fixpoint of <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>∙</span>. 
+If the support of <span class="inlinecode"><span class="id" title="var">x</span></span> is disjoint from the elements of <span class="inlinecode"><span class="id" title="var">p</span></span> then <span class="inlinecode"><span class="id" title="var">x</span></span> is a fixpoint of <span class="inlinecode"><span class="id" title="var">p</span>∙</span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="elements_inv_act"><span class="id" title="lemma">elements_inv_act</span></a> <span class="id" title="var">p</span> <span class="id" title="var">x</span> :<br/>
@@ -549,7 +548,7 @@ If the support of <span class="inlinecode"><a class="idref" href="RIS.tools.html
 </div>
 
 <div class="doc">
-The function <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>∙</span> is a bijection. 
+The function <span class="inlinecode"><span class="id" title="var">p</span>∙</span> is a bijection. 
 </div>
 <div class="code">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="act_bij"><span class="id" title="lemma">act_bij</span></a> <span class="id" title="var">p</span> <span class="id" title="var">x</span> <span class="id" title="var">y</span> : <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a> <a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">∙</span></a> <a class="idref" href="RIS.atoms.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a> <a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">∙</span></a> <a class="idref" href="RIS.atoms.html#y"><span class="id" title="variable">y</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="RIS.atoms.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="RIS.atoms.html#y"><span class="id" title="variable">y</span></a>.<br/>
@@ -558,7 +557,7 @@ The function <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><
 </div>
 
 <div class="doc">
-We can relate the elements appearing in <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span> with those appearing in <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>∙<a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span>. 
+We can relate the elements appearing in <span class="inlinecode"><span class="id" title="var">l</span></span> with those appearing in <span class="inlinecode"><span class="id" title="var">p</span>∙<span class="id" title="var">l</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="In_act_lists"><span class="id" title="lemma">In_act_lists</span></a> <span class="id" title="var">a</span> <span class="id" title="var">p</span> (<span class="id" title="var">l</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="RIS.atoms.html#perm.group.A"><span class="id" title="variable">A</span></a>) :<br/>
@@ -568,7 +567,7 @@ We can relate the elements appearing in <span class="inlinecode"><a class="idref
 </div>
 
 <div class="doc">
-A name <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span> is in the support of a list if and only if it is in the support of one of its elements. 
+A name <span class="inlinecode"><span class="id" title="var">a</span></span> is in the support of a list if and only if it is in the support of one of its elements. 
 </div>
 <div class="code">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="In_support_list"><span class="id" title="lemma">In_support_list</span></a> <span class="id" title="var">a</span> <span class="id" title="var">l</span> : <a class="idref" href="RIS.atoms.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="RIS.tools.html#97d4fc09a45292e6e0781158a2094d81"><span class="id" title="notation">∈</span></a> <a class="idref" href="RIS.atoms.html#527ec098b638b7967f86addfb824eb4a"><span class="id" title="notation">⌊</span></a><a class="idref" href="RIS.atoms.html#l"><span class="id" title="variable">l</span></a><a class="idref" href="RIS.atoms.html#527ec098b638b7967f86addfb824eb4a"><span class="id" title="notation">⌋</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">∃</span></a> <span class="id" title="var">x</span><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#84eb6d2849dbf3581b1c0c05add5f2d8"><span class="id" title="notation">,</span></a> <a class="idref" href="RIS.atoms.html#x"><span class="id" title="variable">x</span></a> <a class="idref" href="RIS.tools.html#97d4fc09a45292e6e0781158a2094d81"><span class="id" title="notation">∈</span></a> <a class="idref" href="RIS.atoms.html#l"><span class="id" title="variable">l</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d82a7d96d3659d805ffe732283716822"><span class="id" title="notation">∧</span></a> <a class="idref" href="RIS.atoms.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="RIS.tools.html#97d4fc09a45292e6e0781158a2094d81"><span class="id" title="notation">∈</span></a> <a class="idref" href="RIS.atoms.html#527ec098b638b7967f86addfb824eb4a"><span class="id" title="notation">⌊</span></a><a class="idref" href="RIS.atoms.html#x"><span class="id" title="variable">x</span></a><a class="idref" href="RIS.atoms.html#527ec098b638b7967f86addfb824eb4a"><span class="id" title="notation">⌋</span></a>.<br/>
@@ -595,7 +594,7 @@ The support of a cons is equivalent to the concatenation of the supports.
 </div>
 
 <div class="doc">
-<span class="inlinecode"><a class="idref" href="RIS.tools.html#rmfst"><span class="id" title="definition">rmfst</span></a></span> commutes with the action of permutations. 
+<span class="inlinecode"><span class="id" title="var">rmfst</span></span> commutes with the action of permutations. 
 </div>
 <div class="code">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Remark</span> <a name="rmfst_perm"><span class="id" title="lemma">rmfst_perm</span></a> `{<a class="idref" href="RIS.tools.html#decidable_set"><span class="id" title="class">decidable_set</span></a> <a class="idref" href="RIS.atoms.html#perm.group.A"><span class="id" title="variable">A</span></a>} <span class="id" title="var">p</span> <span class="id" title="var">l</span> <span class="id" title="var">a</span> : <a class="idref" href="RIS.tools.html#297954bc5d5aaeca45305fc0bd94f1fe"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">∙</span></a><a class="idref" href="RIS.atoms.html#l"><span class="id" title="variable">l</span></a><a class="idref" href="RIS.tools.html#297954bc5d5aaeca45305fc0bd94f1fe"><span class="id" title="notation">)</span></a> <a class="idref" href="RIS.tools.html#297954bc5d5aaeca45305fc0bd94f1fe"><span class="id" title="notation">⊖</span></a> <a class="idref" href="RIS.atoms.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">∙(</span></a><a class="idref" href="RIS.atoms.html#l"><span class="id" title="variable">l</span></a> <a class="idref" href="RIS.tools.html#297954bc5d5aaeca45305fc0bd94f1fe"><span class="id" title="notation">⊖</span></a> <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="RIS.atoms.html#ebb707f1c77500a56c003a1e53d9c263"><span class="id" title="notation">∗</span></a><a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">∙</span></a><a class="idref" href="RIS.atoms.html#a"><span class="id" title="variable">a</span></a><a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">)</span></a>.<br/>
@@ -604,7 +603,7 @@ The support of a cons is equivalent to the concatenation of the supports.
 </div>
 
 <div class="doc">
-If two permutations coincide on the support of <span class="inlinecode"><a class="idref" href="RIS.tools.html#x"><span class="id" title="variable">x</span></a></span>, then applying either to <span class="inlinecode"><a class="idref" href="RIS.tools.html#x"><span class="id" title="variable">x</span></a></span> yields the same result. 
+If two permutations coincide on the support of <span class="inlinecode"><span class="id" title="var">x</span></span>, then applying either to <span class="inlinecode"><span class="id" title="var">x</span></span> yields the same result. 
 </div>
 <div class="code">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="support_eq_action_eq"><span class="id" title="lemma">support_eq_action_eq</span></a> <span class="id" title="var">p</span> <span class="id" title="var">q</span> (<span class="id" title="var">x</span> : <a class="idref" href="RIS.atoms.html#perm.group.A"><span class="id" title="variable">A</span></a>) :<br/>
@@ -627,7 +626,7 @@ Simplification lemma.
 </div>
 
 <div class="doc">
-The function <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>∙</span> distributes over <span class="inlinecode">⊗</span>. 
+The function <span class="inlinecode"><span class="id" title="var">p</span>∙</span> distributes over <span class="inlinecode">⊗</span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="combine_act"><span class="id" title="lemma">combine_act</span></a> <span class="id" title="var">p</span> (<span class="id" title="var">l</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="RIS.atoms.html#perm.group.A"><span class="id" title="variable">A</span></a>)(<span class="id" title="var">m</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="RIS.atoms.html#perm.group.B"><span class="id" title="variable">B</span></a>) : <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a> <a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">∙</span></a> <a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.atoms.html#l"><span class="id" title="variable">l</span></a><a class="idref" href="RIS.tools.html#2dc928bff168db64820279d5764b832e"><span class="id" title="notation">⊗</span></a><a class="idref" href="RIS.atoms.html#m"><span class="id" title="variable">m</span></a><a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="RIS.tools.html#2dc928bff168db64820279d5764b832e"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">∙</span></a><a class="idref" href="RIS.atoms.html#l"><span class="id" title="variable">l</span></a><a class="idref" href="RIS.tools.html#2dc928bff168db64820279d5764b832e"><span class="id" title="notation">)⊗(</span></a><a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">∙</span></a><a class="idref" href="RIS.atoms.html#m"><span class="id" title="variable">m</span></a><a class="idref" href="RIS.tools.html#2dc928bff168db64820279d5764b832e"><span class="id" title="notation">)</span></a>.<br/>
@@ -637,11 +636,11 @@ The function <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><
 </div>
 
 <div class="doc">
-<a name="lab41"></a><h1 class="section">Minimality of support</h1>
+<a name="lab39"></a><h1 class="section">Minimality of support</h1>
 
 <div class="paragraph"> </div>
 
- If a list <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span> supports an element <span class="inlinecode"><a class="idref" href="RIS.tools.html#x"><span class="id" title="variable">x</span></a></span>, then <span class="inlinecode">⌊<a class="idref" href="RIS.tools.html#x"><span class="id" title="variable">x</span></a>⌋</span> is contained in <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span>. 
+ If a list <span class="inlinecode"><span class="id" title="var">l</span></span> supports an element <span class="inlinecode"><span class="id" title="var">x</span></span>, then <span class="inlinecode">⌊<span class="id" title="var">x</span>⌋</span> is contained in <span class="inlinecode"><span class="id" title="var">l</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="minimal_support"><span class="id" title="lemma">minimal_support</span></a> {<span class="id" title="var">X</span>: <span class="id" title="keyword">Set</span>} `{<a class="idref" href="RIS.atoms.html#Nominal"><span class="id" title="class">Nominal</span></a> <a class="idref" href="RIS.atoms.html#X"><span class="id" title="variable">X</span></a>} <span class="id" title="var">l</span> <span class="id" title="var">x</span> :<br/>
@@ -651,8 +650,8 @@ The function <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><
 </div>
 
 <div class="doc">
-<a name="lab42"></a><h1 class="section">Useful remarks</h1>
- If <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span> is a list of atoms, then it is equivalent to its support. 
+<a name="lab40"></a><h1 class="section">Useful remarks</h1>
+ If <span class="inlinecode"><span class="id" title="var">l</span></span> is a list of atoms, then it is equivalent to its support. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Remark</span> <a name="support_list_atoms"><span class="id" title="lemma">support_list_atoms</span></a> (<span class="id" title="var">l</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="RIS.atoms.html#perm.atom"><span class="id" title="variable">atom</span></a>) : <a class="idref" href="RIS.atoms.html#527ec098b638b7967f86addfb824eb4a"><span class="id" title="notation">⌊</span></a><a class="idref" href="RIS.atoms.html#l"><span class="id" title="variable">l</span></a><a class="idref" href="RIS.atoms.html#527ec098b638b7967f86addfb824eb4a"><span class="id" title="notation">⌋</span></a> <a class="idref" href="RIS.tools.html#8a93d10600b37e2dc6f02b51aaad94b8"><span class="id" title="notation">≈</span></a> <a class="idref" href="RIS.atoms.html#l"><span class="id" title="variable">l</span></a>.<br/>
@@ -661,7 +660,7 @@ The function <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><
 </div>
 
 <div class="doc">
-The action of <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a></span> on its list of elements yields an equivalent list. 
+The action of <span class="inlinecode"><span class="id" title="var">p</span></span> on its list of elements yields an equivalent list. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Remark</span> <a name="elements_act_lists"><span class="id" title="lemma">elements_act_lists</span></a> <span class="id" title="var">p</span> : <a class="idref" href="RIS.atoms.html#elements"><span class="id" title="definition">elements</span></a> <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a> <a class="idref" href="RIS.tools.html#8a93d10600b37e2dc6f02b51aaad94b8"><span class="id" title="notation">≈</span></a> <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">∙(</span></a><a class="idref" href="RIS.atoms.html#elements"><span class="id" title="definition">elements</span></a> <a class="idref" href="RIS.atoms.html#p"><span class="id" title="variable">p</span></a><a class="idref" href="RIS.atoms.html#4bfb5e243579ec1d96ba397dcb62961c"><span class="id" title="notation">)</span></a>.<br/>
@@ -670,7 +669,7 @@ The action of <span class="inlinecode"><a class="idref" href="RIS.tools.html#p">
 </div>
 
 <div class="doc">
-The number of occurrences of <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span> in <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>∙<a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span> is the number of occurrences of <span class="inlinecode"><a class="idref" href="RIS.tools.html#p"><span class="id" title="variable">p</span></a>∗∙<a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span> in <span class="inlinecode"><a class="idref" href="RIS.tools.html#l"><span class="id" title="variable">l</span></a></span>. 
+The number of occurrences of <span class="inlinecode"><span class="id" title="var">a</span></span> in <span class="inlinecode"><span class="id" title="var">p</span>∙<span class="id" title="var">l</span></span> is the number of occurrences of <span class="inlinecode"><span class="id" title="var">p</span>∗∙<span class="id" title="var">a</span></span> in <span class="inlinecode"><span class="id" title="var">l</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Remark</span> <a name="nb_act"><span class="id" title="lemma">nb_act</span></a> {<span class="id" title="var">A</span>} `{<a class="idref" href="RIS.atoms.html#Nominal"><span class="id" title="class">Nominal</span></a> <a class="idref" href="RIS.atoms.html#A"><span class="id" title="variable">A</span></a>,<a class="idref" href="RIS.tools.html#decidable_set"><span class="id" title="class">decidable_set</span></a> <a class="idref" href="RIS.atoms.html#A"><span class="id" title="variable">A</span></a>} (<span class="id" title="var">a</span> : <a class="idref" href="RIS.atoms.html#A"><span class="id" title="variable">A</span></a>) <span class="id" title="var">l</span> <span class="id" title="var">p</span> :<br/>
@@ -680,7 +679,7 @@ The number of occurrences of <span class="inlinecode"><a class="idref" href="RIS
 </div>
 
 <div class="doc">
-The functions <span class="inlinecode">{{<span class="id" title="var">_</span>}}</span>, <span class="inlinecode"><a class="idref" href="RIS.tools.html#prj1"><span class="id" title="abbreviation">prj1</span></a></span>, and <span class="inlinecode"><a class="idref" href="RIS.tools.html#prj2"><span class="id" title="abbreviation">prj2</span></a></span> commute with the action of permutations. 
+The functions <span class="inlinecode">{{<span class="id" title="var">_</span>}}</span>, <span class="inlinecode"><span class="id" title="var">prj1</span></span>, and <span class="inlinecode"><span class="id" title="var">prj2</span></span> commute with the action of permutations. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="undup_act"><span class="id" title="lemma">undup_act</span></a> {<span class="id" title="var">A</span> : <span class="id" title="keyword">Set</span>} `{<a class="idref" href="RIS.tools.html#decidable_set"><span class="id" title="class">decidable_set</span></a> <a class="idref" href="RIS.atoms.html#A"><span class="id" title="variable">A</span></a>,<a class="idref" href="RIS.atoms.html#Nominal"><span class="id" title="class">Nominal</span></a> <a class="idref" href="RIS.atoms.html#A"><span class="id" title="variable">A</span></a>}<br/>
@@ -729,7 +728,7 @@ The function <span class="inlinecode">π∙<span class="id" title="var">_</span>
 </div>
 
 <div class="doc">
-The <span class="inlinecode"><a class="idref" href="RIS.tools.html#group_by_fst"><span class="id" title="definition">group_by_fst</span></a></span> function commutes with group actions. 
+The <span class="inlinecode"><span class="id" title="var">group_by_fst</span></span> function commutes with group actions. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="group_by_fst_act"><span class="id" title="lemma">group_by_fst_act</span></a><br/>
@@ -752,7 +751,7 @@ The <span class="inlinecode"><a class="idref" href="RIS.tools.html#group_by_fst"
 </div>
 
 <div class="doc">
-<a name="lab43"></a><h1 class="section">Equivariant functions</h1>
+<a name="lab41"></a><h1 class="section">Equivariant functions</h1>
  A function between two nominal sets is equivalent if it commutes with the group actions. 
 </div>
 <div class="code">
@@ -763,7 +762,7 @@ The <span class="inlinecode"><a class="idref" href="RIS.tools.html#group_by_fst"
 </div>
 
 <div class="doc">
-If <span class="inlinecode"><a class="idref" href="RIS.tools.html#f"><span class="id" title="variable">f</span></a></span> is equivariant, then the support of <span class="inlinecode"><a class="idref" href="RIS.tools.html#f"><span class="id" title="variable">f</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#x"><span class="id" title="variable">x</span></a></span> is contained in that of <span class="inlinecode"><a class="idref" href="RIS.tools.html#x"><span class="id" title="variable">x</span></a></span>. 
+If <span class="inlinecode"><span class="id" title="var">f</span></span> is equivariant, then the support of <span class="inlinecode"><span class="id" title="var">f</span></span> <span class="inlinecode"><span class="id" title="var">x</span></span> is contained in that of <span class="inlinecode"><span class="id" title="var">x</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Lemma</span> <a name="support_image_equivariant"><span class="id" title="lemma">support_image_equivariant</span></a> {<span class="id" title="var">A</span> <span class="id" title="var">B</span> : <span class="id" title="keyword">Set</span>}`{<a class="idref" href="RIS.atoms.html#Nominal"><span class="id" title="class">Nominal</span></a> <a class="idref" href="RIS.atoms.html#A"><span class="id" title="variable">A</span></a>,<a class="idref" href="RIS.atoms.html#Nominal"><span class="id" title="class">Nominal</span></a> <a class="idref" href="RIS.atoms.html#B"><span class="id" title="variable">B</span></a>} :<br/>

@@ -1,5 +1,4 @@
-(* Unset Strict Implicit. *)
-(* Unset Printing Implicit Defensive. *)
+(** * RIS.completenessKA : Link with relation-algebra to import the completeness proof of Kleene algebra. *)
 Require Import tools algebra language regexp.
 Require Import RelationAlgebra.syntax RelationAlgebra.kleene RelationAlgebra.boolean RelationAlgebra.lang RelationAlgebra.lset RelationAlgebra.sums RelationAlgebra.normalisation.
 Require Import RelationAlgebra.regex RelationAlgebra.ka_completeness RelationAlgebra.kat_tac.

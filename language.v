@@ -1,4 +1,4 @@
-(** * RIS.language : Languages *)
+(** * RIS.language : Languages. *)
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.

@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>RIS.alternate_eq</title>
+<title>RIS.alternate_eq: equivalent definitions of alpha-equivalence.</title>
 </head>
 
 <body>
@@ -16,13 +16,12 @@
 
 <div id="main">
 
-<h1 class="libtitle">Library RIS.alternate_eq</h1>
+<h1 class="libtitle">RIS.alternate_eq: equivalent definitions of alpha-equivalence.</h1>
 
 <div class="code">
 </div>
 
 <div class="doc">
-<a name="lab86"></a><h1 class="section">RIS.alternate_eq : equivalent definitions of alpha-equivalence.</h1>
 
 </div>
 <div class="code">
@@ -37,12 +36,12 @@
 </div>
 
 <div class="doc">
-<a name="lab87"></a><h1 class="section">Alternative definition of alpha-equivalence</h1>
-<a name="lab88"></a><h2 class="section">Main results</h2>
+<a name="lab78"></a><h1 class="section">Alternative definition of alpha-equivalence</h1>
+<a name="lab79"></a><h2 class="section">Main results</h2>
 
 <div class="paragraph"> </div>
 
- We introduce a new notion of alpha-equivalence. We just replaced the rule <span class="inlinecode"><a class="idref" href="RIS.words.html#b220861b637a2ca7a2f66fe17814e760"><span class="id" title="constructor">αα</span></a></span> with the new <span class="inlinecode"><a class="idref" href="RIS.alternate_eq.html#07bb85976999144bc6971b9ec118d1c1"><span class="id" title="constructor">αα'</span></a></span>. 
+ We introduce a new notion of alpha-equivalence. We just replaced the rule <span class="inlinecode"><span class="id" title="var">αα</span></span> with the new <span class="inlinecode"><span class="id" title="var">αα'</span></span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Reserved Notation</span> &quot; u ≡' v " (<span class="id" title="tactic">at</span> <span class="id" title="keyword">level</span> 80).<br/>
@@ -59,7 +58,7 @@
 </div>
 
 <div class="doc">
-Since we already know that <span class="inlinecode"><a class="idref" href="RIS.alternate_eq.html#07bb85976999144bc6971b9ec118d1c1"><span class="id" title="constructor">αα'</span></a></span> is admissible, and since we can prove that <span class="inlinecode"><a class="idref" href="RIS.words.html#b220861b637a2ca7a2f66fe17814e760"><span class="id" title="constructor">αα</span></a></span> is an instance of <span class="inlinecode"><a class="idref" href="RIS.alternate_eq.html#07bb85976999144bc6971b9ec118d1c1"><span class="id" title="constructor">αα'</span></a></span>, we get that the new definition of alpha-equivalence defines the same relation as <span class="inlinecode">≡</span>. 
+Since we already know that <span class="inlinecode"><span class="id" title="var">αα'</span></span> is admissible, and since we can prove that <span class="inlinecode"><span class="id" title="var">αα</span></span> is an instance of <span class="inlinecode"><span class="id" title="var">αα'</span></span>, we get that the new definition of alpha-equivalence defines the same relation as <span class="inlinecode">≡</span>. 
 </div>
 <div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Theorem</span> <a name="equiv_alt"><span class="id" title="lemma">equiv_alt</span></a> <span class="id" title="var">u</span> <span class="id" title="var">v</span> : <a class="idref" href="RIS.alternate_eq.html#u"><span class="id" title="variable">u</span></a> <a class="idref" href="RIS.tools.html#130feec68326dec2794bb89648a52e90"><span class="id" title="notation">≡</span></a> <a class="idref" href="RIS.alternate_eq.html#v"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="RIS.alternate_eq.html#u"><span class="id" title="variable">u</span></a> <a class="idref" href="RIS.alternate_eq.html#c3873d47d45ef43697c9ddc9258bc5ed"><span class="id" title="notation">≡'</span></a> <a class="idref" href="RIS.alternate_eq.html#v"><span class="id" title="variable">v</span></a>.<br/>
@@ -68,7 +67,7 @@ Since we already know that <span class="inlinecode"><a class="idref" href="RIS.a
 </div>
 
 <div class="doc">
-<a name="lab89"></a><h2 class="section">Additional properties</h2>
+<a name="lab80"></a><h2 class="section">Additional properties</h2>
 
 </div>
 <div class="code">
@@ -94,7 +93,7 @@ Since we already know that <span class="inlinecode"><a class="idref" href="RIS.a
 </div>
 
 <div class="doc">
-<a name="lab90"></a><h1 class="section">Alpha-equivalence from "Leaving the nest"</h1>
+<a name="lab81"></a><h1 class="section">Alpha-equivalence from "Leaving the nest"</h1>
  In earlier work by Gabbay, Ghica and Petrisan an alternative definition of alpha-equivalence was used. We show here that it is equivalent with our definition. 
 </div>
 <div class="code">

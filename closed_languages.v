@@ -1,3 +1,4 @@
+(** * RIS.closed_languages : languages closed by α-equivalence. *)
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
@@ -7,8 +8,6 @@ Require Import tools algebra language regexp alpha_regexp.
 Section s.
   Context {atom : Set}{𝐀 : Atom atom}.
   Context {X : Set} {𝐗 : Alphabet 𝐀 X}.
-  
-  (** * Closed languages *)
   Definition α_closed : (@language letter) -> Prop := fun L => forall u v, u ≡ v -> L u <-> L v.
  
   Definition cl_α : language -> language := fun L w => exists u, L u /\ u ≡ w.

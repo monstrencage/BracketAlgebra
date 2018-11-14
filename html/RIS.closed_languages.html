@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>RIS.closed_languages</title>
+<title>RIS.closed_languages: languages closed by α-equivalence.</title>
 </head>
 
 <body>
@@ -16,8 +16,14 @@
 
 <div id="main">
 
-<h1 class="libtitle">Library RIS.closed_languages</h1>
+<h1 class="libtitle">RIS.closed_languages: languages closed by α-equivalence.</h1>
 
+<div class="code">
+</div>
+
+<div class="doc">
+
+</div>
 <div class="code">
 <span class="id" title="keyword">Set Implicit Arguments</span>.<br/>
 
@@ -28,15 +34,6 @@
 <span class="id" title="keyword">Section</span> <a name="s"><span class="id" title="section">s</span></a>.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<span class="id" title="var">atom</span> : <span class="id" title="keyword">Set</span>}{𝐀 : <a class="idref" href="RIS.atoms.html#Atom"><span class="id" title="class">Atom</span></a> <a class="idref" href="RIS.closed_languages.html#atom"><span class="id" title="variable">atom</span></a>}.<br/>
 &nbsp;&nbsp;<span class="id" title="keyword">Context</span> {<span class="id" title="var">X</span> : <span class="id" title="keyword">Set</span>} {𝐗 : <a class="idref" href="RIS.words.html#Alphabet"><span class="id" title="class">Alphabet</span></a> <a class="idref" href="RIS.closed_languages.html#1ed9c442daa4176d58e205d8f4f1e274"><span class="id" title="variable">𝐀</span></a> <a class="idref" href="RIS.closed_languages.html#X"><span class="id" title="variable">X</span></a>}.<br/>
-
-<br/>
-</div>
-
-<div class="doc">
-<a name="lab171"></a><h1 class="section">Closed languages</h1>
-
-</div>
-<div class="code">
 &nbsp;&nbsp;<span class="id" title="keyword">Definition</span> <a name="68b380379a2b8abea2617ed59bc09fb7"><span class="id" title="definition">α_closed</span></a> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">(</span></a>@<a class="idref" href="RIS.language.html#language"><span class="id" title="definition">language</span></a> <a class="idref" href="RIS.words.html#letter"><span class="id" title="inductive">letter</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">)</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <span class="id" title="keyword">Prop</span> := <span class="id" title="keyword">fun</span> <span class="id" title="var">L</span> ⇒ <span class="id" title="keyword">∀</span> <span class="id" title="var">u</span> <span class="id" title="var">v</span>, <a class="idref" href="RIS.closed_languages.html#u"><span class="id" title="variable">u</span></a> <a class="idref" href="RIS.tools.html#130feec68326dec2794bb89648a52e90"><span class="id" title="notation">≡</span></a> <a class="idref" href="RIS.closed_languages.html#v"><span class="id" title="variable">v</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.closed_languages.html#L"><span class="id" title="variable">L</span></a> <a class="idref" href="RIS.closed_languages.html#u"><span class="id" title="variable">u</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#df1ced36fc33ce188051218bca314374"><span class="id" title="notation">↔</span></a> <a class="idref" href="RIS.closed_languages.html#L"><span class="id" title="variable">L</span></a> <a class="idref" href="RIS.closed_languages.html#v"><span class="id" title="variable">v</span></a>.<br/>
 
 <br/>

@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="coqdoc.css" rel="stylesheet" type="text/css" />
-<title>RIS.factors</title>
+<title>RIS.factors: square bindings and binding division.</title>
 </head>
 
 <body>
@@ -16,13 +16,12 @@
 
 <div id="main">
 
-<h1 class="libtitle">Library RIS.factors</h1>
+<h1 class="libtitle">RIS.factors: square bindings and binding division.</h1>
 
 <div class="code">
 </div>
 
 <div class="doc">
-<a name="lab129"></a><h1 class="section">RIS.factors : square bindings and binding division.</h1>
 
 </div>
 <div class="code">
@@ -35,9 +34,9 @@
 </div>
 
 <div class="doc">
-<a name="lab130"></a><h1 class="section">Enumerate bindings</h1>
- <span class="inlinecode"><a class="idref" href="RIS.factors.html#Bindupto"><span class="id" title="definition">Bindupto</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.atoms.html#N"><span class="id" title="variable">N</span></a></span> returns a list containing every element of <span class="inlinecode">𝖡</span> of
-size not exceeding <span class="inlinecode"><a class="idref" href="RIS.atoms.html#N"><span class="id" title="variable">N</span></a></span>. 
+<a name="lab117"></a><h1 class="section">Enumerate bindings</h1>
+ <span class="inlinecode"><span class="id" title="var">Bindupto</span></span> <span class="inlinecode"><span class="id" title="var">N</span></span> returns a list containing every element of <span class="inlinecode">𝖡</span> of
+size not exceeding <span class="inlinecode"><span class="id" title="var">N</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Fixpoint</span> <a name="Bindupto"><span class="id" title="definition">Bindupto</span></a> <span class="id" title="var">n</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="RIS.words.html#571dd9ac04bd6b2aa8f449146138bcaf"><span class="id" title="definition">𝖡</span></a> :=<br/>
@@ -56,16 +55,16 @@ size not exceeding <span class="inlinecode"><a class="idref" href="RIS.atoms.htm
 </div>
 
 <div class="doc">
-<a name="lab131"></a><h1 class="section">Factors</h1>
+<a name="lab118"></a><h1 class="section">Factors</h1>
 
 </div>
 <div class="code">
 </div>
 
 <div class="doc">
-<span class="inlinecode"><a class="idref" href="RIS.factors.html#factors"><span class="id" title="definition">factors</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.atoms.html#N"><span class="id" title="variable">N</span></a></span> is a list containing pairs of bindings <span class="inlinecode">(<a class="idref" href="RIS.equiv_stacks.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a>,<a class="idref" href="RIS.factors.html#dc5233cb1d950ecad15b1e9b2514f665"><span class="id" title="variable">β</span></a>)</span> such
-that <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a>⋅<a class="idref" href="RIS.factors.html#dc5233cb1d950ecad15b1e9b2514f665"><span class="id" title="variable">β</span></a>=<a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a></span>. This list is not exhaustive, as there are in general an
-infinite number of such pairs. The parameter <span class="inlinecode"><a class="idref" href="RIS.atoms.html#N"><span class="id" title="variable">N</span></a></span> is used as a bound,
+<span class="inlinecode"><span class="id" title="var">factors</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">N</span></span> is a list containing pairs of bindings <span class="inlinecode">(<span class="id" title="var">α</span>,<span class="id" title="var">β</span>)</span> such
+that <span class="inlinecode"><span class="id" title="var">α</span>⋅<span class="id" title="var">β</span>=<span class="id" title="var">b</span></span>. This list is not exhaustive, as there are in general an
+infinite number of such pairs. The parameter <span class="inlinecode"><span class="id" title="var">N</span></span> is used as a bound,
 to collect only a finite number of pairs. The following lemmas will
 outline the properties of this function. 
 </div>
@@ -82,7 +81,7 @@ outline the properties of this function.
 </div>
 
 <div class="doc">
-Every pair <span class="inlinecode">(<a class="idref" href="RIS.traces.html#a1"><span class="id" title="variable">a1</span></a>,<a class="idref" href="RIS.traces.html#a2"><span class="id" title="variable">a2</span></a>)</span> in <span class="inlinecode"><a class="idref" href="RIS.factors.html#factors"><span class="id" title="definition">factors</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.atoms.html#N"><span class="id" title="variable">N</span></a></span> satisfies <span class="inlinecode"><a class="idref" href="RIS.traces.html#a1"><span class="id" title="variable">a1</span></a>⋅<a class="idref" href="RIS.traces.html#a2"><span class="id" title="variable">a2</span></a>=<a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a></span>. 
+Every pair <span class="inlinecode">(<span class="id" title="var">a1</span>,<span class="id" title="var">a2</span>)</span> in <span class="inlinecode"><span class="id" title="var">factors</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">N</span></span> satisfies <span class="inlinecode"><span class="id" title="var">a1</span>⋅<span class="id" title="var">a2</span>=<span class="id" title="var">b</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Lemma</span> <a name="factors_prod"><span class="id" title="lemma">factors_prod</span></a> <span class="id" title="var">b</span> <span class="id" title="var">N</span> <span class="id" title="var">a1</span> <span class="id" title="var">a2</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.factors.html#a1"><span class="id" title="variable">a1</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">,</span></a><a class="idref" href="RIS.factors.html#a2"><span class="id" title="variable">a2</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">)</span></a> <a class="idref" href="RIS.tools.html#97d4fc09a45292e6e0781158a2094d81"><span class="id" title="notation">∈</span></a> <a class="idref" href="RIS.factors.html#factors"><span class="id" title="definition">factors</span></a> <a class="idref" href="RIS.factors.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="RIS.factors.html#N"><span class="id" title="variable">N</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.factors.html#a1"><span class="id" title="variable">a1</span></a> <a class="idref" href="RIS.words.html#3d9dce47f56ae623b0d519d4b3d8ef3f"><span class="id" title="notation">⋅</span></a> <a class="idref" href="RIS.factors.html#a2"><span class="id" title="variable">a2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="RIS.factors.html#b"><span class="id" title="variable">b</span></a>.<br/>
@@ -91,8 +90,8 @@ Every pair <span class="inlinecode">(<a class="idref" href="RIS.traces.html#a1">
 </div>
 
 <div class="doc">
-If the size of <span class="inlinecode"><a class="idref" href="RIS.traces.html#a1"><span class="id" title="variable">a1</span></a></span> is below <span class="inlinecode"><a class="idref" href="RIS.atoms.html#N"><span class="id" title="variable">N</span></a></span> and if the product <span class="inlinecode"><a class="idref" href="RIS.traces.html#a1"><span class="id" title="variable">a1</span></a>⋅<a class="idref" href="RIS.traces.html#a2"><span class="id" title="variable">a2</span></a></span> equals
-<span class="inlinecode"><a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a></span>, then <span class="inlinecode">(<a class="idref" href="RIS.traces.html#a1"><span class="id" title="variable">a1</span></a>,<a class="idref" href="RIS.traces.html#a2"><span class="id" title="variable">a2</span></a>)</span> belongs to <span class="inlinecode"><a class="idref" href="RIS.factors.html#factors"><span class="id" title="definition">factors</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.atoms.html#N"><span class="id" title="variable">N</span></a></span>. 
+If the size of <span class="inlinecode"><span class="id" title="var">a1</span></span> is below <span class="inlinecode"><span class="id" title="var">N</span></span> and if the product <span class="inlinecode"><span class="id" title="var">a1</span>⋅<span class="id" title="var">a2</span></span> equals
+<span class="inlinecode"><span class="id" title="var">b</span></span>, then <span class="inlinecode">(<span class="id" title="var">a1</span>,<span class="id" title="var">a2</span>)</span> belongs to <span class="inlinecode"><span class="id" title="var">factors</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">N</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Lemma</span> <a name="factors_In"><span class="id" title="lemma">factors_In</span></a> <span class="id" title="var">b</span> <span class="id" title="var">N</span> <span class="id" title="var">a1</span> <span class="id" title="var">a2</span> : <a class="idref" href="RIS.words.html#size"><span class="id" title="definition">size</span></a> <a class="idref" href="RIS.factors.html#a1"><span class="id" title="variable">a1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Peano.html#9b077c369e19739ef880736ba34623ff"><span class="id" title="notation">≤</span></a> <a class="idref" href="RIS.factors.html#N"><span class="id" title="variable">N</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.factors.html#a1"><span class="id" title="variable">a1</span></a> <a class="idref" href="RIS.words.html#3d9dce47f56ae623b0d519d4b3d8ef3f"><span class="id" title="notation">⋅</span></a> <a class="idref" href="RIS.factors.html#a2"><span class="id" title="variable">a2</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="RIS.factors.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.factors.html#a1"><span class="id" title="variable">a1</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">,</span></a><a class="idref" href="RIS.factors.html#a2"><span class="id" title="variable">a2</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">)</span></a> <a class="idref" href="RIS.tools.html#97d4fc09a45292e6e0781158a2094d81"><span class="id" title="notation">∈</span></a> <a class="idref" href="RIS.factors.html#factors"><span class="id" title="definition">factors</span></a> <a class="idref" href="RIS.factors.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="RIS.factors.html#N"><span class="id" title="variable">N</span></a>.<br/>
@@ -101,8 +100,8 @@ If the size of <span class="inlinecode"><a class="idref" href="RIS.traces.html#a
 </div>
 
 <div class="doc">
-For any pair <span class="inlinecode">(<a class="idref" href="RIS.traces.html#a1"><span class="id" title="variable">a1</span></a>,<a class="idref" href="RIS.traces.html#a2"><span class="id" title="variable">a2</span></a>)</span> in <span class="inlinecode"><a class="idref" href="RIS.factors.html#factors"><span class="id" title="definition">factors</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.atoms.html#N"><span class="id" title="variable">N</span></a></span>, the size of <span class="inlinecode"><a class="idref" href="RIS.traces.html#a1"><span class="id" title="variable">a1</span></a></span> does not
-exceed <span class="inlinecode">2*<a class="idref" href="RIS.atoms.html#N"><span class="id" title="variable">N</span></a></span>. 
+For any pair <span class="inlinecode">(<span class="id" title="var">a1</span>,<span class="id" title="var">a2</span>)</span> in <span class="inlinecode"><span class="id" title="var">factors</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> <span class="inlinecode"><span class="id" title="var">N</span></span>, the size of <span class="inlinecode"><span class="id" title="var">a1</span></span> does not
+exceed <span class="inlinecode">2*<span class="id" title="var">N</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Lemma</span> <a name="factors_size"><span class="id" title="lemma">factors_size</span></a> <span class="id" title="var">a1</span> <span class="id" title="var">a2</span> <span class="id" title="var">b</span> <span class="id" title="var">N</span> : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">(</span></a><a class="idref" href="RIS.factors.html#a1"><span class="id" title="variable">a1</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">,</span></a><a class="idref" href="RIS.factors.html#a2"><span class="id" title="variable">a2</span></a><a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#44400027531d4bc3f586a1997dc874c0"><span class="id" title="notation">)</span></a> <a class="idref" href="RIS.tools.html#97d4fc09a45292e6e0781158a2094d81"><span class="id" title="notation">∈</span></a> <a class="idref" href="RIS.factors.html#factors"><span class="id" title="definition">factors</span></a> <a class="idref" href="RIS.factors.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="RIS.factors.html#N"><span class="id" title="variable">N</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.words.html#size"><span class="id" title="definition">size</span></a> <a class="idref" href="RIS.factors.html#a1"><span class="id" title="variable">a1</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Peano.html#9b077c369e19739ef880736ba34623ff"><span class="id" title="notation">≤</span></a> 2<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Peano.html#697e4695610f677ae98a52af81f779d2"><span class="id" title="notation">×</span></a><a class="idref" href="RIS.factors.html#N"><span class="id" title="variable">N</span></a>.<br/>
@@ -111,9 +110,9 @@ exceed <span class="inlinecode">2*<a class="idref" href="RIS.atoms.html#N"><span
 </div>
 
 <div class="doc">
-<a name="lab132"></a><h1 class="section">Division when one projection is 0</h1>
- <span class="inlinecode"><a class="idref" href="RIS.factors.html#factors"><span class="id" title="definition">factors</span></a></span> <span class="inlinecode">(<a class="idref" href="RIS.atoms.html#N"><span class="id" title="variable">N</span></a>,<a class="idref" href="RIS.tools.html#t"><span class="id" title="variable">t</span></a>,0)</span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#k"><span class="id" title="variable">k</span></a></span> contains only pairs of the shape
-<span class="inlinecode">((<span class="id" title="var">D</span>,<a class="idref" href="RIS.regexp.html#F"><span class="id" title="variable">F</span></a>,<a class="idref" href="RIS.tools.html#C"><span class="id" title="variable">C</span></a>),(<a class="idref" href="RIS.factors.html#N'"><span class="id" title="variable">N'</span></a>,<a class="idref" href="RIS.factors.html#t'"><span class="id" title="variable">t'</span></a>,0))</span> such that <span class="inlinecode"><a class="idref" href="RIS.tools.html#C"><span class="id" title="variable">C</span></a>≤<a class="idref" href="RIS.factors.html#N'"><span class="id" title="variable">N'</span></a></span>. 
+<a name="lab119"></a><h1 class="section">Division when one projection is 0</h1>
+ <span class="inlinecode"><span class="id" title="var">factors</span></span> <span class="inlinecode">(<span class="id" title="var">N</span>,<span class="id" title="var">t</span>,0)</span> <span class="inlinecode"><span class="id" title="var">k</span></span> contains only pairs of the shape
+<span class="inlinecode">((<span class="id" title="var">D</span>,<span class="id" title="var">F</span>,<span class="id" title="var">C</span>),(<span class="id" title="var">N'</span>,<span class="id" title="var">t'</span>,0))</span> such that <span class="inlinecode"><span class="id" title="var">C</span>≤<span class="id" title="var">N'</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Lemma</span> <a name="factors_open_balanced"><span class="id" title="lemma">factors_open_balanced</span></a> <span class="id" title="var">β1</span> <span class="id" title="var">β2</span> <span class="id" title="var">N</span> <span class="id" title="var">t</span> <span class="id" title="var">k</span> :<br/>
@@ -124,8 +123,8 @@ exceed <span class="inlinecode">2*<a class="idref" href="RIS.atoms.html#N"><span
 </div>
 
 <div class="doc">
-<span class="inlinecode"><a class="idref" href="RIS.factors.html#divide_by_open"><span class="id" title="definition">divide_by_open</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.factors.html#dc5233cb1d950ecad15b1e9b2514f665"><span class="id" title="variable">β</span></a></span> yields a list containing every <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a></span> such that
-<span class="inlinecode">(0,<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>,1)⋅<a class="idref" href="RIS.factors.html#dc5233cb1d950ecad15b1e9b2514f665"><span class="id" title="variable">β</span></a>=(0,<a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#false"><span class="id" title="constructor">false</span></a>,1)⋅<a class="idref" href="RIS.equiv_stacks.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a></span>. 
+<span class="inlinecode"><span class="id" title="var">divide_by_open</span></span> <span class="inlinecode"><span class="id" title="var">β</span></span> yields a list containing every <span class="inlinecode"><span class="id" title="var">α</span></span> such that
+<span class="inlinecode">(0,<span class="id" title="var">false</span>,1)⋅<span class="id" title="var">β</span>=(0,<span class="id" title="var">false</span>,1)⋅<span class="id" title="var">α</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Definition</span> <a name="divide_by_open"><span class="id" title="definition">divide_by_open</span></a> <span class="id" title="var">β</span> :=<br/>
@@ -141,15 +140,15 @@ exceed <span class="inlinecode">2*<a class="idref" href="RIS.atoms.html#N"><span
 </div>
 
 <div class="doc">
-<a name="lab133"></a><h1 class="section">Square bindings</h1>
- A binding <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a>:𝖡</span> is called <span class="inlinecode"><a class="idref" href="RIS.factors.html#square"><span class="id" title="definition">square</span></a></span> when its creation and destruction projections are equal. 
+<a name="lab120"></a><h1 class="section">Square bindings</h1>
+ A binding <span class="inlinecode"><span class="id" title="var">α</span>:𝖡</span> is called <span class="inlinecode"><span class="id" title="var">square</span></span> when its creation and destruction projections are equal. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Definition</span> <a name="square"><span class="id" title="definition">square</span></a> <span class="id" title="var">α</span> := <a class="idref" href="RIS.words.html#c_binding"><span class="id" title="definition">c_binding</span></a> <a class="idref" href="RIS.factors.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="RIS.words.html#d_binding"><span class="id" title="definition">d_binding</span></a> <a class="idref" href="RIS.factors.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a>.<br/>
 </div>
 
 <div class="doc">
-This property can be checked using the <span class="inlinecode"><a class="idref" href="RIS.factors.html#is_square"><span class="id" title="definition">is_square</span></a></span> boolean predicate. 
+This property can be checked using the <span class="inlinecode"><span class="id" title="var">is_square</span></span> boolean predicate. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Definition</span> <a name="is_square"><span class="id" title="definition">is_square</span></a> <span class="id" title="var">β</span> := <a class="idref" href="RIS.words.html#c_binding"><span class="id" title="definition">c_binding</span></a> <a class="idref" href="RIS.factors.html#dc5233cb1d950ecad15b1e9b2514f665"><span class="id" title="variable">β</span></a> <a class="idref" href="RIS.tools.html#f62e571aaf06e485801e62a5c9bd7232"><span class="id" title="notation">=?=</span></a> <a class="idref" href="RIS.words.html#d_binding"><span class="id" title="definition">d_binding</span></a> <a class="idref" href="RIS.factors.html#dc5233cb1d950ecad15b1e9b2514f665"><span class="id" title="variable">β</span></a>.<br/>
@@ -180,7 +179,7 @@ On square bindings, this operation coincides with multiplication.
 </div>
 
 <div class="doc">
-The structure <span class="inlinecode">(𝖡,⊓,<a class="idref" href="RIS.words.html#a06c34952043eb8035c521bac955bdcc"><span class="id" title="definition">ε</span></a>)</span> forms a commutative idempotent monoid. 
+The structure <span class="inlinecode">(𝖡,⊓,<span class="id" title="var">ε</span>)</span> forms a commutative idempotent monoid. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Lemma</span> <a name="maxBind_neutral"><span class="id" title="lemma">maxBind_neutral</span></a> <span class="id" title="var">a</span> : <a class="idref" href="RIS.factors.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="RIS.factors.html#aa894034b1f291efadf35ca684d331cf"><span class="id" title="notation">⊓</span></a> <a class="idref" href="RIS.words.html#a06c34952043eb8035c521bac955bdcc"><span class="id" title="definition">ε</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#1c39bf18749e5cc609e83c0a0ba5a372"><span class="id" title="notation">=</span></a> <a class="idref" href="RIS.factors.html#a"><span class="id" title="variable">a</span></a>.<br/>
@@ -192,7 +191,7 @@ The structure <span class="inlinecode">(𝖡,⊓,<a class="idref" href="RIS.word
 </div>
 
 <div class="doc">
-If <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span> and <span class="inlinecode"><a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a></span> are square, <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span> <span class="inlinecode">⊓</span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a></span> is either <span class="inlinecode"><a class="idref" href="RIS.tools.html#a"><span class="id" title="variable">a</span></a></span> or <span class="inlinecode"><a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a></span>. 
+If <span class="inlinecode"><span class="id" title="var">a</span></span> and <span class="inlinecode"><span class="id" title="var">b</span></span> are square, <span class="inlinecode"><span class="id" title="var">a</span></span> <span class="inlinecode">⊓</span> <span class="inlinecode"><span class="id" title="var">b</span></span> is either <span class="inlinecode"><span class="id" title="var">a</span></span> or <span class="inlinecode"><span class="id" title="var">b</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Lemma</span> <a name="maxBind_square_disj"><span class="id" title="lemma">maxBind_square_disj</span></a> <span class="id" title="var">a</span> <span class="id" title="var">b</span> : <br/>
@@ -220,8 +219,8 @@ equivalent lists yields the same result.
 </div>
 
 <div class="doc">
-<a name="lab134"></a><h1 class="section">Square factors of square bindings</h1>
- <span class="inlinecode"><a class="idref" href="RIS.factors.html#lower_squares"><span class="id" title="definition">lower_squares</span></a></span>, when applied to a square binding <span class="inlinecode"><a class="idref" href="RIS.factors.html#dc5233cb1d950ecad15b1e9b2514f665"><span class="id" title="variable">β</span></a></span>, produces the list of square bindings <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a></span> such that <span class="inlinecode"><a class="idref" href="RIS.equiv_stacks.html#ab410a966ac148e9b78c65c6cdf301fd"><span class="id" title="variable">α</span></a>⋅<a class="idref" href="RIS.factors.html#dc5233cb1d950ecad15b1e9b2514f665"><span class="id" title="variable">β</span></a>=<a class="idref" href="RIS.factors.html#dc5233cb1d950ecad15b1e9b2514f665"><span class="id" title="variable">β</span></a></span>. 
+<a name="lab121"></a><h1 class="section">Square factors of square bindings</h1>
+ <span class="inlinecode"><span class="id" title="var">lower_squares</span></span>, when applied to a square binding <span class="inlinecode"><span class="id" title="var">β</span></span>, produces the list of square bindings <span class="inlinecode"><span class="id" title="var">α</span></span> such that <span class="inlinecode"><span class="id" title="var">α</span>⋅<span class="id" title="var">β</span>=<span class="id" title="var">β</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Definition</span> <a name="lower_squares"><span class="id" title="definition">lower_squares</span></a> (<span class="id" title="var">β</span> : <a class="idref" href="RIS.words.html#571dd9ac04bd6b2aa8f449146138bcaf"><span class="id" title="definition">𝖡</span></a>) : <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Datatypes.html#list"><span class="id" title="inductive">list</span></a> <a class="idref" href="RIS.words.html#571dd9ac04bd6b2aa8f449146138bcaf"><span class="id" title="definition">𝖡</span></a> :=<br/>
@@ -237,7 +236,7 @@ equivalent lists yields the same result.
 </div>
 
 <div class="doc">
-We may write the following detailed characterisation of the elements of <span class="inlinecode"><a class="idref" href="RIS.factors.html#lower_squares"><span class="id" title="definition">lower_squares</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.factors.html#dc5233cb1d950ecad15b1e9b2514f665"><span class="id" title="variable">β</span></a></span>. 
+We may write the following detailed characterisation of the elements of <span class="inlinecode"><span class="id" title="var">lower_squares</span></span> <span class="inlinecode"><span class="id" title="var">β</span></span>. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Lemma</span> <a name="lower_squares_alt"><span class="id" title="lemma">lower_squares_alt</span></a>  <span class="id" title="var">α</span> <span class="id" title="var">β</span> :<br/>
@@ -249,7 +248,7 @@ We may write the following detailed characterisation of the elements of <span cl
 </div>
 
 <div class="doc">
-If the product of two squares belongs to <span class="inlinecode"><a class="idref" href="RIS.factors.html#lower_squares"><span class="id" title="definition">lower_squares</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.factors.html#b0e5ed29efd576246de3282fa163293b"><span class="id" title="variable">γ</span></a></span>, so does its arguments. 
+If the product of two squares belongs to <span class="inlinecode"><span class="id" title="var">lower_squares</span></span> <span class="inlinecode"><span class="id" title="var">γ</span></span>, so does its arguments. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Lemma</span> <a name="lower_squares_prod"><span class="id" title="lemma">lower_squares_prod</span></a> <span class="id" title="var">α</span> <span class="id" title="var">β</span> <span class="id" title="var">γ</span> :<br/>
@@ -260,7 +259,7 @@ If the product of two squares belongs to <span class="inlinecode"><a class="idre
 </div>
 
 <div class="doc">
-<span class="inlinecode"><a class="idref" href="RIS.factors.html#lower_squares"><span class="id" title="definition">lower_squares</span></a></span> <span class="inlinecode"><a class="idref" href="RIS.tools.html#b"><span class="id" title="variable">b</span></a></span> only contains bindings of smaller size. 
+<span class="inlinecode"><span class="id" title="var">lower_squares</span></span> <span class="inlinecode"><span class="id" title="var">b</span></span> only contains bindings of smaller size. 
 </div>
 <div class="code">
 <span class="id" title="keyword">Lemma</span> <a name="lower_squares_size"><span class="id" title="lemma">lower_squares_size</span></a> <span class="id" title="var">a</span> <span class="id" title="var">b</span> : <a class="idref" href="RIS.factors.html#square"><span class="id" title="definition">square</span></a> <a class="idref" href="RIS.factors.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.factors.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="RIS.tools.html#97d4fc09a45292e6e0781158a2094d81"><span class="id" title="notation">∈</span></a> <a class="idref" href="RIS.factors.html#lower_squares"><span class="id" title="definition">lower_squares</span></a> <a class="idref" href="RIS.factors.html#b"><span class="id" title="variable">b</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Logic.html#d43e996736952df71ebeeae74d10a287"><span class="id" title="notation">→</span></a> <a class="idref" href="RIS.words.html#size"><span class="id" title="definition">size</span></a> <a class="idref" href="RIS.factors.html#a"><span class="id" title="variable">a</span></a> <a class="idref" href="http://coq.inria.fr/distrib/8.8.0/stdlib//Coq.Init.Peano.html#9b077c369e19739ef880736ba34623ff"><span class="id" title="notation">≤</span></a> <a class="idref" href="RIS.words.html#size"><span class="id" title="definition">size</span></a> <a class="idref" href="RIS.factors.html#b"><span class="id" title="variable">b</span></a>.<br/>

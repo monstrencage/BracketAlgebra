@@ -1,3 +1,4 @@
+(** * RIS.positive_regexp : regular expressions that do not contain the empty word. *)
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.

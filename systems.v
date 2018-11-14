@@ -1,3 +1,4 @@
+(** * RIS.systems : affine systems of equations *)
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
@@ -7,69 +8,85 @@ Require Import Bool.
 
 Require Import tools algebra language regexp automata completenessKA.
 
-Definition pairs {A B : Set} l r : list (A * B) :=
-  fold_right (fun a acc => (map (fun b => (a,b)) r)++acc) [] l.
-
-Lemma pairs_spec {A B : Set} l r (a : A) (b : B) : (a,b) ∈ pairs l r <-> a ∈ l /\ b ∈ r.
-Proof.
-  revert a b;induction l;simpl;[tauto|].
-  intros a' b;simpl_In.
-  rewrite IHl;clear IHl.
-  rewrite in_map_iff.
-  split.
-  - intros [(?&E&Ib)|I].
-    + inversion E;subst;tauto.
-    + tauto.
-  - intros ([<-|Ia]&Ib).
-    + left;exists b;tauto.
-    + right;tauto.
-Qed.
-
+(** * Solving affine systems *)
 Section system.
-
+  (** We fix a decidable set of variables. *)
   Context {Q : Set}{decQ: decidable_set Q }.
+
+  (** We fix a set [X] equipped with the operations of Kleene
+      algebra. We do not however assume any axioms. *)
   Context {X : Set}.
   Context {jX: Join X}{pX: Product X}{zX: Zero X}{uX:Un X}{sX:Star X}.
-  
+
+  (** An affine system with variables of type [Q] and values of type
+  [X] is a finite set of inequations either of the shape [x<=q] or
+  [x·q<=q']. *)
   Definition cst_leq : Set := X * Q.
 
   Definition var_leq : Set := X * Q * Q.
 
   Definition system : Set := list cst_leq * list var_leq.
 
+  (** We may extract the set of variables appearing in a system. *)
   Definition vars_system : system -> list Q :=
     fun S => (map snd (fst S))++(flat_map (fun e => [snd(fst e);snd e]) (snd S)).
 
+  (** We define the size of a system to be its number of variables. *)
   Definition sizeSys (S : system) := ⎢{{vars_system S}}⎥.
 
+  (** A vector is a map from variables to values. *)
   Definition vector := Q -> X.
 
+  (** If [V] is a vector, [S] a system and [q] a variable, we may
+      compute an expression representing the constraints on [q]: we
+      take the union [x1 ∪ ... ∪ xn ∪ x'1 · q1 ∪ x'k · qk], where the
+      inequations in [S] with [q] on the right hand side are [xi<=q]
+      and [x'i·qi<=q]. *)
   Definition ExprVar (V : vector) (S : system) (x : Q) :=
     (Σ (flat_map (fun L => if (snd L) =?= x then [fst L] else []) (fst S)))
       ∪ (Σ (flat_map (fun L => if (snd L) =?= x then [fst (fst L)·V (snd (fst L))] else []) (snd S))).
-  
+
+  (** A vector [E] is an exact solution of [S] with respect to some
+      relation [=X] if for every variable in the system we have 
+      [E(q) =X ExprVar E S q]. *)
   Definition exact_solution (eqX : relation X) (S : system) (E : Q -> X) : Prop :=
     (forall q, q ∈ vars_system S -> eqX (E q)  (ExprVar E S q)).
-  
+
+  (** It is a weak solution with respect to a relation [<=X] if for
+      every contraint is satisfied, meaning that:
+      - if [x<=q] then [x <=X E q]
+      - if [x·q<=q'] then [x·(E q) <=X (E q')].
+   *)
   Definition weak_solution (leqX : relation X) (S : system) (E : Q -> X) : Prop :=
     (forall e q, (e,q) ∈ (fst S) -> leqX e (E q))
     /\ (forall p e q, (e,p,q) ∈ (snd S) -> leqX (e · E p) (E q)).
 
+  (** A vector is a lower bound (of the solutions) if it is is
+      pointwise smaller than every weak solution. *)
   Definition lower_bound leqX S E : Prop :=
     (forall F, weak_solution leqX S F -> forall q, q ∈ vars_system S -> leqX (E q) (F q)).
-  
+
+  (** The least solution is a weak solution that is a lower bound. *)
   Definition least_solution leqX S E :=
     weak_solution leqX S E /\ lower_bound leqX S E.
 
+  (** [cst S q] is the sum of constants [xi] such that [xi<=q] is in [S]. *)
   Definition cst (M : system) q := Σ (flat_map (fun C => if (snd C =?= q) then [fst C] else []) (fst M)).
 
+  (** [loop S q] is the sum of constants [xi] such that [xi·q<=q] is in [S]. *)
   Definition loop (M : system) q := Σ (flat_map (fun C => if (snd C =?= q) && (snd(fst C)=?=q)
                                                        then [fst (fst C)] else []) (snd M)).
 
+  (** [succ S q] is the list of pairs [(x,p)] such that [p<>q] and [x·p<=q] is in [S]. *)
   Definition succ (M : system) q := (flat_map (fun C => if (snd C =?= q) && negb (snd(fst C)=?=q)
                                                      then [(fst (fst C),snd (fst C))] else [])
                                               (snd M)).
 
+  (** [elim_var M q] yields a system that is equivalent to [M] except
+      that [q] does not appear in it. It is obtained by removing all
+      the constraints involving [q], and adding
+      - [x · (loop M q)⋆ ·(cst M q) <= p] for every [x·q<=p] in the system;
+      - [x · (loop M q)⋆ · y · p' <= p] for every [x·q<=p] and every [y,p'] in [succ M q]. *)
   Definition elim_var (M : system) q : system :=
     (((fun C => negb (snd C =?= q)) :> fst M)
        ++ (flat_map (fun C => if (negb (snd C =?= q)) && (snd(fst C)=?=q)
@@ -84,7 +101,11 @@ Section system.
                         else [C]
                       else [])
                (snd M))).
-  
+
+  (** We compute a vector [solution_sys n M] by iterating
+      [elim_var]. [n] is a natural number used to ensure
+      termination. To get the correct result, [n] should be greater
+      than the size of the system. *)
   Fixpoint solution_sys n (M : system) : (Q -> X) :=
     match n with
     | 0 => (fun _ => zero)
@@ -100,13 +121,16 @@ Section system.
     end.
 
   Section solutions.
+    (** We temporarily fix an equivalence relation [⩵] and a partial
+        order [≦], and assume they provide a Kleene algebra
+        structure to the set [X]. *)
     Context {eqX leqX : relation X}.
     Context {equivX : @Equivalence X eqX} {preX : @PreOrder X leqX}.
     Context {poX : @PartialOrder X eqX equivX leqX preX}.
     Context {kaX : @KleeneAlgebra X eqX leqX jX pX zX uX sX}.
     Infix " ≦ " := leqX (at level 80).
     Infix " ⩵ " := eqX (at level 80).
-
+    (* begin hide *)
     Instance join_semilattice : Semilattice X eqX join.
     Proof. destruct kaX;eapply IdemSemiRing_Semilattice;eauto. Qed.
 
@@ -115,7 +139,9 @@ Section system.
       (@inf_cup_right X _ _ _ _ _ _ join_semilattice proper_join ka_joinOrder).
     Definition inf_join_inf := (@inf_join_inf X eqX leqX _ _ _ _ join_semilattice proper_join _).
     Definition proper_join_inf := (@proper_join_inf X eqX leqX _ _ join_semilattice proper_join _).
-             
+    (* end hide *)
+
+    (** An exact solution is in particular a weak one. *)
     Lemma exact_solution_is_weak_solution S E :
       exact_solution eqX S E -> weak_solution leqX S E.
     Proof.
@@ -140,6 +166,7 @@ Section system.
           now right;left.
     Qed.
 
+    (** Equivalent vectors yield equivalent [ExprVar]. *)
     Lemma ExprVar_ext E F S q :
       (forall p, p ∈ vars_system S -> E p ⩵ F p) -> ExprVar E S q ⩵ ExprVar F S q.
     Proof.
@@ -209,9 +236,11 @@ Section system.
         apply (lower_bound_ext hyp) in h2;split;assumption.
     Qed.
 
+    (**  The zero vector is always a lower bound. *)
     Lemma lower_bound_zero M : lower_bound leqX M (fun _ => zero).
     Proof. intros E _ ? _;apply zero_minimal. Qed.
 
+    (** It's also the least solution of any system devoid of variables. *)
     Lemma solution_no_var M : sizeSys M = 0 -> exact_solution eqX M (fun _ => zero).
     Proof.
       intro E;unfold sizeSys in E;apply length_zero_iff_nil in E.
@@ -223,6 +252,7 @@ Section system.
         rewrite <- E;simpl_In;simpl;tauto.
     Qed.
 
+    (** Eliminating variables eliminates variables. *)
     Lemma vars_elim M q : vars_system (elim_var M q) ⊆ vars_system M ∖ q.
     Proof.
       unfold vars_system,elim_var;simpl;intro;simpl_In.
@@ -258,7 +288,9 @@ Section system.
           destruct I2 as [<-|[<-|I2]];[| |simpl in I2;tauto];simpl;
             (split;[|intros ->;tauto]);right;apply in_flat_map;exists (v,x1,x2);simpl;tauto.
     Qed.
-    
+
+    (** The vector [solution_sys n M] is uniformly zero on variables
+        that do not appear in the system. *)
     Lemma solution_sys_zero n M :
       forall x, ~ x ∈ vars_system M -> solution_sys n M x = zero.
     Proof.
@@ -273,6 +305,8 @@ Section system.
           intros I;apply vars_elim,rm_In in I as (I&_).
           apply nI,I.
     Qed.
+
+    (** For any weak solution [F] the following inequalities hold. *)
     Lemma loop_spec M F q : weak_solution leqX M F -> loop M q ⋆ · F q ≦ F q.
     Proof.
       intros hF.
@@ -304,6 +338,7 @@ Section system.
       apply hF;tauto.
     Qed.
 
+    (** Eliminating variables preserves weak solutions. *)
     Lemma elim_var_solutions M F q : weak_solution leqX M F -> weak_solution leqX (elim_var M q) F.
     Proof.
       intros hF;pose proof hF as (h1&h2);split.
@@ -331,8 +366,12 @@ Section system.
           apply h2,I.
     Qed.
 
+    (** If the parameter [n] is big enough, [solution_sys n S] is an
+        exact solution and a lower bound of the system [S]. *)
     Theorem solution_sys_spec S n :
-      sizeSys S <= n -> exact_solution eqX S (solution_sys n S) /\ lower_bound leqX S (solution_sys n S).  
+      sizeSys S <= n ->
+      exact_solution eqX S (solution_sys n S)
+      /\ lower_bound leqX S (solution_sys n S).  
     Proof.
       revert S;induction n;intros M hn.
       - split;[apply solution_no_var;lia|apply lower_bound_zero].
@@ -605,6 +644,7 @@ Section system.
                          simpl_eqX;simpl;tauto.
     Qed.
 
+    (** Every least solution is in fact an exact solution. *)
     Lemma least_solution_is_exact S E :
       least_solution leqX S E -> exact_solution eqX S E.
     Proof.
@@ -636,7 +676,11 @@ Section system.
     Qed.
     
   End solutions.
-  
+
+  (** Now, if we generalize the previous result, we show that for
+      every system, the vector [solution_sys(sizeSys S) S] is the
+      least solution of [S] for every choice of [⩵,≦], as long as they
+      satisfy the axioms of Kleene algebras. *)
   Corollary least_solution_exists : forall S : system,
       forall (eqX leqX : relation X),
       forall (equivX : @Equivalence X eqX) (preX : @PreOrder X leqX),
@@ -653,14 +697,21 @@ End system.
 
 Arguments system : clear implicits.
 
+(** * Automata as affine systems *)
 Section automata_system.
   Context {X : Set}{decX: decidable_set X }.
   Context {Q : Set}{decQ: decidable_set Q }.
 
+  (** Given an [NFA] with states of type [Q] and alphabet of type [X],
+      we may generate a system [sys_of_NFA A] with constants [regexp X] and
+      variables [Q]. *)
   Definition sys_of_NFA {Q : Set} (A : NFA Q X) : system Q (@regexp X) :=
     (map (fun q => (e_un,q)) (fst A),
      map (fun tr => (⟪snd(fst tr)⟫,snd tr,fst(fst tr))) (snd A)).
-  
+
+  (** There exists vector that assigns to every state a regular
+      expression denoting its language, and that is a weak solution of
+      [sys_of_NFA A]. *)
   Lemma sys_of_NFA_solution (A : NFA Q X) :
     exists F,
       (forall q, ⟦F q⟧ ≃ langNFA A q)
@@ -699,15 +750,23 @@ Section automata_system.
                 ** apply hF,Ip.
   Qed.
 
+  (** [pathSys M p u q n] is a proposition saying ``there exists a
+      path in [M] of length not exceeding [n] from [p] to [q] labelled
+      with [u]''.*)
   Fixpoint pathSys (M : system Q (@regexp X)) p u q n :=
     match n with
     | 0 => p = q /\ u = []
     | S n => exists e r v1 v2 , u = v1 ++ v2 /\ (e,r,p) ∈ (snd M) /\ ⟦e⟧ v1 /\ pathSys M r v2 q n
     end.
 
+  (** [langSys M q] is the set of words [uv] such that there is a path
+  from [q] to some state [p] labelled with [u], [e<=p] is in [M] and
+  [v∈⟦e⟧]. *)
   Definition langSys M q : (@language X) :=
     fun u => exists n p e v1 v2, u = v1 ++ v2 /\ pathSys M q v1 p n /\ (e,p) ∈ fst M /\ ⟦e⟧ v2.
 
+  (** Every weak solution (w.r.t. language ordering) is greater than
+      [langSys M q]. *)
   Lemma langSys_inf_sol M F :
     weak_solution (fun e f => ⟦e⟧ ≲ ⟦f⟧) M F -> forall q, langSys M q ≲ ⟦F q⟧.
   Proof.
@@ -722,6 +781,8 @@ Section automata_system.
       apply (IHn r v2 P).
   Qed.
 
+  (** The language of an NFA is contained in the language of its
+      system. *)
   Lemma sys_of_NFA_lang A q : langNFA A q ≲ langSys (sys_of_NFA A) q.
   Proof.
     intros u (f&P&If);exists ⎢u⎥,f,un,u,[];split;[|split;[|split]].
@@ -781,7 +842,9 @@ Section automata_system.
     - intros a b;simpl;apply ka_star_left_ind.
     - intros a b;simpl;apply ka_star_right_ind.
   Qed.
-  
+
+  (** There is a least solution of [sys_of_NFA A] that associates to
+      every state its language. *)
   Theorem sys_of_NFA_least_solution (A : NFA Q X) :
     exists F, (forall q, ⟦F q⟧ ≃ langNFA A q) /\ least_solution (fun e f => ⟦e⟧ ≲ ⟦f⟧) (sys_of_NFA A) F.
   Proof.
@@ -794,6 +857,7 @@ Section automata_system.
   
 End automata_system.
 
+(** * The Antimirov system *)
 Section regexp.
   Context {X : Set}{decX: decidable_set X }.
     
@@ -1161,7 +1225,7 @@ End regexp.
   
 Definition equate {A : Set} {decA : decidable_set A} (x y : A) : A -> A :=
   fun z => if z =?= y then x else z.
-
+(** * Inclusion of two systems *)
 Section inf_system.
   Context {Q1 : Set}{decQ1: decidable_set Q1 }.
   Context {Q2 : Set}{decQ2: decidable_set Q2 }.
@@ -1186,6 +1250,7 @@ Section inf_system.
 
   
 End inf_system.
+(** * Intersection of two systems *)
 Section intersect.
   Context {Q1 : Set}{decQ1: decidable_set Q1 }.
   Context {Q2 : Set}{decQ2: decidable_set Q2 }.
@@ -1253,7 +1318,7 @@ Section intersect.
     
   
 End intersect.
-                                 
+(* begin hide *)                        
 Section simulation.
   Context {Q1 : Set}{decQ1: decidable_set Q1 }.
   Context {Q2 : Set}{decQ2: decidable_set Q2 }.
@@ -1534,3 +1599,4 @@ Section simulation.
   Qed.
 
 End simulation.
+(* end hide *)

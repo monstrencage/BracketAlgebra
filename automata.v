@@ -1,7 +1,9 @@
+(** * RIS.automata : finite state automata. *)
 Set Implicit Arguments.
 Unset Strict Implicit.
 Unset Printing Implicit Defensive.
-
+(** This module contains the definitions of deterministic and
+non-deterministic automata, as well as a proof of Kleene's theorem. *)
 Require Import tools algebra language regexp.
 Require Import Bool.
 
