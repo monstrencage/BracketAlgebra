@@ -1,3 +1,11 @@
 *.vo
 *.glob
 *.v.d
+
+*.aux
+
+relation-algebra
+
+\.coqdeps\.d
+
+\.lia\.cache

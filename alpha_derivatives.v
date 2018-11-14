@@ -6,6 +6,7 @@ Require Import tools algebra language regexp systems.
 Require Import factors aeq_facts.
 Require Import alpha_regexp closed_languages binding_finite alphaKA.
 Require Import filters splits.
+Require Import strict_split.
 
 Opaque filter_binding.
 Opaque lower_squares.
@@ -887,7 +888,6 @@ Section s.
     - destruct x;unfold_eqX;apply incl_nil.
   Qed.
 
-  Require Import strict_split.
   Definition δ3 c e := Σ (map (fun a => (splitActStrict c a 0 (δ (open a) e))) ⌊e⌋).
 
   Lemma δ3_test0 c e : test0 e = true -> δ3 c e =KA zero.
