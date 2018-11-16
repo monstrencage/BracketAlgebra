@@ -8,7 +8,7 @@ This repository contains :chicken:[Coq](https://coq.inria.fr):chicken: libraries
 
 To obtain this library, simply run the command:
 ``` shell
-	git clone  --recurse-submodules git@github.com:monstrencage/BracketAlgebra.git
+git clone  --recurse-submodules git@github.com:monstrencage/BracketAlgebra.git
 ```
 Notice the `--recurse-submodules`, which is necessary to get the submodule [`relation-algebra`](https://github.com/damien-pous/relation-algebra), due to Damien Pous.
 
@@ -22,6 +22,11 @@ This library was compiled using:
 To compile it, one needs to first compile `relation-algebra`, then the main library. To compile everything and produce the html documentation, run the following command from the main folder:
 
 ``` shell
-	cd relation-algebra && make && cd .. && make gallinahtml
+cd relation-algebra && make && cd .. && make gallinahtml
 ```
 
+## Documentation ##
+
+The documentation of the library was generated using the utility `coqdoc`, avalaible as standard in [Coq](https://coq.inria.fr) distributions.
+A copy of the documentation is [here](paul.brunet-zamansky.fr/Brackets/html/toc.html).
+		
