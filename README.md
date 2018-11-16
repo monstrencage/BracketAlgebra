@@ -28,5 +28,5 @@ cd relation-algebra && make && cd .. && make gallinahtml
 ## Documentation ##
 
 The documentation of the library was generated using the utility `coqdoc`, avalaible as standard in [Coq](https://coq.inria.fr) distributions.
-A copy of the documentation is [here](paul.brunet-zamansky.fr/Brackets/html/toc.html).
+A copy of the documentation is [here](http://paul.brunet-zamansky.fr/Brackets/html/toc.html).
 		
