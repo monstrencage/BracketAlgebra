@@ -8,11 +8,9 @@ Require Import tools.
 (** * Definitions *)
 Section algebra.
   (** Let [A] be some type equipped with an equivalence relation [⩵] and a partial order [≦]. *)
-  Context {A : Type} {eqA: relation A} {leqA : relation A}.
-  Context {equivA : @Equivalence A eqA} {preA : @PreOrder A leqA}
-          {partialA : @PartialOrder A eqA equivA leqA preA}.
+  Context {A : Type} {eqA: relation A}.
+  Context {equivA : @Equivalence A eqA}.
 
-  Infix " ≦ " := leqA (at level 80).
   Infix " ⩵ " := eqA (at level 80).
 
   (** We introduce some notations. *)
@@ -52,21 +50,25 @@ Section algebra.
   (** ** Basic structures *)
   Class Monoid (prod : A -> A -> A) (unit : A) :=
     {
+      mon_congr :> Proper (eqA ==> eqA ==> eqA) prod;
       mon_assoc :> Associative prod;
       mon_unit :> Unit prod unit;
     }.
 
   Class Semilattice (join : A -> A -> A) :=
-    { 
+    {
+      lat_congr :> Proper (eqA ==> eqA ==> eqA) join;
       lat_assoc :> Associative join;
       lat_comm :> Commutative join;
       lat_idem :> Idempotent join;
     }.
   
   Class Lattice (m j : A -> A -> A) :=
-    { 
+    {
+      lat_meet_congr :> Proper (eqA ==> eqA ==> eqA) m;
       lat_meet_assoc :> Associative m;
       lat_meet_comm :> Commutative m;
+      lat_join_congr :> Proper (eqA ==> eqA ==> eqA) j;
       lat_join_assoc :> Associative j;
       lat_join_comm :> Commutative j;
       lat_join_meet : forall a b, j a (m a b) ⩵ a;
@@ -83,32 +85,79 @@ Section algebra.
       semiring_right_distr : forall a b c, prod (add a b) c ⩵ add (prod a c) (prod b c);
     }.
 
-  (** The property [JoinOrder] states that the partial order we choose
-  coincides with the natural ordering we get from a join
-  [Semilattice]. *)
-  Class JoinOrder j :=
-    join_is_order : forall x y, x ≦ y <-> y ⩵ j x y.
+  (** ** Join semi-lattices *)
+  Section order.
+    Context {j : Join}.
+    Context {S : Semilattice join}.
+    
+    Definition leqA : relation A := (fun x y => y ⩵ x ∪ y).
+    Infix " ≦ " := leqA (at level 80).
 
-  (** An idempotent semi-ring is in particular a semi-lattice. *)
-  Global Instance IdemSemiRing_Semilattice p j u z `{SemiRing p j u z} `{Idempotent j} : Semilattice j.
-  Proof.
-    split.
-    - cut (Monoid j z).
-      + intro;apply mon_assoc.
-      + apply semiring_add.
-    - apply semiring_comm.
-    - assumption.
-  Qed.
+    Global Instance preA : PreOrder leqA.
+    Proof.
+      destruct S as [p ass comm id];unfold leqA.
+      split.
+      - intro x;symmetry;apply id.
+      - intros x y z e1 e2.
+        rewrite e2 at 2.
+        rewrite (ass x y z),<- e1.
+        apply e2.
+    Qed.
+
+    Global Instance partialA : PartialOrder eqA leqA.
+    Proof.
+      destruct S as [p ass comm id].
+      intros x y;unfold Basics.flip,leqA;split.
+      - intros E;split.
+        + rewrite E,(id y);reflexivity.
+        + rewrite E;symmetry;apply id.
+      - intros (E1&E2).
+        rewrite E1.
+        rewrite E2 at 1.
+        apply comm.
+    Qed.
+    
+    Lemma refactor e f g h : (e ∪ f) ∪ (g ∪ h) ⩵ (e ∪ g) ∪ (f ∪ h).
+    Proof.
+      rewrite (lat_assoc (e∪f) g h).
+      rewrite <- (lat_assoc e f g).
+      rewrite (@lat_comm _ S f g).
+      rewrite (lat_assoc e g f).
+      rewrite (lat_assoc (e∪g) f h).
+      reflexivity.
+    Qed.
+
+    Global Instance proper_join_inf : Proper (leqA ==> leqA ==> leqA) join.
+    Proof.
+      intros x y I x' y' I';unfold leqA in *.
+      rewrite I,I' at 1;apply refactor.
+    Qed.
+
+    Lemma inf_cup_left a b : a ≦ a ∪ b.
+    Proof. unfold leqA; rewrite (lat_assoc _ _ _),(lat_idem _);reflexivity. Qed.
+
+    Lemma inf_cup_right a b : b ≦ a ∪ b.
+    Proof. rewrite (lat_comm a b);apply inf_cup_left. Qed.
+
+    Lemma inf_join_inf a b c : a ≦ c -> b ≦ c -> a ∪ b ≦ c.
+    Proof. intros;rewrite <- (lat_idem c); apply proper_join_inf;assumption. Qed.
+
+    Context {z : Zero} {u : Unit join zero}.
+  
+    Lemma zero_minimal x : zero ≦ x.
+    Proof. unfold leqA;symmetry ;apply left_unit. Qed.
+
+  End order.
+      
+  Infix " ≦ " := leqA (at level 80).
+
 
   (** ** Kleene algebra and Boolean algebra *)
   Class KleeneAlgebra (j: Join) (p: Product) (z: Zero) (u:Un) (s:Star) :=
     {
-      proper_prod :> Proper (eqA ==> eqA ==> eqA) prod;
-      proper_join :> Proper (eqA ==> eqA ==> eqA) join;
-      proper_star :> Proper (eqA ==> eqA) star;
+      ka_star_congr :> Proper (eqA ==> eqA) star;
       ka_semiring :> SemiRing prod join un zero;
       ka_idem :> Idempotent join;
-      ka_joinOrder :> JoinOrder join;
       ka_star_unfold : forall a, 𝟭 ∪ a · a ⋆ ≦ a⋆ ;
       ka_star_left_ind : forall a b, a · b ≦ b -> a ⋆ · b ≦ b;
       ka_star_right_ind : forall a b, a · b ≦ a -> a · b ⋆ ≦ a;
@@ -142,20 +191,19 @@ Infix " ∪ " := join (at level 45).
 Notation " e ⋆ " := (star e) (at level 35).
 
 Arguments KleeneAlgebra : clear implicits.
-Arguments KleeneAlgebra A eqA leqA {j p z u s}.
+Arguments KleeneAlgebra A eqA {j p z u s}.
 Arguments SemiRing : clear implicits.
-Arguments JoinOrder : clear implicits.
 Arguments Semilattice : clear implicits.
 Arguments BooleanAlgebra : clear implicits.
 Arguments BooleanAlgebra {A} eqA t f n c d.
+Arguments leqA : clear implicits.
+Arguments leqA {A} eqA {j}.
 
 (** * Facts about boolean algebra *)
 Section booleanAlgebra.
-  Context {A : Type} {eqA: relation A} {leqA : relation A}.
-  Context {equivA : @Equivalence A eqA} {preA : @PreOrder A leqA}
-          {partialA : @PartialOrder A eqA equivA leqA preA}.
+  Context {A : Type} {eqA: relation A}.
+  Context {equivA : @Equivalence A eqA}.
 
-  Infix " ≦ " := leqA (at level 80).
   Infix " ⩵ " := eqA (at level 80).
   Context {top bot : A} {neg : A -> A} {conj disj : A -> A -> A}.
   Context `{BooleanAlgebra A eqA top bot neg conj disj}.
@@ -451,8 +499,10 @@ Section booleanAlgebra.
   Global Instance BooleanAlgebra_Join_Lattice : @Lattice A eqA conj disj.
   Proof.
     split.
+    - apply H.
     - intros x y z;apply Ass2.
     - apply ba_conj_comm.
+    - apply H.
     - intros x y z;apply Ass1.
     - apply ba_disj_comm.
     - apply Abs1.
@@ -462,6 +512,7 @@ Section booleanAlgebra.
   Global Instance BooleanAlgebra_Join_Semilattice : Semilattice A eqA disj.
   Proof.
     split.
+    - apply H.
     - apply lat_join_assoc.
     - apply lat_join_comm.
     - intros a;apply Idm1.
@@ -470,6 +521,7 @@ Section booleanAlgebra.
   Global Instance BooleanAlgebra_Meet_Semilattice : Semilattice A eqA conj.
   Proof.
     split.
+    - apply H.
     - apply lat_meet_assoc.
     - apply lat_meet_comm.
     - intros a;apply Idm2.
@@ -478,6 +530,7 @@ Section booleanAlgebra.
   Global Instance BooleanAlgebra_Meet_Monoid : @Monoid A eqA conj top.
   Proof.
     split.
+    - apply H.
     - apply lat_meet_assoc.
     - split.
       + intro a;etransitivity;[apply lat_meet_comm|apply ba_true].
@@ -487,6 +540,7 @@ Section booleanAlgebra.
   Global Instance BooleanAlgebra_Join_Monoid : @Monoid A eqA disj bot.
   Proof.
     split.
+    - apply H.
     - apply lat_join_assoc.
     - split.
       + intro a;etransitivity;[apply lat_join_comm|apply ba_false].
@@ -509,71 +563,23 @@ Section booleanAlgebra.
 
 End booleanAlgebra.
   
-(** * Join semi-lattices *)
-Section joinSemiLattice.
-  Context {A : Type} {eqA: relation A} {leqA : relation A}.
-  Context {equivA : @Equivalence A eqA} {preA : @PreOrder A leqA}
-          {partialA : @PartialOrder A eqA equivA leqA preA}.
-
-  Infix " ≦ " := leqA (at level 80).
-  Infix " ⩵ " := eqA (at level 80).
-  Context {j : Join A} {semLatA: Semilattice A eqA join}.
-  Context {proper_join: Proper (eqA ==> eqA ==> eqA) join}.
-
-  Lemma refactor e f g h : (e ∪ f) ∪ (g ∪ h) ⩵ (e ∪ g) ∪ (f ∪ h).
-  Proof.
-    rewrite (lat_assoc (e∪f) g h).
-    rewrite <- (lat_assoc e f g).
-    rewrite (lat_comm f g).
-    rewrite (lat_assoc e g f).
-    rewrite (lat_assoc (e∪g) f h).
-    reflexivity.
-  Qed.
-
-  Context {joA : JoinOrder A eqA leqA join}.
-  
-  Global Instance proper_join_inf : Proper (leqA ==> leqA ==> leqA) join.
-  Proof.
-    intros x y I x' y' I';rewrite join_is_order in *.
-    rewrite I,I' at 1;apply refactor.
-  Qed.
-
-  Lemma inf_cup_left a b : a ≦ a ∪ b.
-  Proof. apply join_is_order; rewrite (lat_assoc _ _ _),(lat_idem _);reflexivity. Qed.
-
-  Lemma inf_cup_right a b : b ≦ a ∪ b.
-  Proof. rewrite (lat_comm a b);apply inf_cup_left. Qed.
-
-  Lemma inf_join_inf a b c : a ≦ c -> b ≦ c -> a ∪ b ≦ c.
-  Proof. intros;rewrite <- (lat_idem c); apply proper_join_inf;assumption. Qed.
-
-  Context {z : Zero A} {u : @Unit A eqA join zero}.
-  
-  Lemma zero_minimal x : zero ≦ x.
-  Proof. rewrite join_is_order;symmetry ;apply left_unit. Qed.
-  
-End joinSemiLattice.
 
 (** * Kleene algebras *)
 Section ka_facts.
-  Context {A : Type} {eqA: relation A} {leqA : relation A}.
-  Context {equivA : @Equivalence A eqA} {preA : @PreOrder A leqA}
-          {partialA : @PartialOrder A eqA equivA leqA preA}.
-
-  Infix " ≦ " := leqA (at level 80).
+  Context {A : Type} {eqA: relation A}.
+  Context {equivA : @Equivalence A eqA}.
+  
   Infix " ⩵ " := eqA (at level 80).
   
   Context {j: Join A}{p: Product A}{z: Zero A}{u:Un A}{s:Star A}.
-  Context {ka: KleeneAlgebra A eqA leqA}.
+  Context {ka: KleeneAlgebra A eqA}.
 
-
-  Global Instance proper_join_eq : Proper (eqA ==> eqA ==> eqA) join.
-  Proof. destruct ka;assumption. Qed.
+  Infix " ≦ " := (leqA eqA) (at level 80).
   
-  Global Instance proper_prod_inf : Proper (leqA ==> leqA ==> leqA) prod.
+  Global Instance proper_prod_inf : Proper (leqA eqA ==> leqA eqA ==> leqA eqA) prod.
   Proof.
     intros e f I e' f' I'.
-    rewrite join_is_order in *.
+    unfold leqA in *.
     rewrite I' at 1.
     rewrite semiring_left_distr.
     rewrite I at 1.
@@ -582,16 +588,16 @@ Section ka_facts.
     rewrite <- semiring_left_distr.
     rewrite <- I'.
     reflexivity.
-  Qed.    
+  Qed.
   
   Global Instance join_semilattice : Semilattice A eqA join.
-  Proof. destruct ka;eapply IdemSemiRing_Semilattice;eauto. Qed.
-  
+  Proof. split;apply ka. Qed.
+
   Lemma ka_star_unfold_eq a : a⋆ ⩵ 𝟭 ∪ a · a ⋆.
   Proof.
-    apply partialA;split.
+    apply antisymmetry.
     - etransitivity;[|apply ka_star_left_ind with (a0:=a)].
-      + rewrite (semiring_left_distr _ _ _).
+      + rewrite (semiring_left_distr _ _ _). 
         rewrite right_unit. 
         apply inf_cup_left.
       + rewrite (semiring_left_distr _ _ _).
@@ -608,18 +614,16 @@ Section ka_facts.
           rewrite (semiring_left_distr _ _ _).
           rewrite <- inf_cup_right.
           reflexivity.
-    - unfold Basics.flip.
-      apply ka_star_unfold.
+    - apply ka_star_unfold.
   Qed.
   
   Lemma ka_star_dup a : a ⋆ · a ⋆ ⩵ a ⋆.
   Proof.
-    apply partialA;split.
+    apply antisymmetry.
     - apply ka_star_left_ind.
       rewrite ka_star_unfold_eq at 2.
       apply inf_cup_right.
-    - unfold Basics.flip.
-      rewrite ka_star_unfold_eq at 1.
+    - rewrite ka_star_unfold_eq at 1.
       apply inf_join_inf.
       + rewrite ka_star_unfold_eq.
         rewrite (semiring_left_distr _ _ _).
@@ -644,7 +648,7 @@ Section ka_facts.
   Lemma star_incr e : e ≦ e⋆.
   Proof. rewrite ka_star_unfold_eq, <- one_inf_star,right_unit;apply inf_cup_right. Qed.
     
-  Global Instance proper_star_inf : Proper (leqA ==> leqA) star.
+  Global Instance proper_star_inf : Proper (leqA eqA ==> leqA eqA) star.
   Proof.
     intros e f I.
     transitivity (e⋆·𝟭);[rewrite right_unit;reflexivity|].
@@ -655,7 +659,7 @@ Section ka_facts.
   
   Lemma ka_star_star a : a⋆ ⩵ (a ⋆)⋆.
   Proof.
-    apply partialA;split;unfold Basics.flip.
+    apply antisymmetry.
     - apply proper_star_inf.
       rewrite ka_star_unfold_eq.
       rewrite <- inf_cup_right.
@@ -688,7 +692,7 @@ Section ka_facts.
 
   Lemma star_join e f : (e ∪ f)⋆ ⩵ e ⋆ ∪ f⋆·(e·f⋆)⋆.
   Proof.
-    apply partialA;unfold Basics.flip;split.
+    apply antisymmetry.
     - transitivity ((e ∪ f) ⋆ · un);[rewrite right_unit;reflexivity|].
       transitivity ((e ∪ f) ⋆ · (e ⋆ ∪ f ⋆ · (e · f ⋆) ⋆)).
       + apply proper_prod_inf;[reflexivity|].
@@ -727,7 +731,7 @@ Section ka_facts.
 
   Lemma un_star : un⋆ ⩵ un.
   Proof.
-    apply partialA;unfold Basics.flip;split.
+    apply antisymmetry.
     - transitivity (un⋆·un);[rewrite right_unit;reflexivity|].
       apply ka_star_left_ind;rewrite left_unit;reflexivity.
     - apply star_incr.
@@ -735,7 +739,7 @@ Section ka_facts.
 
   Lemma star_switch_side e : e⋆·e ⩵ e· e⋆.
   Proof.
-    apply partialA;unfold Basics.flip;split.
+    apply antisymmetry.
     - transitivity (e⋆·e·e⋆).
       + rewrite <- one_inf_star at 3.
         rewrite right_unit;reflexivity.
@@ -776,7 +780,7 @@ Section ka_facts.
       
   Lemma Σ_incl L M : L ⊆ M -> Σ L ≦ Σ M.
   Proof.
-    intro I;apply ka_joinOrder;rewrite Σ_app;revert M I;induction L;intros M I.
+    intro I;unfold leqA;rewrite Σ_app;revert M I;induction L;intros M I.
     - reflexivity.
     - simpl;rewrite <- IHL by (rewrite <- I;intro;simpl;tauto).
       assert (Ia : a ∈ M) by (apply I;now left).
@@ -792,9 +796,7 @@ Section ka_facts.
   Global Instance Σ_equivalent : Proper (@equivalent _ ==> eqA) Σ.
   Proof.
     intros l1 l2 E.
-    apply incl_PartialOrder in E as (E1&E2);unfold Basics.flip in E2.
-    apply Σ_incl,ka_joinOrder in E1; apply Σ_incl,ka_joinOrder in E2. 
-    rewrite E1, E2 at 1;apply semiring_comm.
+    apply antisymmetry;apply Σ_incl;rewrite E;reflexivity.
   Qed.
 
   Lemma Σ_bigger e L : e ∈ L -> e ≦ Σ L.
@@ -821,18 +823,17 @@ Section ka_facts.
     etransitivity;[apply proper_prod_inf;[apply proper_prod_inf;
                                           [reflexivity|apply star_incr]|reflexivity]|].
     cut ((e ⋆ · e ⋆) · e ⋆ ⩵ e ⋆);[intros ->;reflexivity|].
-    etransitivity;[apply proper_prod;[apply ka_star_dup|]|apply ka_star_dup].
-    reflexivity.
+    repeat rewrite ka_star_dup;reflexivity.
   Qed.
 
   Lemma ka_zero_star :  𝟬 ⋆ ⩵ 𝟭.
   Proof.
-    symmetry;apply partialA;unfold Basics.flip;split.
-    - apply one_inf_star.
+    apply antisymmetry.
     - transitivity (𝟬 ⋆ · 𝟭).
       + rewrite right_unit;reflexivity.
       + apply ka_star_left_ind.
         rewrite left_absorbing;apply zero_minimal.
+    - apply one_inf_star.
   Qed.
 
 End ka_facts.

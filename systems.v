@@ -124,21 +124,21 @@ Section system.
     (** We temporarily fix an equivalence relation [⩵] and a partial
         order [≦], and assume they provide a Kleene algebra
         structure to the set [X]. *)
-    Context {eqX leqX : relation X}.
-    Context {equivX : @Equivalence X eqX} {preX : @PreOrder X leqX}.
-    Context {poX : @PartialOrder X eqX equivX leqX preX}.
-    Context {kaX : @KleeneAlgebra X eqX leqX jX pX zX uX sX}.
+    Context {eqX : relation X}.
+    Context {equivX : @Equivalence X eqX}.
+    Context {kaX : @KleeneAlgebra X eqX jX pX zX uX sX}.
+    Notation leqX := (leqA eqX).
     Infix " ≦ " := leqX (at level 80).
     Infix " ⩵ " := eqX (at level 80).
     (* begin hide *)
     Instance join_semilattice : Semilattice X eqX join.
-    Proof. destruct kaX;eapply IdemSemiRing_Semilattice;eauto. Qed.
+    Proof. split;apply kaX. Qed.
 
-    Definition inf_cup_left := (@inf_cup_left X _ _ _ _ join_semilattice proper_join ka_joinOrder).
-    Definition inf_cup_right :=
-      (@inf_cup_right X _ _ _ _ _ _ join_semilattice proper_join ka_joinOrder).
-    Definition inf_join_inf := (@inf_join_inf X eqX leqX _ _ _ _ join_semilattice proper_join _).
-    Definition proper_join_inf := (@proper_join_inf X eqX leqX _ _ join_semilattice proper_join _).
+    (* Definition inf_cup_left := (@inf_cup_left X _ _ _ _ join_semilattice proper_join ka_joinOrder). *)
+    (* Definition inf_cup_right := *)
+    (*   (@inf_cup_right X _ _ _ _ _ _ join_semilattice proper_join ka_joinOrder). *)
+    (* Definition inf_join_inf := (@inf_join_inf X eqX leqX _ _ _ _ join_semilattice proper_join _). *)
+    (* Definition proper_join_inf := (@proper_join_inf X eqX leqX _ _ join_semilattice proper_join _). *)
     (* end hide *)
 
     (** An exact solution is in particular a weak one. *)
@@ -170,12 +170,12 @@ Section system.
     Lemma ExprVar_ext E F S q :
       (forall p, p ∈ vars_system S -> E p ⩵ F p) -> ExprVar E S q ⩵ ExprVar F S q.
     Proof.
-      intros h1;unfold ExprVar;apply proper_join;[reflexivity|].
+      intros h1;unfold ExprVar; apply mon_congr;[reflexivity|].
       cut (forall p e q, ((e,p),q) ∈ (snd S) -> p ∈ vars_system S).
       - induction (snd S) as [|((e,p),q0) l].
         + intros _;reflexivity.
         + intros hyp;simpl;unfold_eqX.
-          * simpl;apply proper_join.
+          * simpl;apply mon_congr.
             -- rewrite h1;[reflexivity|].
                apply (hyp p e q);now left.
             -- apply IHl;intros ? ? ? I;eapply hyp;right;apply I.
@@ -419,7 +419,7 @@ Section system.
                ++ subst;unfold ExprVar,q_expr.
                   transitivity (cst M q ∪ ((loop M q · q_expr)
                                              ∪ Σ (map (fun C : X * Q => fst C · E (snd C)) (succ M q)))).
-                  ** apply poX;unfold Basics.flip;split.
+                  ** apply antisymmetry.
                      --- transitivity
                            (cst M q ∪ (Σ (map (fun C : X * Q => fst C · E (snd C)) (succ M q))
                                          ∪ loop M q· q_expr));
@@ -456,12 +456,12 @@ Section system.
                              rewrite left_unit.
                              apply inf_cup_right.
                   ** unfold cst,loop.
-                     etransitivity;[apply proper_join;
-                                    [reflexivity|apply proper_join;[apply  Σ_distr_r|reflexivity]]|].
-                     etransitivity;[apply proper_join;[reflexivity|apply algebra.Σ_app]|].
+                     etransitivity;[apply mon_congr;
+                                    [reflexivity|apply mon_congr;[apply  Σ_distr_r|reflexivity]]|].
+                     etransitivity;[apply mon_congr;[reflexivity|apply algebra.Σ_app]|].
                      etransitivity;[apply algebra.Σ_app|].
                      etransitivity;[|symmetry;apply algebra.Σ_app].
-                     apply poX;unfold Basics.flip;split;
+                     apply antisymmetry;
                        apply Σ_bounded;intros f If;simpl_In in If.
                      --- destruct If as [If|[If|If]].
                          +++ apply in_flat_map in If as ((e&p)&I&If).
@@ -510,7 +510,7 @@ Section system.
                                  apply in_flat_map;exists (e,p,q);split;[assumption|].
                                  simpl;simpl_eqX;now left.
                ++ rewrite (sol _ I).
-                  apply poX;unfold Basics.flip;split;unfold ExprVar;
+                  apply antisymmetry;unfold ExprVar;
                     apply inf_join_inf;apply Σ_bounded;intros f If;simpl in *;simpl_In in If.
                   ** apply in_flat_map in If as ((e&p')&Ip'&If).
                      revert If;simpl;unfold_eqX;simpl;try tauto.
@@ -656,11 +656,11 @@ Section system.
       cut (forall q, q ∈ vars_system S -> E q ⩵ E0 q).
       - intros h q Iq;rewrite (h q Iq),(h1 q Iq).
         clear ws lb h1 h2.
-        unfold ExprVar;simpl;apply proper_join;[reflexivity|].
+        unfold ExprVar;simpl;apply mon_congr;[reflexivity|].
         clear Iq;revert h;unfold vars_system;simpl.
         induction (snd S)  as [|((a,p1),p2) l];intros h;[reflexivity|].
         simpl;unfold_eqX;simpl.
-        + apply proper_join.
+        + apply mon_congr.
           * rewrite h;[reflexivity|].
              simpl_In;right;apply in_flat_map;exists (a,p1,q);simpl;tauto.
           * apply IHl.
@@ -669,7 +669,7 @@ Section system.
         + apply IHl.
           revert h;clear;intros h r I; apply h.
           revert I;simpl;simpl_In;tauto.
-      - intros q Iq;apply poX;unfold Basics.flip;split.
+      - intros q Iq;apply antisymmetry.
         * apply lb,Iq.
           eapply exact_solution_is_weak_solution,h1.
         * apply h2,Iq;apply ws.
@@ -682,11 +682,10 @@ Section system.
       least solution of [S] for every choice of [⩵,≦], as long as they
       satisfy the axioms of Kleene algebras. *)
   Corollary least_solution_exists : forall S : system,
-      forall (eqX leqX : relation X),
-      forall (equivX : @Equivalence X eqX) (preX : @PreOrder X leqX),
-      forall (poX : @PartialOrder X eqX equivX leqX preX),
-      forall (kaX : @KleeneAlgebra X eqX leqX jX pX zX uX sX),
-        least_solution leqX S (solution_sys (sizeSys S) S).
+      forall (eqX : relation X),
+      forall (equivX : @Equivalence X eqX),
+      forall (kaX : @KleeneAlgebra X eqX jX pX zX uX sX),
+        least_solution (leqA eqX) S (solution_sys (sizeSys S) S).
   Proof.
     intros;split.
     - apply exact_solution_is_weak_solution,solution_sys_spec;reflexivity.
@@ -799,7 +798,6 @@ Section automata_system.
   Qed.
 
   Definition eqX := (fun e f :@regexp X => ⟦e⟧ ≃ ⟦f⟧).
-  Definition leqX := (fun e f :@regexp X => ⟦e⟧ ≲ ⟦f⟧).
   
   Instance eqX_eq : Equivalence eqX.
   Proof.
@@ -809,27 +807,17 @@ Section automata_system.
     - etransitivity;eassumption.
   Qed.
         
-  Instance leqX_o : PreOrder leqX.
+  Instance kaX : KleeneAlgebra regexp eqX.
   Proof.
-    split;intro;intros;unfold leqX.
-    - reflexivity.
-    - etransitivity;eassumption.
-  Qed.
-
-  Instance leqX_po : PartialOrder eqX leqX.
-  Proof. intros x y;unfold eqX,leqX;apply inf_lang_PartialOrder. Qed.
-
-  Instance kaX : KleeneAlgebra regexp eqX leqX.
-  Proof.
-    unfold eqX,leqX;split.
-    - intros x y E x' y' E';simpl;rewrite E,E';reflexivity.
-    - intros x y E x' y' E';simpl;rewrite E,E';reflexivity.
+    unfold eqX;split.
     - intros x y E;simpl;rewrite E;reflexivity.
     - split.
       + split.
+        * intros e1 e2 E f1 f2 F;simpl;apply mon_congr;assumption.
         * intros a b c;simpl;apply mon_assoc.
         * split;intro a;simpl;[apply left_unit|apply right_unit].
       + split.
+        * intros e1 e2 E f1 f2 F;simpl;apply mon_congr;assumption.
         * intros a b c;simpl;apply mon_assoc.
         * split;intro a;simpl;[apply left_unit|apply right_unit].
       + intros a b;simpl;apply semiring_comm.
@@ -837,10 +825,11 @@ Section automata_system.
       + intros a b c;simpl;apply semiring_left_distr.
       + intros a b c;simpl;apply semiring_right_distr.
     - intros a;simpl;apply ka_idem.
-    - intros a b;simpl;apply ka_joinOrder.
-    - intro a;simpl;apply ka_star_unfold.
-    - intros a b;simpl;apply ka_star_left_ind.
-    - intros a b;simpl;apply ka_star_right_ind.
+    - intro a;unfold leqA;simpl;apply ka_star_unfold.
+    - unfold leqA;intros a b;simpl.
+      intro h;apply ka_star_left_ind,h.
+    - unfold leqA;intros a b;simpl.
+      intro h;apply ka_star_right_ind,h.
   Qed.
 
   (** There is a least solution of [sys_of_NFA A] that associates to
@@ -939,7 +928,7 @@ Section regexp.
       + repeat rewrite Σ_distr_l.
         destruct (ϵ_zero_or_un e1) as [-> | ->];simpl_eqX;simpl;
           [replace e_un with un by reflexivity|].
-        * apply ax_inf_PartialOrder;unfold Basics.flip;split;apply Σ_bounded;intros f If.
+        * apply antisymmetry;apply Σ_bounded;intros f If.
           -- apply in_map_iff in If as (g&<-&Ig).
              rewrite left_unit;apply Σ_bigger;tauto.
           -- transitivity (prod un f);[rewrite left_unit;reflexivity|].
@@ -949,7 +938,7 @@ Section regexp.
           rewrite IHl,left_absorbing,(ka_idem _);reflexivity.
     - replace e_star with star by reflexivity.
       simpl in V;apply IHe in V;clear IHe;simpl;replace e_un with un by reflexivity.
-      apply ax_inf_PartialOrder;unfold Basics.flip;split.
+      apply antisymmetry.
       + transitivity ((𝟭 ∪ Σ_{ A} (fun a : X => ⟪a⟫·Σ (map (fun g : regexp => g · e ⋆) (δA a e))))·e⋆);
           [etransitivity;[|apply proper_prod_inf;[apply inf_cup_left|reflexivity]];
            rewrite left_unit;reflexivity|].
@@ -963,7 +952,8 @@ Section regexp.
              apply proper_join_inf;[|assumption].
              apply proper_prod_inf;[reflexivity|].
              apply Σ_bounded;intros f If.
-             transitivity (f·e⋆);[rewrite <- one_inf_star,right_unit;reflexivity|].
+             transitivity (f·𝟭);[rewrite right_unit;reflexivity|].
+             rewrite one_inf_star.
              apply Σ_bigger,in_map_iff;exists f;tauto.
         * rewrite <- join_list_right_distr.
           etransitivity;[|apply inf_cup_right].
@@ -1025,8 +1015,7 @@ Section regexp.
     apply vars_Antimirov in If.
     rewrite (Antimirov_fundamental_theorem (stateSpace_Var If)).
     apply ax_eq_add.
-    + destruct (ϵ_zero_or_un f) as [E|E];rewrite E;apply ax_inf_PartialOrder;
-        unfold Basics.flip;split.
+    + destruct (ϵ_zero_or_un f) as [E|E];rewrite E;apply antisymmetry.
       * apply Σ_bigger;apply in_flat_map;exists (e_un,f);simpl;simpl_eqX;split;[|now left].
         apply in_map_iff;exists f;split;[reflexivity|simpl_In].
         split;[assumption|].
@@ -1200,8 +1189,9 @@ Section regexp.
   Corollary CompletenessKA_inf {A : Set} `{decidable_set A} :
     forall (e f : @regexp A), e <=KA f <-> ⟦e⟧ ≲ ⟦f⟧.
   Proof.
-    intros e f;unfold ax_inf;rewrite CompletenessKA;simpl.
-    rewrite (ka_joinOrder _ _);split;[intros ->;reflexivity|intros <-;reflexivity].
+    intros e f;unfold ax_inf,leqA;rewrite CompletenessKA;simpl;split.
+    - intros -> u;firstorder.
+    - intros h u;simpl;pose proof (h u) as I;firstorder.
   Qed.
   
   Theorem least_solution_Antimirov e :

@@ -145,11 +145,17 @@ Section proof.
     - destruct H;simpl;ka.
     - destruct H;simpl.
       + cut (regexp_to_expr e^* * regexp_to_expr f <== regexp_to_expr f).
-        * intro h;apply leq_iff_cup,h.
-        * apply str_ind_l,leq_iff_cup,IHE.
+        * intro h.
+          apply leq_iff_cup in h.
+          symmetry in h;apply h.
+        * apply str_ind_l,leq_iff_cup.
+          symmetry;apply IHE.
       + cut (regexp_to_expr e * regexp_to_expr f^* <== regexp_to_expr e).
-        * intro h;apply leq_iff_cup,h.
-        * apply str_ind_r,leq_iff_cup,IHE.
+        * intro h.
+          apply leq_iff_cup in h.
+          symmetry in h;apply h.
+        * apply str_ind_r,leq_iff_cup.
+          symmetry;apply IHE.
   Qed.
       
   Instance regexp_laws: monoid.laws level.BKA regexp_ops.
@@ -157,12 +163,12 @@ Section proof.
     split;intros;simpl;autounfold;auto;
       try (unfold level.lower;simpl;discriminate)||(repeat right;intros).
     - split;simpl;try (unfold level.lower;simpl;discriminate).
-      + apply ax_inf_PreOrder.
-      + apply ax_inf_PartialOrder.
+      + apply preA.
+      + apply partialA.
       + intros;split.
-        * intros <-;split;unfold ax_inf.
+        * intros <-;split;unfold ax_inf,leqA.
           -- rewrite (mon_assoc _ _),(ka_idem _);reflexivity.
-          -- rewrite (semiring_comm _),<-(mon_assoc _ _),(ka_idem _);reflexivity.
+          -- rewrite (semiring_comm _),(mon_assoc _ _),(ka_idem _);reflexivity.
         * intros (->&->);rewrite (ka_idem _);reflexivity.
       + intros;right;apply zero_minimal.
     - rewrite H,H0;reflexivity.
@@ -184,9 +190,9 @@ Section proof.
   Lemma inject_regexp_to_expr e : inject (regexp_to_expr e) = e.
   Proof.
     induction e;simpl;try reflexivity.
-    - rewrite <- IHe1,<-IHe2 at 2;reflexivity.
-    - rewrite <- IHe1,<-IHe2 at 2;reflexivity.
-    - rewrite <- IHe at 2;reflexivity.
+    - unfold inject in *;simpl;rewrite IHe1,IHe2;reflexivity.
+    - unfold inject in *;simpl;rewrite IHe1,IHe2;reflexivity.
+    - unfold inject in *;simpl;rewrite IHe;reflexivity.
   Qed.
 
   Lemma CompletenessKA_sigma (e f : E) : ⟦e⟧ ≃ ⟦f⟧ -> e =KA f.

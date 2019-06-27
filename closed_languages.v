@@ -93,7 +93,8 @@ Section s.
   Lemma cl_α_prod l m: cl_α (l · m) ≃ cl_α (cl_α l · cl_α m).
   Proof.
     apply inf_lang_PartialOrder;split;[|unfold Basics.flip].
-    - apply cl_α_inf_lang,proper_prod_inf;apply cl_α_incr.
+    - apply cl_α_inf_lang,joinOrderLang.
+      apply proper_prod_inf;apply joinOrderLang, cl_α_incr.
     - intros u (w&(u1&u2&->&(v1&I1&E1)&v2&I2&E2)&E).
       exists (v1++v2);split.
       + exists v1,v2;tauto.
@@ -103,7 +104,7 @@ Section s.
   Lemma cl_α_star l: cl_α (l⋆) ≃ cl_α ((cl_α l)⋆).
   Proof.
     apply inf_lang_PartialOrder;split;[|unfold Basics.flip].
-    - apply cl_α_inf_lang,proper_star_inf;apply cl_α_incr.
+    - apply cl_α_inf_lang,joinOrderLang,proper_star_inf,joinOrderLang,cl_α_incr.
     - intros u (w&(n&I)&E);rewrite <- E;clear E u; revert w I;induction n;simpl;intros w.
       + intros ->; exists [];simpl;split;[exists 0|];reflexivity.
       + intros (u1&u2&->&(u1'&I1&E1)&I2).

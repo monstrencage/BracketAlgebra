@@ -1242,10 +1242,11 @@ Section s.
       rewrite <- Σ_distr_l,<- IHL.
       auto.
     - replace e_star with star by reflexivity.
-      symmetry;apply ax_inf_PartialOrder;unfold Basics.flip;split.
+      symmetry;apply antisymmetry.
       + apply Σ_bounded;intros f I.
         symmetry in IHe.
-        apply ax_eq_inf in IHe;rewrite <- Σ_bounded in IHe.
+        apply ax_eq_inf in IHe.
+        rewrite <- (Σ_bounded e (𝐇 e)) in IHe.
         apply in_flat_map in I as (L&IL&I).
         apply subsets_In in IL.
         apply in_map_iff in I as (L'&<-&EL').
@@ -1414,7 +1415,7 @@ Section s.
           intros u Iu.
           apply (Π_lang (pad (e_star (Σ m)) m)) in Iu as (U&->&len&Iu).
           assert (Lm : ⟦Σ m ⋆⟧ ≲ ⟦e ⋆⟧)
-            by (simpl;apply proper_star_inf;rewrite (𝐇_lang e);
+            by (simpl;apply joinOrderLang,proper_star_inf,joinOrderLang;rewrite (𝐇_lang e);
                 apply ax_inf_lang_incl,Σ_incl,Il).
           assert (hyp:forall u, u ∈ U -> ⟦e⋆⟧ u).
           -- intros u IU.
@@ -1422,7 +1423,8 @@ Section s.
              ++ intros (f&If&L).
                 rewrite pad_contents in If;destruct If as [<-|If].
                 ** apply Lm,L.
-                ** simpl;pose proof (star_incr ⟦e⟧) as h;apply (h u);clear h.
+                ** simpl;pose proof (star_incr ⟦e⟧) as h;apply joinOrderLang in h.
+                   apply (h u);clear h.
                    apply Il in If;apply 𝐇_lang,Σ_lang;exists f;tauto.
              ++ apply In_nth with (d := []) in IU as (n&Ln&<-).
                 exists (nth n (pad (e_star (Σ m)) m) 𝟭);split.
@@ -1608,9 +1610,7 @@ Section s.
       rewrite map_app,<- (KA_ACI0 (Σ_app _ _)).
       transitivity (e⋆∪e⋆·e·e⋆);[|apply join_ax_eq].
       + symmetry;transitivity (e⋆·e·e⋆∪e⋆);[auto|].
-        cut (e⋆·e·e⋆ <=KA e⋆);[tauto|].
-        rewrite (star_incr e) at 2.
-        rewrite ka_star_dup,ka_star_dup;reflexivity.
+        symmetry;apply ka_star_mid_split.
       + rewrite <- ka_star_dup at 1.
         rewrite (𝐇_eq (e⋆)) at 1 2.
         remember (𝐇 (e⋆)) as L.

@@ -186,6 +186,10 @@ Proof.
 Qed.
 
 (** * Binary relations *)
+Global Instance PartialOrder_subrelation {X e o} `{PartialOrder X e o} :
+  subrelation e o.
+Proof. intros x y E;apply H;symmetry;assumption. Qed.
+
 Section relations.
   Context {A : Set}.
   (** We define semantic (in)equality for binary relations in the usual way. *)

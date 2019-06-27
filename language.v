@@ -75,13 +75,13 @@ Section lang.
 
   (** * Algebraic properties *)
   (** The containment order is the natural order stemming from [∪]. *)
-  Global Instance joinOrderLang : JoinOrder language sequiv ssmaller join.
+  Lemma joinOrderLang : relation_equivalence (leqA sequiv) ssmaller.
   Proof.
-    intros L M;split;intros I w.
+    unfold leqA;intros L M;split;intros I w.
+    - rewrite (I w);intro;now left.
     - split.
       + intro h;right;apply h.
       + intros [h|h];[apply I|];apply h.
-    - intros h;apply I;left;apply h.
   Qed.
 
   (** The set of languages is a semi-ring. *)
@@ -89,6 +89,7 @@ Section lang.
   Proof.
     split.
     - split.
+      + typeclasses eauto.
       + intros l1 l2 l3 w';split.
         * intros (u&v1&->&h1&(v&w&->&h2)).
           exists (u++v),w;rewrite app_ass;split;[|split].
@@ -106,6 +107,7 @@ Section lang.
         * rewrite h2,app_nil_r;assumption.
         * exists w,[];rewrite app_nil_r;split;[|split];tauto||reflexivity.
     - split;simpl.
+      + typeclasses eauto.
       + intros l1 l2 l3;firstorder.
       + split;intros l w;firstorder.
     - intros l1 l2 w;firstorder.
@@ -127,26 +129,28 @@ Section lang.
   Qed.
 
   (** It is actually a Kleene algebra. *)
-  Global Instance lang_KA : KleeneAlgebra language sequiv ssmaller.
+  Global Instance lang_KA : KleeneAlgebra language sequiv.
   Proof.
     split.
-    - apply proper_prodLang.
-    - apply proper_joinLang.
     - apply proper_starLang.
     - apply lang_Semiring.
     - intros l w;firstorder.
-    - apply joinOrderLang.
-    - intros L w [->|(u&v&->&h1&(n&h2))].
+    - intros L;apply joinOrderLang.
+      intros w [->|(u&v&->&h1&(n&h2))].
       + exists 0;reflexivity.
       + exists (S n),u,v;tauto.
-    - intros l1 l2 L w (u&v&->&(n&h1)&h2).
+    - intros l1 l2 L.
+      apply joinOrderLang;apply joinOrderLang in L.
+      intros w (u&v&->&(n&h1)&h2).
       revert u v h1 h2;induction n;intros.
       + rewrite h1;simpl;assumption.
       + destruct h1 as (u1&u2&->&h1&h1').
         rewrite app_ass.
         apply L.
         exists u1,(u2++v);firstorder.
-    - intros l1 l2 L w (u&v&->&h1&(n&h2)).
+    - intros l1 l2 L.
+      apply joinOrderLang;apply joinOrderLang in L.
+      intros w (u&v&->&h1&(n&h2)).
       revert u v h1 h2;induction n;intros.
       + rewrite h2,app_nil_r;assumption.
       + rewrite (iter_lang_last n _ v) in h2.

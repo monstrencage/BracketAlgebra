@@ -56,13 +56,15 @@ Section s.
           -- intro c;apply H in I;revert I.
              repeat rewrite αfresh_perm;simpl;unfold act;simpl;simpl_eqX;unfold_eqX;tauto.
       + apply cl_α_eq_lang,soundness;auto.
-    - destruct H;simpl;rewrite cl_α_join;symmetry;apply join_is_order;
-        simpl in IHE;rewrite cl_α_join in IHE;symmetry in IHE;apply join_is_order in IHE.
-      + rewrite cl_α_prod,<- (cl_α_idem ⟦f⟧),<-cl_α_prod;apply cl_α_inf_lang.
-        apply ka_star_left_ind;apply cl_α_inf;rewrite <- IHE at 2.
+    - destruct H;simpl;rewrite cl_α_join;apply joinOrderLang;simpl in IHE;
+        rewrite cl_α_join in IHE;apply joinOrderLang in IHE. 
+      + rewrite cl_α_prod,<- (cl_α_idem ⟦f⟧),<-cl_α_prod.
+        apply cl_α_inf_lang.
+        apply joinOrderLang,ka_star_left_ind,joinOrderLang;
+          apply cl_α_inf;rewrite <- IHE at 2.
         rewrite cl_α_prod,cl_α_idem,<-cl_α_prod;reflexivity.
       + rewrite cl_α_prod,<- (cl_α_idem ⟦e⟧),<-cl_α_prod;apply cl_α_inf_lang.
-        apply ka_star_right_ind;apply cl_α_inf;rewrite <- IHE at 2.
+        apply joinOrderLang,ka_star_right_ind,joinOrderLang,cl_α_inf;rewrite <- IHE at 2.
         rewrite cl_α_prod,cl_α_idem,<-cl_α_prod;reflexivity.
   Qed.
 
@@ -332,19 +334,18 @@ Section s.
   Proof.
     intros E;unfold ax_inf in E.
     apply αKA_lang in E;simpl in E.
-    rewrite cl_α_join in E.
-    apply join_is_order;symmetry;apply E.
+    rewrite cl_α_join in E;apply joinOrderLang,E.
   Qed.
 
-  Global Instance αKA_KleeneAlgebra : KleeneAlgebra Regexp (ax_eq αKA KA') (ax_inf αKA KA').
+  Global Instance αKA_KleeneAlgebra : KleeneAlgebra Regexp (ax_eq αKA KA').
   Proof.
     repeat split;repeat intro.
-    - rewrite H,H0;reflexivity.
-    - rewrite H,H0;reflexivity.
     - rewrite H;reflexivity.
+    - rewrite H,H0;reflexivity.
     - apply KA_αKA;auto.
     - apply KA_αKA;auto.
     - apply KA_αKA;auto.
+    - rewrite H,H0;reflexivity.
     - apply KA_αKA;auto.
     - apply KA_αKA;auto.
     - apply KA_αKA;eauto.
@@ -354,8 +355,6 @@ Section s.
     - apply KA_αKA;auto.
     - apply KA_αKA;auto.
     - apply KA_αKA;auto.
-    - unfold ax_inf in H;rewrite H;reflexivity.
-    - unfold ax_inf;rewrite <- H;reflexivity.
     - apply KA_αKA;auto.
     - eapply ax_eq_ax',H;auto.
     - eapply ax_eq_ax',H;auto.
@@ -635,7 +634,7 @@ Section s.
   Lemma Σ_map_app {A} (f g : A -> Regexp) L :
     Σ (map f L) ∪ Σ (map g L) =α Σ (map (fun x => f x ∪ g x) L).
   Proof.
-    apply ax_inf_PartialOrder;unfold Basics.flip;split.
+    apply antisymmetry.
     - apply inf_join_inf;apply Σ_bounded;intros e Ie;apply in_map_iff in Ie as (a&<-&Ia);
         (transitivity (f a ∪ g a);[|apply Σ_bigger;apply in_map_iff;exists a;tauto]).
       + apply inf_cup_left.

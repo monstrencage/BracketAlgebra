@@ -72,7 +72,7 @@ Section s.
     
   Lemma positive_star e : positive e ⋆ =KA e ⋆.
   Proof.
-    apply ax_inf_PartialOrder;unfold Basics.flip;split.
+    apply antisymmetry.
     - apply proper_star_inf,positive_inf.
     - apply CompletenessKA_inf;intros u (n&In).
       revert u In;induction n;intro u.

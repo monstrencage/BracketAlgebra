@@ -70,7 +70,7 @@ Section regexp.
   | ax_eq_ax' e f g h : Ax' e f g h -> {|Ax,Ax'|} ⊢ e == f -> {|Ax,Ax'|} ⊢ g == h
   where " {| Ax , Ax' |} ⊢ e == f " := (ax_eq Ax Ax' e f).
 
-  Definition ax_inf Ax Ax' e f := {|Ax,Ax'|} ⊢ e ∪ f == f.
+  Notation ax_inf Ax Ax' := (leqA (ax_eq Ax Ax')).
   Notation " {| Ax , Ax' |} ⊢ e =<= f " := (ax_inf Ax Ax' e f) (at level 80).
   
   Hint Constructors ax_eq.
@@ -136,6 +136,9 @@ Section regexp.
     Proper (ax_eq Ax Ax'==> ax_eq Ax Ax') star.
   Proof. intros ? ? ?;eauto. Qed.
 
+  Global Instance subrelation_Ax Ax Ax' : subrelation Ax (ax_eq Ax Ax').
+  Proof. intro;intros;eauto. Qed.
+
   (** If the axioms [Ax,Ax'] are sound with respect to the language
   interpretation, so is the relation [{|Ax,Ax'|}⊢_==_]. *)
   Remark soundness_proof (Ax: relation regexp)(Ax' : regexp -> regexp -> regexp -> regexp -> Prop):
@@ -166,44 +169,19 @@ Section regexp.
 
     Context {G : GoodEnoughAxiom Ax}.
 
-    (** In this case, we can show that [{|Ax,Ax'|} ⊢ e =<= f] is a
-    partial order, thus yielding a semi-lattice structure. *)
-    Global Instance ax_inf_PreOrder : PreOrder (fun e f => {|Ax,Ax'|} ⊢ e =<= f).
-    Proof.
-      destruct G as [h1 h2 h3];split.
-      - intro e;apply ax_eq_ax;auto.
-      - intros e f g E1 E2.
-        unfold ax_inf in *.
-        etransitivity;[|apply E2].
-        rewrite <- E1;rewrite <- E2 at 1;apply ax_eq_ax;auto.
-    Qed.
-
-    Global Instance ax_inf_PartialOrder :
-      PartialOrder (ax_eq Ax Ax') (fun e f => {|Ax,Ax'|} ⊢ e =<= f).
-    Proof.
-      destruct G as [h1 h2 h3];intros e f;split;unfold Basics.flip,ax_inf.
-      - intro E;split.
-        + rewrite E;auto.
-        + rewrite E;auto.
-      - intros (E1&E2).
-        rewrite <- E1.
-        rewrite <- E2 at 1;auto.
-    Qed.
-    
-    Global Instance joinOrder_ax : JoinOrder _ (ax_eq Ax Ax') (ax_inf Ax Ax') join.
-    Proof. intros x y;unfold ax_inf;split;intro h;symmetry;apply h. Qed.
-
-    Lemma ax_eq_inf e f : {| Ax,Ax'|} ⊢ e == f -> {| Ax,Ax'|} ⊢ e =<= f.
-    Proof. rewrite (ax_inf_PartialOrder e f);intros (H&_);tauto. Qed.
-
+    (** In this case, we have a semi-lattice structure. *)
     Global Instance Semilattice_ax : Semilattice _ (ax_eq Ax Ax') join.
     Proof.
       split.
+      - intros e e' Ee f f' Ef;eauto.
       - intros e f g;apply ax_eq_ax,join_assoc.
       - intros e f;apply ax_eq_ax,join_comm.
       - intro e;apply ax_eq_ax,join_idem.
     Qed.
 
+    Lemma ax_eq_inf e f : {| Ax,Ax'|} ⊢ e == f -> {| Ax,Ax'|} ⊢ e =<= f.
+    Proof. intros E;apply partialA in E;apply E. Qed.
+      
     (** [Ax] is very good if in addition it entails distributivity of
     [·] over [∪]. *)
     Class VeryGoodAxioms Ax :=
@@ -216,14 +194,15 @@ Section regexp.
     Global Instance prod_ax_inf :
       Proper (ax_inf Ax Ax' ==> ax_inf Ax Ax' ==> ax_inf Ax Ax') prod.
     Proof.
-      destruct V as (h1&h2);destruct G as [h3 h4 h5];intros e1 e2 E1 f1 f2 E2;unfold ax_inf in *.
-      rewrite <-E2 at 2.
-      transitivity (e2 · f1 ∪ e2 · f2);[|now auto].
-      rewrite <- E1 at 2.
-      transitivity ((e1 · f1 ∪ e2 · f1) ∪ e2 · f2);[|now auto].
-      transitivity (e1 · f1 ∪ (e2 · f1 ∪ e2 · f2));[|now auto].
-      transitivity (e1 · f1 ∪ e2 · (f1 ∪ f2));[|now auto].
-      rewrite E2;reflexivity.
+      destruct V as (h1&h2);destruct G as [h3 h4 h5];intros e1 e2 E1 f1 f2 E2;
+        unfold ax_inf,leqA in *.
+      rewrite E2 at 1.
+      transitivity (e2 · f1 ∪ e2 · f2);[now auto|].
+      rewrite E1 at 1.
+      transitivity ((e1 · f1 ∪ e2 · f1) ∪ e2 · f2);[now auto|].
+      transitivity (e1 · f1 ∪ (e2 · f1 ∪ e2 · f2));[now auto|].
+      transitivity (e1 · f1 ∪ e2 · (f1 ∪ f2));[now auto|].
+      rewrite <- E2;reflexivity.
     Qed.
 
   End gen_proofs.
@@ -238,21 +217,20 @@ Section regexp.
   | KA_add_comm e f : e ∪ f =KA f ∪ e
   | KA_left_distr e f g : e · (f ∪ g) =KA e·f ∪ e·g
   | KA_right_distr e f g : (e ∪ f)· g =KA e·g ∪ f·g
-  | KA_zero e : 𝟬 <=KA e
+  | KA_zero e : 𝟬 ∪ e =KA e
   | KA_un_left e : 𝟭 · e =KA e
   | KA_un_right e : e · 𝟭 =KA e
   | KA_left_zero e : 𝟬 · e =KA 𝟬
   | KA_right_zero e : e · 𝟬 =KA 𝟬
-  | KA_idem e : e <=KA e
-  | KA_star_unfold e : 𝟭 ∪ e · e ⋆ <=KA e⋆ 
-  where " e =KA f " := (KA e f)
-  and " e <=KA f " := (KA (e ∪ f) f).
+  | KA_idem e : e ∪ e =KA e
+  | KA_star_unfold e :  e⋆ =KA 𝟭 ∪ e · e ⋆ ∪  e⋆ 
+  where " e =KA f " := (KA e f).
 
   Hint Constructors KA.
 
   Inductive KA' : regexp -> regexp -> regexp -> regexp -> Prop :=
-  | KA_star_left_ind e f : KA' (e · f ∪ f) f (e ⋆ · f ∪ f) f
-  | KA_star_right_ind e f : KA' (e · f ∪ e) e (e · f ⋆ ∪ e) e.
+  | KA_star_left_ind e f : KA' f (e · f ∪ f) f (e ⋆ · f ∪ f)
+  | KA_star_right_ind e f : KA' e (e · f ∪ e) e (e · f ⋆ ∪ e).
 
   Hint Constructors KA'.
   
@@ -275,15 +253,12 @@ Section regexp.
   Qed.
 
   (** The set of expressions equipped with the axioms [KA,KA'] forms a Kleene algebra. *)
-  Global Instance KA_regexp : KleeneAlgebra regexp (ax_eq KA KA') (ax_inf KA KA').
+  Global Instance KA_regexp : KleeneAlgebra regexp (ax_eq KA KA').
   Proof.
     split.
-    - apply prod_ax_eq.
-    - apply join_ax_eq.
     - apply star_ax_eq.
+    - repeat split;try (typeclasses eauto);intro;intros;eauto.
     - repeat split;intro;intros;eauto.
-    - repeat split;intro;intros;eauto.
-    - apply joinOrder_ax.
     - intros a;apply ax_eq_ax;auto.
     - apply star_left_ind. 
     - apply star_right_ind.
@@ -298,18 +273,15 @@ Section regexp.
       + apply mon_assoc.
       + apply mon_assoc.
       + apply semiring_comm.
-      + symmetry;apply join_is_order,ka_star_unfold.
-    - intros e f g h E;destruct E;intro E;simpl in *;symmetry in E;
-        rewrite <- join_is_order in E;symmetry;apply join_is_order.
+    - intros e f g h E;destruct E;intro E;simpl in *.
       + apply ka_star_left_ind,E.
       + apply ka_star_right_ind,E.
   Qed.
   
   Lemma ax_inf_lang_incl e f : {| KA,KA' |} ⊢ e =<= f -> ⟦e⟧ ≲ ⟦f⟧.
   Proof.
-    unfold ax_inf;rewrite join_is_order;intro I.
-    transitivity ⟦e∪f⟧;[|reflexivity].
-    apply soundness;symmetry;assumption.
+    intro E;apply joinOrderLang.
+    apply soundness in E;apply E.
   Qed.
 
   (** * Equatity modulo associativity, commutativity, idempotence and units. *)
@@ -427,6 +399,7 @@ Section regexp.
     - split;discriminate.
   Qed.
 
+  
   Lemma ϵ_inf_e e : {|KA,KA'|} ⊢ ϵ e =<= e.
   Proof.
     induction e;simpl.
@@ -434,8 +407,11 @@ Section regexp.
     - reflexivity.
     - replace e_add with join by reflexivity.
       transitivity (ϵ e1 ∪ ϵ e2);[clear IHe1 IHe2|rewrite IHe1,IHe2;reflexivity].
-      apply ax_eq_inf.
       destruct (ϵ_zero_or_un e1) as [-> | ->]; try destruct (ϵ_zero_or_un e2)as [-> | ->];eauto.
+      + rewrite (ka_idem _);reflexivity.
+      + rewrite KA_add_comm,KA_zero;reflexivity.
+      + rewrite KA_zero;reflexivity.
+      + rewrite (ka_idem _);reflexivity.
     - replace e_prod with prod by reflexivity.
       transitivity (ϵ e1 · ϵ e2);[clear IHe1 IHe2|rewrite IHe1,IHe2;reflexivity].
       apply ax_eq_inf.
@@ -462,7 +438,7 @@ Section regexp.
   Qed.
 
   Remark ϵ_sub_id e : {|KA,KA'|} ⊢ ϵ e =<= 𝟭.
-  Proof. destruct (ϵ_zero_or_un e) as [-> | ->];unfold ax_inf; now auto. Qed.
+  Proof. destruct (ϵ_zero_or_un e) as [-> | ->];unfold ax_inf,leqA ; now auto. Qed.
 
   Lemma ϵ_add e f :  {|KA,KA'|} ⊢ ϵ (e ∪ f) == ϵ e ∪ ϵ f.
   Proof.
@@ -510,8 +486,8 @@ Section regexp.
   Global Instance ϵ_proper_inf : Proper (ax_inf KA KA' ==> ax_inf KA KA') ϵ.
   Proof.
     intros e f E.
-    apply ϵ_proper in E as <-.
-    unfold ax_inf;simpl.
+    apply ϵ_proper in E as ->;simpl.
+    unfold ax_inf,leqA;simpl.
     destruct (ϵ_zero_or_un e) as [-> | ->]; try destruct (ϵ_zero_or_un f)as [-> | ->];auto.
   Qed.
     
@@ -629,7 +605,7 @@ Section regexp.
       + rewrite andb_true_iff;intros (I1&I2);apply IHe1 in I1 as ->;apply IHe2 in I2 as ->;auto.
       + rewrite orb_true_iff,test0_spec;intros [I|I].
         * apply IHe in I as ->.
-          apply ax_inf_PartialOrder;unfold Basics.flip;split.
+          apply antisymmetry.
           -- rewrite <- (ax_eq_ax _ (KA_un_left _));apply star_right_ind.
              apply ax_eq_inf;auto.
           -- apply star_incr.
@@ -659,18 +635,18 @@ Section regexp.
 
   Lemma join_list_monotone {A} f (E F : list A) : E ⊆ F -> Σ_{E} f ≦0 Σ_{F} f.
   Proof.
-    unfold ax_inf;induction E as [|e E];simpl.
+    unfold ax_inf,leqA;induction E as [|e E];simpl.
     - eauto. 
-    - intro L;rewrite <- IHE at 2 by (rewrite <- L;clear;intro;simpl;tauto).
-      transitivity (e_add (f e) (e_add (join_list f E) (join_list f F)));[auto|].
+    - intro L;rewrite IHE at 1 by (rewrite <- L;clear;intro;simpl;tauto).
+      transitivity (e_add (f e) (e_add (join_list f E) (join_list f F)));[|auto].
       repeat rewrite <- join_list_app.
       assert (Ie : e ∈ (E++F)) by (simpl_In;rewrite <- L;simpl;tauto).
       clear L IHE;induction (E++F).
       + simpl in *;tauto.
       + destruct Ie as [<-|I].
         * simpl;transitivity ((f a∪f a)∪(join_list f l));now auto.
-        * simpl;rewrite <- IHl at 2 by assumption.
-          transitivity ((f e∪f a)∪(join_list f l));[now auto|].
+        * simpl;rewrite IHl at 1 by assumption.
+          transitivity ((f e∪f a)∪(join_list f l));[|now auto].
           transitivity ((f a ∪ f e)∪(join_list f l));now auto.
   Qed.
 
@@ -715,7 +691,7 @@ Section regexp.
         * reflexivity.
         * simpl;tauto.
         * intros x Ix;apply hypf;now right.
-    - apply KA_ACI0,ax_inf_PartialOrder;split;apply join_list_monotone;rewrite hypA;reflexivity.
+    - apply KA_ACI0,antisymmetry;apply join_list_monotone;rewrite hypA;reflexivity.
   Qed.
   
   Lemma join_list_equivalent_ACI0 {C} (A B : list C) f g :
@@ -729,7 +705,7 @@ Section regexp.
         * reflexivity.
         * simpl;tauto.
         * intros x Ix;apply hypf;now right.
-    - apply ax_inf_PartialOrder;split;apply join_list_monotone;rewrite hypΣ;reflexivity.
+    - apply antisymmetry;apply join_list_monotone;rewrite hypΣ;reflexivity.
   Qed.
   
   Lemma join_list_zero {B} (A : list B) : Σ_{A} (fun _ => e_zero) ≡0 𝟬.
@@ -740,9 +716,9 @@ Section regexp.
       
   Lemma Σ_incl0 L M : L ⊆ M -> Σ L ≦0 Σ M.
   Proof.
-    unfold ax_inf;rewrite Σ_app;revert M;induction L;intros M I.
+    unfold ax_inf,leqA;rewrite Σ_app;revert M;induction L;intros M I.
     - reflexivity.
-    - simpl;rewrite IHL by (rewrite <- I;intro;simpl;tauto).
+    - simpl;rewrite <- IHL by (rewrite <- I;intro;simpl;tauto).
       assert (Ia : a ∈ M) by (apply I;now left).
       clear I L IHL.
       induction M as [|e L].
@@ -750,17 +726,17 @@ Section regexp.
       + simpl;destruct Ia as [->|Ia];simpl;
           replace e_add with join in * by reflexivity.
         * transitivity ((a∪a)∪Σ L);auto.
-        * transitivity ((a∪e)∪Σ L);[auto|].
-          transitivity ((e∪a)∪Σ L);[auto|].
-          rewrite <- IHL at 2 by assumption;auto.
+        * transitivity ((a∪e)∪Σ L);[|auto].
+          transitivity ((e∪a)∪Σ L);[|auto].
+          rewrite IHL at 1 by assumption;auto.
   Qed.  
   
   Global Instance Σ_equivalent : Proper (@equivalent _ ==> ax_eq ACI0 Empt) Σ.
   Proof.
     intros l1 l2 E.
     apply incl_PartialOrder in E as (E1&E2);unfold Basics.flip in E2.
-    apply Σ_incl0 in E1; apply Σ_incl0 in E2;unfold ax_inf in *.
-    rewrite <- E1,<- E2 at 1;auto.
+    apply Σ_incl0 in E1; apply Σ_incl0 in E2;unfold ax_inf,leqA in *.
+    rewrite E1, E2 at 1;auto.
   Qed.
   
   Lemma Σ_map_concat l :
@@ -941,10 +917,9 @@ Section regexp.
         rewrite E1.
         transitivity (𝟬 · e2 ∪ f1 · e2);[auto|].
         transitivity (𝟬 ∪ f1 · e2);auto.
-    - apply ax_inf_PartialOrder;
-        cut ( {|KA, KA'|}⊢ join_list (fun x : X => ⟪ x ⟫ · δ x (e ⋆)) A
-              ==join_list (fun x : X => (⟪ x ⟫ · δ x e) · e ⋆) A);
-        [intro E;unfold Basics.flip;split;rewrite E;clear E|].
+    - cut ( {|KA, KA'|}⊢ join_list (fun x : X => ⟪ x ⟫ · δ x (e ⋆)) A
+            ==join_list (fun x : X => (⟪ x ⟫ · δ x e) · e ⋆) A);
+        [intro E;apply antisymmetry;rewrite E;clear E|].
       + replace e_star with star by reflexivity.
         replace (ϵ (e⋆)) with 𝟭 by reflexivity.
         apply IHe in V;clear IHe.
@@ -958,7 +933,8 @@ Section regexp.
              rewrite V at 1.
              apply proper_join_inf.
              ++ apply ϵ_sub_id.
-             ++ rewrite <- one_inf_star,right_unit;reflexivity.
+             ++ etransitivity;[|apply proper_prod_inf;[reflexivity|apply one_inf_star]].
+               rewrite right_unit;reflexivity.
           -- etransitivity;[|apply inf_cup_right].
              rewrite <- (mon_assoc _ _ _).
              apply proper_prod_inf;[reflexivity|].
@@ -1187,12 +1163,9 @@ Section regexp.
   Proof.
     simpl;destruct (ϵ_zero_or_un e) as [-> | ->];simpl_eqX.
     - replace e_un with un by reflexivity.
-      etransitivity;[|apply proper_join;[reflexivity|symmetry;apply left_unit]].
-      reflexivity.
+      rewrite left_unit;reflexivity.
     - replace e_zero with zero by reflexivity.
-      etransitivity;[|apply proper_join;[reflexivity|symmetry;apply left_absorbing]].
-      etransitivity;[|symmetry;apply right_unit].
-      reflexivity.
+      rewrite left_absorbing,right_unit;reflexivity.
   Qed.
 
   (** [δ] may be extended to words in the obvious way. *)
@@ -1338,7 +1311,7 @@ Notation " ⟪ l ⟫" := (atomic l).
 Notation " ⟦ e ⟧ " := (reg_lang e).
 
 Notation " {| Ax , Ax' |} ⊢ e == f " := (ax_eq Ax Ax' e f) (at level 80).
-
+Notation ax_inf Ax Ax' := (leqA (ax_eq Ax Ax')).
 Notation " {| Ax , Ax' |} ⊢ e =<= f " := (ax_inf Ax Ax' e f) (at level 80).
 Hint Constructors ax_eq.
 Hint Constructors KA.
@@ -1576,6 +1549,144 @@ Section Antimirov.
     - intros [<-|[<-|F]];[reflexivity|apply incl_nil|tauto].
   Qed.
 End Antimirov.
+
+(** * Spines*)
+Section spines.
+  Context {X : Set}{decX: decidable_set X }.
+  Fixpoint spines (e : @regexp X) :=
+    match e with
+    | e_zero => []
+    | e_un => [(𝟭,𝟭)]
+    | ⟪ x ⟫ => [(⟪x⟫,𝟭);(𝟭,⟪x⟫)]
+    | e_add e f => (spines e) ++ (spines f)
+    | e_prod e f => map (fun g => (fst g,snd g · f)) (spines e)
+                       ++(map (fun g => (e·fst g,snd g)) (spines f))
+    | e_star e =>(𝟭,𝟭)::map (fun g => (e⋆·fst g,snd g · e⋆)) (spines e)
+    end.
+
+  Lemma spines_eq e : e =KA Σ (map (fun g => fst g · snd g) (spines e)).
+  Proof.
+    induction e;simpl.
+    - reflexivity.
+    - rewrite left_unit,right_unit;reflexivity.
+    - rewrite map_app,<-algebra.Σ_app.
+      rewrite <- IHe1,<-IHe2.
+      reflexivity.
+    - rewrite map_app,<-algebra.Σ_app.
+      replace e_prod with prod by reflexivity.
+      rewrite <- (KA_idem (e1 · e2)).
+      apply ax_eq_add.
+      + rewrite IHe1,Σ_distr_r at 1.
+        repeat rewrite map_map;simpl.
+        apply Σ_map_equiv.
+        intros;symmetry;apply mon_assoc.
+      + rewrite IHe2,Σ_distr_l at 1.
+        repeat rewrite map_map;simpl.
+        apply Σ_map_equiv.
+        intros;apply mon_assoc.
+    - rewrite left_unit.
+      transitivity (𝟭 ∪ (e⋆·e·e⋆)).
+      + replace e_star with star by reflexivity.
+        rewrite star_switch_side,<- (mon_assoc _),ka_star_dup.
+        apply ka_star_unfold_eq.
+      + apply ax_eq_add;[reflexivity|].
+        rewrite IHe at 2.
+        rewrite Σ_distr_l,Σ_distr_r.
+        repeat rewrite map_map;simpl.
+        apply Σ_map_equiv.
+        intros;repeat rewrite (mon_assoc _);reflexivity.
+    - rewrite left_unit,right_unit,right_unit,KA_idem;reflexivity.
+  Qed.
+
+  Corollary spines_inf e e1 e2 : (e1,e2) ∈ spines e -> e1 · e2 <=KA e.
+  Proof.
+    intros I;rewrite (spines_eq e).
+    apply Σ_bigger,in_map_iff;exists (e1,e2);simpl;tauto.
+  Qed.
+  
+  Lemma spines_lang e u v :
+    ⟦e⟧ (u++v) -> exists e1 e2, (e1,e2) ∈ spines e /\ ⟦e1⟧ u /\ ⟦e2⟧ v.
+  Proof.
+    revert u v;induction e;intros u v I.
+    - exfalso;apply I.
+    - apply app_eq_nil in I as (->&->);exists 𝟭,𝟭;simpl;repeat split;auto.
+    - simpl in *;destruct I as [I|I];[apply IHe1 in I|apply IHe2 in I];
+        destruct I as (f1&f2&I&I1&I2);exists f1,f2;rewrite in_app_iff;split;auto.
+    - simpl in *;destruct I as (u'&v'&E&I1&I2).
+      levi E;subst;clear E.
+      + rewrite <- app_nil_r in I1.
+        apply IHe1 in I1 as (f1&f2&I1&I1'&I2').
+        exists f1,(f2 · e2);split;[|split;[|exists [],v'];simpl;tauto].
+        apply in_app_iff;left;apply in_map_iff;exists (f1,f2);simpl;tauto.
+      + rewrite app_comm_cons in I2;apply IHe2 in I2 as (f1&f2&I2&I'1&I'2).
+        exists (e1·f1), f2;split;[|split;[exists u',(a::w)|];simpl;tauto].
+        apply in_app_iff;right;apply in_map_iff;exists (f1,f2);simpl;tauto.
+      + apply IHe1 in I1 as (f1&f2&I1&I1'&I2').
+        exists f1,(f2 · e2);split;[|split;[|exists (a::w),v'];simpl;tauto].
+        apply in_app_iff;left;apply in_map_iff;exists (f1,f2);simpl;tauto.
+    - apply split_star in I as [(->&->)|(u1&u2&v1&v2&->&->&I1&I2&I3)].
+      + exists 𝟭,𝟭;simpl;repeat split;auto.
+      + apply IHe in I2 as (e1&e2&I2&I'1&I'2).
+        exists (e⋆· e1),(e2 ·e⋆);simpl;repeat split.
+        * right;apply in_map_iff;exists (e1,e2);simpl;tauto.
+        * exists u1,u2;simpl;auto.
+        * exists v1,v2;simpl;auto.
+    - destruct u;simpl in I;inversion I as [[e1 e2]];subst.
+      + exists 𝟭,⟪x⟫;simpl;repeat split;auto.
+      + apply app_eq_nil in e2 as (->&->).
+        exists ⟪x⟫,𝟭;simpl;repeat split;auto.
+  Qed.
+
+  Fixpoint treeSize (e : @regexp X) :=
+    match e with
+    | e_zero | e_un | ⟪ _ ⟫ => 1
+    | e_add e f | e_prod e f => treeSize e + treeSize f
+    | e_star e => 1 + treeSize e
+    end.
+  
+  Lemma nb_spines e : ⎢spines e⎥ <= 2*(treeSize e).
+  Proof.
+    induction e;simpl;repeat rewrite app_length;repeat rewrite map_length;try lia.
+  Qed.
+  
+  Lemma size_spines e1 e2 e :
+    (e1,e2) ∈ (spines e) -> treeSize (e1·e2) <= 2 * treeSize e * treeSize e.
+  Proof.
+    revert e1 e2;induction e;intros f1 f2;simpl;
+      repeat rewrite in_app_iff;repeat rewrite in_map_iff.
+    - tauto.
+    - intros [E|E];inversion E;subst;simpl;reflexivity.
+    - intros [I|I];[apply IHe1 in I as ->|apply IHe2 in I as ->];simpl.
+      + repeat rewrite PeanoNat.Nat.mul_add_distr_r.
+        repeat rewrite PeanoNat.Nat.mul_add_distr_l.
+        lia.
+      + repeat rewrite PeanoNat.Nat.mul_add_distr_r.
+        repeat rewrite PeanoNat.Nat.mul_add_distr_l.
+        lia.
+    - assert (hyp : forall n, n <= n * n)
+        by (intros n;case_eq n;[reflexivity|intros m E;rewrite <- E at 1 3;simpl;lia]).
+      pose proof (hyp (treeSize e1)) as h1.
+      pose proof (hyp (treeSize e2)) as h2.
+      intros [I|I];destruct I as ((g1&g2)&E&I);inversion E;subst;clear E;simpl;
+        [rewrite PeanoNat.Nat.add_assoc|rewrite <- PeanoNat.Nat.add_assoc];
+        [apply IHe1 in I as ->|apply IHe2 in I as ->];simpl;revert h1 h2;
+          repeat (rewrite PeanoNat.Nat.mul_add_distr_r)
+          || (rewrite PeanoNat.Nat.mul_add_distr_l)
+          || (rewrite (PeanoNat.Nat.mul_comm (treeSize e2) (treeSize e1)));simpl;
+            generalize (treeSize e1 * treeSize e1);
+            generalize (treeSize e1 * treeSize e2);
+            generalize (treeSize e2 * treeSize e2);intros;lia.
+    - intros [E|I].
+      + inversion E;subst;simpl;lia.
+      + destruct I as ((e1&e2)&E&I);inversion E;subst;clear E.
+        transitivity (2*treeSize (e⋆)+treeSize (e1 · e2)).
+        * simpl;lia.
+        * apply IHe in I as ->;simpl.
+          lia.
+    - intros [E|[E|E]];inversion E;subst;simpl;lia.
+  Qed.
+  
+End spines.
 (* begin hide *)
 Section simulation_expr.
   Context {X : Set}{dec_X : decidable_set X}.
@@ -1593,7 +1704,7 @@ Section simulation_expr.
       + destruct (ϵ_zero_or_un e) as [e1|e0].
         * rewrite e1.
           apply ϵ_spec,hL,ϵ_spec in e1 as ->;reflexivity.
-        * rewrite e0;unfold ax_inf;eauto.
+        * rewrite e0;unfold ax_inf,leqA;eauto.
       + intros a;apply hE.
         intros u;repeat rewrite <- δ_lang;apply hL.
     - intros hE u;revert e f hE.
@@ -1609,7 +1720,7 @@ Section simulation_expr.
   Lemma similar_join e f g : similar (e ∪ f) g -> similar e g /\ similar f g.
   Proof.
     repeat rewrite <-simulation_language.
-    intros L;split;rewrite <- L;simpl;[apply inf_cup_left|apply inf_cup_right].
+    intros L;split;rewrite <- L;simpl;intro;simpl;firstorder.
   Qed.
      
 End simulation_expr.
